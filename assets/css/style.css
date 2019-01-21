@@ -1,0 +1,16 @@
+.brand-logo {
+  margin-left: 15px;
+}
+
+#dropdown {
+  position: relative;
+  top: -60px;
+}
+
+#dropdown a {
+  color: #42A5F5;
+}
+
+#dropdown a:hover{
+  color: #1565c0;
+}
