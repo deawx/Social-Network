@@ -23,23 +23,47 @@
 <body>
 	<nav class="blue lighten-1">
     <div class="nav-wrapper">
-      <a href="#!" class="brand-logo">Red Stone Shop</a>
+      <a href="#!" class="brand-logo">My Web Shop</a>
       <ul class="right hide-on-med-and-down">
 				<li>
-					<a class="dropdown-trigger" href="#!" data-target="dropdown">Menu
+					<a class="dropdown-trigger" href="#!" data-target="product">Products Menu
 						<i class="material-icons right">arrow_drop_down</i>
 					</a>
 
-					<ul id="dropdown" class="dropdown-content">
+					<ul id="product" class="dropdown-content">
   					<li><a href="#!">Shirts</a></li>
   					<li><a href="#!">Pants</a></li>
 						<li><a href="#!">Shoes</a></li>
 						<li><a href="#!">Accessories</a></li>
 					</ul>
 				</li>
-        <li><a href=""><i class="material-icons right">search</i>Search </a></li>
-      </ul>
-    </div>
+
+				<li>
+					<a class="dropdown-trigger" href="#!" data-target="account">My Account
+						<i class="material-icons right">arrow_drop_down</i>
+					</a>
+
+					<ul id="account" class="dropdown-content">
+  					<li><a href="#!">Login</a></li>
+  					<li><a href="#!">Create Account</a></li>
+					</ul>
+				</li>
+
+				<li>
+					<a class="dropdown-trigger" href="#!" data-target="cart">My Cart (<small> 5 Items </small>)
+						<i class="material-icons right">arrow_drop_down</i>
+					</a>
+
+					<ul id="cart" class="dropdown-content">
+  					<li><a href="#!">Product 1</a></li>
+						<li><a href="#!">Product 2</a></li>
+						<li><a href="#!">Product 3</a></li>
+						<li><a href="#!">Product 4</a></li>
+						<li><a href="#!">Product 5</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
   </nav>
 
 	<script src="assets/js/jquery-3.3.1.min.js"></script>
