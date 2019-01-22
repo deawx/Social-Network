@@ -26,3 +26,10 @@ li:last-child {
   color: #FFF;
   background-color: #42A5F5;
 }
+
+.featured {
+  text-align: center;
+  font-family: 'Raleway';
+  font-weight: 300;
+  text-transform: uppercase;
+}
