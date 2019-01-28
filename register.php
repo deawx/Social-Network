@@ -10,7 +10,7 @@ $email2 = "";
 $password = "";
 $password = "";
 $date = "";
-$error_array = "";
+$error_array = array();
 
 if(isset($_POST['reg_btn'])) {
   $fname = strip_tags($_POST['reg_fname']);
@@ -45,32 +45,33 @@ if(isset($_POST['reg_btn'])) {
       $num_rows = mysqli_num_rows($email_check);
 
       if($num_rows > 0) {
-        $_SESSION["ErrorMessage"] = "Email already in use";
+        array_push($error_array, "Email already in use.");
       };
     } else {
-      $_SESSION["ErrorMessage"] = "Invalid email format";
+      array_push($error_array, "Invalid email format.");
     };
   } else {
-    $_SESSION["ErrorMessage"] = "Email don't match";
+    array_push($error_array, "Email don't match.");
   };
 
   if(strlen($fname) < 3 || strlen($fname) > 25) {
-    $_SESSION["ErrorMessage"] = "Your first name must be between 3 & 25 characters.";
+    array_push($error_array, "Your first name must be between 3 & 25 characters.");
   };
 
   if(strlen($lname) < 3 || strlen($lname) > 25) {
-    $_SESSION["ErrorMessage"] = "Your last name must be between 3 & 25 characters.";
+    array_push($error_array, "Your last name must be between 3 & 25 characters.");
   };
 
   if($password !== $password2) {
-    $_SESSION["ErrorMessage"] = "Your password don't match.";
+    array_push($error_array, "Your password don't match.");
   } else {
       if(preg_match('/[^a-zA-Z0-9]/', $password)) {
-        $_SESSION["ErrorMessage"] = "Your password can only contain english characters or numbers.";
+        array_push($error_array, "Your password can only contain english characters or numbers.");
       };
     };
+
   if(strlen($password < 5 || $password > 30)) {
-    $_SESSION["ErrorMessage"] = "Your password must be between 5 & 30 characters.";
+    array_push($error_array, "Your password must be between 5 & 30 characters.");
   }
 };
 
@@ -85,7 +86,7 @@ if(isset($_POST['reg_btn'])) {
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
 
   <link rel="stylesheet" type="text/css" href="assets/css/fonts.css" />
-  <link rel="stylesheet" type="text/css" href="assets/css/material.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/material-kit.min.css" />
 
   <title>Material Social Network - Register</title>
 </head>
@@ -94,12 +95,6 @@ if(isset($_POST['reg_btn'])) {
   <div class="page-header header-filter" style="background-image: url('assets/img/bg2.jpg'); background-size: cover; background-position: center center;">
     <div class="container">
       <div class="container-fluid" style="margin-top:60px;">
-
-        <?php
-					echo ErrorMessage();
-					echo SuccessMessage();
-        ?>
-
         <form action="register.php" method="POST">
           <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
@@ -117,7 +112,17 @@ if(isset($_POST['reg_btn'])) {
                         </span>
                       </div>
                       <input type="text" id="reg_fname" name="reg_fname" class="form-control" placeholder="First Name"
-                             value="<?php if(isset($_SESSION['reg_fname'])) echo $_SESSION['reg_fname']; ?>" />
+                             value="<?php if(isset($_SESSION['reg_fname'])) echo $_SESSION['reg_fname']; ?>"
+                      />
+
+                      <br />
+
+                      <p class="text-danger text-center">
+                        <?php 
+                          if(in_array("Your first name must be between 3 & 25 characters.", $error_array)) 
+                            echo "Your first name must be between 3 & 25 characters.";
+                        ?>
+                      </p>
                     </div>
                   </span>
 
@@ -129,7 +134,17 @@ if(isset($_POST['reg_btn'])) {
                         </span>
                       </div>
                       <input type="text" id="reg_lname" name="reg_lname" class="form-control" placeholder="Last Name"
-                             value="<?php if(isset($_SESSION['reg_lname'])) echo $_SESSION['reg_lname']; ?>" />
+                             value="<?php if(isset($_SESSION['reg_lname'])) echo $_SESSION['reg_lname']; ?>"
+                      />
+
+                      <br />
+
+                      <p class="text-danger text-center">
+                        <?php
+                          if(in_array("Your last name must be between 3 & 25 characters.", $error_array)) 
+                            echo "Your last name must be between 3 & 25 characters.";
+                        ?>
+                      </p>
                     </div>
                   </span>
 
@@ -141,7 +156,16 @@ if(isset($_POST['reg_btn'])) {
                         </span>
                       </div>
                       <input type="email" id="reg_email" name="reg_email" class="form-control" placeholder="Email"
-                             value="<?php if(isset($_SESSION['reg_email'])) echo $_SESSION['reg_email']; ?>" />
+                             value="<?php if(isset($_SESSION['reg_email'])) echo $_SESSION['reg_email']; ?>"
+                      />
+
+                      <br />
+
+                      <p class="text-danger text-center">
+                        <?php
+                          if (in_array("Invalid email format.", $error_array)) echo "Invalid email format.";
+                        ?>
+                      </p>
                     </div>
                   </span>
 
@@ -153,7 +177,17 @@ if(isset($_POST['reg_btn'])) {
                         </span>
                       </div>
                       <input type="email" id="reg_email2" name="reg_email2" class="form-control" placeholder="Confirm Email"
-                             value="<?php if(isset($_SESSION['reg_email2'])) echo $_SESSION['reg_email2']; ?>" />
+                             value="<?php if(isset($_SESSION['reg_email2'])) echo $_SESSION['reg_email2']; ?>"
+                      />
+
+                      <br />
+
+                      <p class="text-danger text-center">
+                        <?php 
+                          if(in_array("Email already in use.", $error_array)) echo "Email already in use.";
+                          elseif (in_array("Email don't match.", $error_array)) echo "Email don't match.";
+                        ?>
+                      </p>
                     </div>
                   </span>
 
@@ -165,6 +199,15 @@ if(isset($_POST['reg_btn'])) {
                         </span>
                       </div>
                       <input type="password" id="reg_password" name="reg_password" class="form-control" placeholder="Password" />
+
+                      <br />
+                      
+                      <p class="text-danger text-center">
+                        <?php
+                          if (in_array("Your password must be between 5 & 30 characters.", $error_array)) echo "Your password must be between 5 & 30 characters.";
+                          elseif (in_array("Your password can only contain english characters or numbers.", $error_array)) echo "Your password can only contain english characters or numbers.";
+                        ?>
+                      </p>
                     </div>
                   </span>
 
@@ -175,7 +218,15 @@ if(isset($_POST['reg_btn'])) {
                           <i class="material-icons">lock</i>
                         </span>
                       </div>
-                      <input type="password" id="reg_password2" name="reg_password2" class="form-control" placeholder="Confirm Password" />>
+                      <input type="password" id="reg_password2" name="reg_password2" class="form-control" placeholder="Confirm Password" />
+
+                      <br />
+
+                      <p class="text-danger text-center">
+                        <?php 
+                          if(in_array("Your password don't match.", $error_array)) echo "Your password don't match.";
+                        ?>
+                      </p>
                     </div>
                   </span>
                 </div>
@@ -194,7 +245,7 @@ if(isset($_POST['reg_btn'])) {
   <script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
   <script type="text/javascript" src="assets/js/lib/popper.min.js"></script>
   <script type="text/javascript" src="assets/js/lib/bootstrap-material-design.min.js"></script>
-  <script type="text/javascript" src="assets/js/material.js"></script>
+  <script type="text/javascript" src="assets/js/material-kit.min.js"></script>
 
 </body>
 </html>
