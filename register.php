@@ -1,6 +1,7 @@
 <?php
 
 require_once("includes/database.php");
+require_once("includes/sessions.php");
 
 $fname = "";
 $lname = "";
@@ -15,18 +16,22 @@ if(isset($_POST['reg_btn'])) {
   $fname = strip_tags($_POST['reg_fname']);
   $fname = str_replace(' ', '', $fname);
   $fname = ucfirst(strtolower($fname));
+  $_SESSION['reg_fname'] = $fname;
 
   $lname = strip_tags($_POST['reg_lname']);
   $lname = str_replace(' ', '', $lname);
   $lname = ucfirst(strtolower($lname));
+  $_SESSION['reg_lname'] = $lname;
 
   $email = strip_tags($_POST['reg_email']);
   $email = str_replace(' ', '', $email);
   $email = ucfirst(strtolower($email));
+  $_SESSION['reg_email'] = $email;
 
   $email2 = strip_tags($_POST['reg_email2']);
   $email2 = str_replace(' ', '', $email2);
   $email2 = ucfirst(strtolower($email2));
+  $_SESSION['reg_email2'] = $email2;
 
   $password = strip_tags($_POST['reg_password']);
   $password2 = strip_tags($_POST['reg_password2']);
@@ -40,32 +45,32 @@ if(isset($_POST['reg_btn'])) {
       $num_rows = mysqli_num_rows($email_check);
 
       if($num_rows > 0) {
-        echo "Email already in use";
+        $_SESSION["ErrorMessage"] = "Email already in use";
       };
     } else {
-      echo "Invalid email format";
+      $_SESSION["ErrorMessage"] = "Invalid email format";
     };
   } else {
-    echo "Email don't match";
+    $_SESSION["ErrorMessage"] = "Email don't match";
   };
 
   if(strlen($fname) < 3 || strlen($fname) > 25) {
-    echo "Your first name must be between 3 & 25 characters.";
+    $_SESSION["ErrorMessage"] = "Your first name must be between 3 & 25 characters.";
   };
 
   if(strlen($lname) < 3 || strlen($lname) > 25) {
-    echo "Your last name must be between 3 & 25 characters.";
+    $_SESSION["ErrorMessage"] = "Your last name must be between 3 & 25 characters.";
   };
 
   if($password !== $password2) {
-    echo "Your password don't match.";
+    $_SESSION["ErrorMessage"] = "Your password don't match.";
   } else {
       if(preg_match('/[^a-zA-Z0-9]/', $password)) {
-        echo "Your password can only contain english characters or numbers.";
+        $_SESSION["ErrorMessage"] = "Your password can only contain english characters or numbers.";
       };
     };
-  if(strlen($password < 5 || $password > 30) {
-    echo "Your password must be between 5 & 30 characters.";
+  if(strlen($password < 5 || $password > 30)) {
+    $_SESSION["ErrorMessage"] = "Your password must be between 5 & 30 characters.";
   }
 };
 
@@ -90,6 +95,11 @@ if(isset($_POST['reg_btn'])) {
     <div class="container">
       <div class="container-fluid" style="margin-top:60px;">
 
+        <?php
+					echo ErrorMessage();
+					echo SuccessMessage();
+        ?>
+
         <form action="register.php" method="POST">
           <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
@@ -106,7 +116,8 @@ if(isset($_POST['reg_btn'])) {
                           <i class="material-icons">person_outline</i>
                         </span>
                       </div>
-                      <input type="text" id="reg_fname" name="reg_fname" class="form-control" placeholder="First Name">
+                      <input type="text" id="reg_fname" name="reg_fname" class="form-control" placeholder="First Name"
+                             value="<?php if(isset($_SESSION['reg_fname'])) echo $_SESSION['reg_fname']; ?>" />
                     </div>
                   </span>
 
@@ -117,7 +128,8 @@ if(isset($_POST['reg_btn'])) {
                           <i class="material-icons">person</i>
                         </span>
                       </div>
-                      <input type="text" id="reg_lname" name="reg_lname" class="form-control" placeholder="Last Name">
+                      <input type="text" id="reg_lname" name="reg_lname" class="form-control" placeholder="Last Name"
+                             value="<?php if(isset($_SESSION['reg_lname'])) echo $_SESSION['reg_lname']; ?>" />
                     </div>
                   </span>
 
@@ -128,7 +140,8 @@ if(isset($_POST['reg_btn'])) {
                           <i class="material-icons">mail_outline</i>
                         </span>
                       </div>
-                      <input type="email" id="reg_email" name="reg_email" class="form-control" placeholder="Email">
+                      <input type="email" id="reg_email" name="reg_email" class="form-control" placeholder="Email"
+                             value="<?php if(isset($_SESSION['reg_email'])) echo $_SESSION['reg_email']; ?>" />
                     </div>
                   </span>
 
@@ -139,7 +152,8 @@ if(isset($_POST['reg_btn'])) {
                           <i class="material-icons">email</i>
                         </span>
                       </div>
-                      <input type="email" id="reg_email2" name="reg_email2" class="form-control" placeholder="Confirm Email">
+                      <input type="email" id="reg_email2" name="reg_email2" class="form-control" placeholder="Confirm Email"
+                             value="<?php if(isset($_SESSION['reg_email2'])) echo $_SESSION['reg_email2']; ?>" />
                     </div>
                   </span>
 
@@ -150,7 +164,7 @@ if(isset($_POST['reg_btn'])) {
                           <i class="material-icons">lock_outline</i>
                         </span>
                       </div>
-                      <input type="password" id="reg_password" name="reg_password" class="form-control" placeholder="Password">
+                      <input type="password" id="reg_password" name="reg_password" class="form-control" placeholder="Password" />
                     </div>
                   </span>
 
@@ -161,7 +175,7 @@ if(isset($_POST['reg_btn'])) {
                           <i class="material-icons">lock</i>
                         </span>
                       </div>
-                      <input type="password" id="reg_password2" name="reg_password2" class="form-control" placeholder="Confirm Password">
+                      <input type="password" id="reg_password2" name="reg_password2" class="form-control" placeholder="Confirm Password" />>
                     </div>
                   </span>
                 </div>
