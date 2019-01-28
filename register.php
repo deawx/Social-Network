@@ -59,6 +59,13 @@ if(isset($_POST['reg_btn'])) {
 
   if($password !== $password2) {
     echo "Your password don't match.";
+  } else {
+      if(preg_match('/[^a-zA-Z0-9]/', $password)) {
+        echo "Your password can only contain english characters or numbers.";
+      };
+    };
+  if(strlen($password < 5 || $password > 30) {
+    echo "Your password must be between 5 & 30 characters.";
   }
 };
 
