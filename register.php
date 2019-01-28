@@ -2,6 +2,54 @@
 
 require_once("includes/database.php");
 
+$fname = "";
+$lname = "";
+$email = "";
+$email2 = "";
+$password = "";
+$password = "";
+$date = "";
+$error_array = "";
+
+if(isset($_POST['reg_btn'])) {
+  $fname = strip_tags($_POST['reg_fname']);
+  $fname = str_replace(' ', '', $fname);
+  $fname = ucfirst(strtolower($fname));
+
+  $lname = strip_tags($_POST['reg_lname']);
+  $lname = str_replace(' ', '', $lname);
+  $lname = ucfirst(strtolower($lname));
+
+  $email = strip_tags($_POST['reg_email']);
+  $email = str_replace(' ', '', $email);
+  $email = ucfirst(strtolower($email));
+
+  $email2 = strip_tags($_POST['reg_email2']);
+  $email2 = str_replace(' ', '', $email2);
+  $email2 = ucfirst(strtolower($email2));
+
+  $password = strip_tags($_POST['reg_password']);
+  $password2 = strip_tags($_POST['reg_password2']);
+
+  $date = date("d-m-Y");
+
+  if($email == $email2) {
+    if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $em = filter_var($email, FILTER_VALIDATE_EMAIL);
+      $email_check = mysqli_query($Connection, "SELECT email FROM users WHERE (email='$email')");
+      $num_rows = mysqli_num_rows($email_check);
+
+      if($num_rows > 0) {
+        echo "Email already in use";
+      };
+    } else {
+      echo "Invalid email format";
+    };
+  } else {
+    echo "Email don't match";
+  };
+};
+
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +109,7 @@ require_once("includes/database.php");
                           <i class="material-icons">mail_outline</i>
                         </span>
                       </div>
-                      <input type="text" id="reg_email" name="reg_email" class="form-control" placeholder="Email">
+                      <input type="email" id="reg_email" name="reg_email" class="form-control" placeholder="Email">
                     </div>
                   </span>
 
@@ -72,7 +120,7 @@ require_once("includes/database.php");
                           <i class="material-icons">email</i>
                         </span>
                       </div>
-                      <input type="text" id="reg_email2" name="reg_email2" class="form-control" placeholder="Confirm Email">
+                      <input type="email" id="reg_email2" name="reg_email2" class="form-control" placeholder="Confirm Email">
                     </div>
                   </span>
 
@@ -83,7 +131,7 @@ require_once("includes/database.php");
                           <i class="material-icons">lock_outline</i>
                         </span>
                       </div>
-                      <input type="reg_password" id="reg_password" name="Password" class="form-control" placeholder="Password">
+                      <input type="password" id="reg_password" name="reg_password" class="form-control" placeholder="Password">
                     </div>
                   </span>
 
@@ -94,7 +142,7 @@ require_once("includes/database.php");
                           <i class="material-icons">lock</i>
                         </span>
                       </div>
-                      <input type="reg_password2" id="reg_password2" name="Password" class="form-control" placeholder="Confirm Password">
+                      <input type="password" id="reg_password2" name="reg_password2" class="form-control" placeholder="Confirm Password">
                     </div>
                   </span>
                 </div>
