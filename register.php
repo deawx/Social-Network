@@ -48,6 +48,18 @@ if(isset($_POST['reg_btn'])) {
   } else {
     echo "Email don't match";
   };
+
+  if(strlen($fname) < 3 || strlen($fname) > 25) {
+    echo "Your first name must be between 3 & 25 characters.";
+  };
+
+  if(strlen($lname) < 3 || strlen($lname) > 25) {
+    echo "Your last name must be between 3 & 25 characters.";
+  };
+
+  if($password !== $password2) {
+    echo "Your password don't match.";
+  }
 };
 
 ?>
