@@ -1,7 +1,6 @@
 <?php
 
 require_once("includes/database.php");
-require_once("includes/sessions.php");
 
 $fname = "";
 $lname = "";
@@ -49,7 +48,7 @@ if(isset($_POST['reg_btn'])) {
   if($email == $email2) {
     if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $em = filter_var($email, FILTER_VALIDATE_EMAIL);
-      $email_check = mysqli_query($Connection, "SELECT email FROM users WHERE (email='$email')");
+      $email_check = mysqli_query($con, "SELECT email FROM users WHERE (email='$email')");
       $num_rows = mysqli_num_rows($email_check);
 
       if($num_rows > 0) {
@@ -83,13 +82,13 @@ if(isset($_POST['reg_btn'])) {
   if(empty($error_array)) {
     $password = md5($password);
     $username = strtolower($fname . "_" . $lname);
-    $username_check = mysqli_query($Connection, "SELECT username FROM users WHERE (username='$username')");
+    $username_check = mysqli_query($con, "SELECT username FROM users WHERE (username='$username')");
     $i = 0;
 
     while(mysqli_num_rows($username_check) != 0) {
       $i++;
       $username = $username . "_" . $i;
-      $username_check = mysqli_query($Connection, "SELECT username FROM users WHERE (username='$username')");
+      $username_check = mysqli_query($con, "SELECT username FROM users WHERE (username='$username')");
     };
 
     $rand = rand(1, 16);
@@ -111,7 +110,7 @@ if(isset($_POST['reg_btn'])) {
     elseif ($rand == 15) $profile_pic = "assets/img/profile_pics/defaults/head_wet_asphalt.png";
     elseif ($rand == 16) $profile_pic = "assets/img/profile_pics/defaults/head_wisteria.png";
 
-    $query = mysqli_query($Connection, "INSERT INTO users VALUES ('', '$fname', '$lname', '$username', '$email', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
+    $query = mysqli_query($con, "INSERT INTO users VALUES ('', '$fname', '$lname', '$username', '$email', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
     array_push($error_array, "<br /><div class='alert alert-success text-center'><strong>Success! Goahead and login !</strong></div>");
 
     $_SESSION['reg_fname'] = "";
