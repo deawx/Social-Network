@@ -94,22 +94,22 @@ if(isset($_POST['reg_btn'])) {
 
     $rand = ran(1, 16);
 
-    if($rand == 1) $profil_pic = "assets/img/profile_pics/head_alizarin.png";
-    elseif ($rand == 2) $profil_pic = "assets/img/profile_pics/head_amethyst.png";
-    elseif ($rand == 3) $profil_pic = "assets/img/profile_pics/head_belize_hole.png";
-    elseif ($rand == 4) $profil_pic = "assets/img/profile_pics/head_carrot.png";
-    elseif ($rand == 5) $profil_pic = "assets/img/profile_pics/head_deep_blue.png";
-    elseif ($rand == 6) $profil_pic = "assets/img/profile_pics/head_emerald.png";
-    elseif ($rand == 7) $profil_pic = "assets/img/profile_pics/head_green_sea.png";
-    elseif ($rand == 8) $profil_pic = "assets/img/profile_pics/head_nephritis.png";
-    elseif ($rand == 9) $profil_pic = "assets/img/profile_pics/head_pete_river.png";
-    elseif ($rand == 10) $profil_pic = "assets/img/profile_pics/head_pomegranate.png";
-    elseif ($rand == 11) $profil_pic = "assets/img/profile_pics/head_pumpkin.png";
-    elseif ($rand == 12) $profil_pic = "assets/img/profile_pics/head_red.png";
-    elseif ($rand == 13) $profil_pic = "assets/img/profile_pics/head_sun_flower.png";
-    elseif ($rand == 14) $profil_pic = "assets/img/profile_pics/head_turqoise.png";
-    elseif ($rand == 15) $profil_pic = "assets/img/profile_pics/head_wet_asphalt.png";
-    elseif ($rand == 16) $profil_pic = "assets/img/profile_pics/head_wisteria.png";
+    if($rand == 1) $profil_pic = "assets/img/profile_pics/defaults/head_alizarin.png";
+    elseif ($rand == 2) $profil_pic = "assets/img/profile_pics/defaults/head_amethyst.png";
+    elseif ($rand == 3) $profil_pic = "assets/img/profile_pics/defaults/head_belize_hole.png";
+    elseif ($rand == 4) $profil_pic = "assets/img/profile_pics/defaults/head_carrot.png";
+    elseif ($rand == 5) $profil_pic = "assets/img/profile_pics/defaults/head_deep_blue.png";
+    elseif ($rand == 6) $profil_pic = "assets/img/profile_pics/defaults/head_emerald.png";
+    elseif ($rand == 7) $profil_pic = "assets/img/profile_pics/defaults/head_green_sea.png";
+    elseif ($rand == 8) $profil_pic = "assets/img/profile_pics/defaults/head_nephritis.png";
+    elseif ($rand == 9) $profil_pic = "assets/img/profile_pics/defaults/head_pete_river.png";
+    elseif ($rand == 10) $profil_pic = "assets/img/profile_pics/defaults/head_pomegranate.png";
+    elseif ($rand == 11) $profil_pic = "assets/img/profile_pics/defaults/head_pumpkin.png";
+    elseif ($rand == 12) $profil_pic = "assets/img/profile_pics/defaults/head_red.png";
+    elseif ($rand == 13) $profil_pic = "assets/img/profile_pics/defaults/head_sun_flower.png";
+    elseif ($rand == 14) $profil_pic = "assets/img/profile_pics/defaults/head_turqoise.png";
+    elseif ($rand == 15) $profil_pic = "assets/img/profile_pics/defaults/head_wet_asphalt.png";
+    elseif ($rand == 16) $profil_pic = "assets/img/profile_pics/defaults/head_wisteria.png";
     
   };
 };
