@@ -13,30 +13,39 @@ $date = "";
 $error_array = array();
 
 if(isset($_POST['reg_btn'])) {
+  $date = date("d-m-Y");
+
+//--------------------------------------------------------------------------------- FIRST NAME
   $fname = strip_tags($_POST['reg_fname']);
   $fname = str_replace(' ', '', $fname);
   $fname = ucfirst(strtolower($fname));
   $_SESSION['reg_fname'] = $fname;
 
+  if(strlen($fname) < 3 || strlen($fname) > 25) {
+    array_push($error_array, "Your first name must be between 3 & 25 characters.");
+  };
+
+//--------------------------------------------------------------------------------- LAST NAME
   $lname = strip_tags($_POST['reg_lname']);
   $lname = str_replace(' ', '', $lname);
   $lname = ucfirst(strtolower($lname));
   $_SESSION['reg_lname'] = $lname;
 
+  if(strlen($lname) < 3 || strlen($lname) > 25) {
+    array_push($error_array, "Your last name must be between 3 & 25 characters.");
+  };
+
+//--------------------------------------------------------------------------------- EMAIL
   $email = strip_tags($_POST['reg_email']);
   $email = str_replace(' ', '', $email);
   $email = ucfirst(strtolower($email));
   $_SESSION['reg_email'] = $email;
 
+//--------------------------------------------------------------------------------- CONFIRM EMAIL
   $email2 = strip_tags($_POST['reg_email2']);
   $email2 = str_replace(' ', '', $email2);
   $email2 = ucfirst(strtolower($email2));
   $_SESSION['reg_email2'] = $email2;
-
-  $password = strip_tags($_POST['reg_password']);
-  $password2 = strip_tags($_POST['reg_password2']);
-
-  $date = date("d-m-Y");
 
   if($email == $email2) {
     if(filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -54,25 +63,35 @@ if(isset($_POST['reg_btn'])) {
     array_push($error_array, "Email don't match.");
   };
 
-  if(strlen($fname) < 3 || strlen($fname) > 25) {
-    array_push($error_array, "Your first name must be between 3 & 25 characters.");
-  };
-
-  if(strlen($lname) < 3 || strlen($lname) > 25) {
-    array_push($error_array, "Your last name must be between 3 & 25 characters.");
-  };
+//--------------------------------------------------------------------------------- PASSWORD
+  $password = strip_tags($_POST['reg_password']);
+  $password2 = strip_tags($_POST['reg_password2']);
 
   if($password !== $password2) {
     array_push($error_array, "Your password don't match.");
   } else {
-      if(preg_match('/[^a-zA-Z0-9]/', $password)) {
-        array_push($error_array, "Your password can only contain english characters or numbers.");
-      };
+    if(preg_match('/[^a-zA-Z0-9]/', $password)) {
+      array_push($error_array, "Your password can only contain english characters or numbers.");
     };
+  };
 
   if(strlen($password < 5 || $password > 30)) {
     array_push($error_array, "Your password must be between 5 & 30 characters.");
-  }
+  };
+
+//--------------------------------------------------------------------------------- ERROR ARRAY
+  if(empty($error_array)) {
+    $password = md5($password);
+    $username = strtolower($fname . "_" . $lname);
+    $username_check = mysqli_query($Connection, "SELECT username FROM users WHERE (username='$username')");
+    $i = 0;
+
+    while(mysqli_num_rows($username_check) != 0) {
+      $i++;
+      $username = $username . "_" . $i;
+      $username_check = mysqli_query($Connection, "SELECT username FROM users WHERE (username='$username')");
+    };
+  };
 };
 
 ?>
@@ -85,7 +104,6 @@ if(isset($_POST['reg_btn'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
 
-  <link rel="stylesheet" type="text/css" href="../../../fonts.googleapis.com/cssff98.css?family=Open+Sans:300,400,600,700">
   <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/argon.min.css" />
 
