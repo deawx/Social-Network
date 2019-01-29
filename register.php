@@ -8,12 +8,11 @@ $lname = "";
 $email = "";
 $email2 = "";
 $password = "";
-$password = "";
+$password2 = "";
 $date = "";
 $error_array = array();
 
 if(isset($_POST['reg_btn'])) {
-  $date = date("d-m-Y");
 
 //--------------------------------------------------------------------------------- FIRST NAME
   $fname = strip_tags($_POST['reg_fname']);
@@ -63,11 +62,11 @@ if(isset($_POST['reg_btn'])) {
     array_push($error_array, "Email don't match.");
   };
 
-//--------------------------------------------------------------------------------- PASSWORD
+//--------------------------------------------------------------------------------- PASSWORD & DATE
   $password = strip_tags($_POST['reg_password']);
   $password2 = strip_tags($_POST['reg_password2']);
 
-  if($password !== $password2) {
+  if($password != $password2) {
     array_push($error_array, "Your password don't match.");
   } else {
     if(preg_match('/[^a-zA-Z0-9]/', $password)) {
@@ -75,11 +74,12 @@ if(isset($_POST['reg_btn'])) {
     };
   };
 
-  if(strlen($password < 5 || $password > 30)) {
+  if(strlen($password) < 5 || strlen($password) > 30) {
     array_push($error_array, "Your password must be between 5 & 30 characters.");
   };
 
-//--------------------------------------------------------------------------------- ERROR ARRAY
+  $date = date("d-m-Y");
+//--------------------------------------------------------------------------------- USERNAME & PROFILE_PIC
   if(empty($error_array)) {
     $password = md5($password);
     $username = strtolower($fname . "_" . $lname);
@@ -92,25 +92,32 @@ if(isset($_POST['reg_btn'])) {
       $username_check = mysqli_query($Connection, "SELECT username FROM users WHERE (username='$username')");
     };
 
-    $rand = ran(1, 16);
+    $rand = rand(1, 16);
 
-    if($rand == 1) $profil_pic = "assets/img/profile_pics/defaults/head_alizarin.png";
-    elseif ($rand == 2) $profil_pic = "assets/img/profile_pics/defaults/head_amethyst.png";
-    elseif ($rand == 3) $profil_pic = "assets/img/profile_pics/defaults/head_belize_hole.png";
-    elseif ($rand == 4) $profil_pic = "assets/img/profile_pics/defaults/head_carrot.png";
-    elseif ($rand == 5) $profil_pic = "assets/img/profile_pics/defaults/head_deep_blue.png";
-    elseif ($rand == 6) $profil_pic = "assets/img/profile_pics/defaults/head_emerald.png";
-    elseif ($rand == 7) $profil_pic = "assets/img/profile_pics/defaults/head_green_sea.png";
-    elseif ($rand == 8) $profil_pic = "assets/img/profile_pics/defaults/head_nephritis.png";
-    elseif ($rand == 9) $profil_pic = "assets/img/profile_pics/defaults/head_pete_river.png";
-    elseif ($rand == 10) $profil_pic = "assets/img/profile_pics/defaults/head_pomegranate.png";
-    elseif ($rand == 11) $profil_pic = "assets/img/profile_pics/defaults/head_pumpkin.png";
-    elseif ($rand == 12) $profil_pic = "assets/img/profile_pics/defaults/head_red.png";
-    elseif ($rand == 13) $profil_pic = "assets/img/profile_pics/defaults/head_sun_flower.png";
-    elseif ($rand == 14) $profil_pic = "assets/img/profile_pics/defaults/head_turqoise.png";
-    elseif ($rand == 15) $profil_pic = "assets/img/profile_pics/defaults/head_wet_asphalt.png";
-    elseif ($rand == 16) $profil_pic = "assets/img/profile_pics/defaults/head_wisteria.png";
-    
+    if($rand == 1) $profile_pic = "assets/img/profile_pics/defaults/head_alizarin.png";
+    elseif ($rand == 2) $profile_pic = "assets/img/profile_pics/defaults/head_amethyst.png";
+    elseif ($rand == 3) $profile_pic = "assets/img/profile_pics/defaults/head_belize_hole.png";
+    elseif ($rand == 4) $profile_pic = "assets/img/profile_pics/defaults/head_carrot.png";
+    elseif ($rand == 5) $profile_pic = "assets/img/profile_pics/defaults/head_deep_blue.png";
+    elseif ($rand == 6) $profile_pic = "assets/img/profile_pics/defaults/head_emerald.png";
+    elseif ($rand == 7) $profile_pic = "assets/img/profile_pics/defaults/head_green_sea.png";
+    elseif ($rand == 8) $profile_pic = "assets/img/profile_pics/defaults/head_nephritis.png";
+    elseif ($rand == 9) $profile_pic = "assets/img/profile_pics/defaults/head_pete_river.png";
+    elseif ($rand == 10) $profile_pic = "assets/img/profile_pics/defaults/head_pomegranate.png";
+    elseif ($rand == 11) $profile_pic = "assets/img/profile_pics/defaults/head_pumpkin.png";
+    elseif ($rand == 12) $profile_pic = "assets/img/profile_pics/defaults/head_red.png";
+    elseif ($rand == 13) $profile_pic = "assets/img/profile_pics/defaults/head_sun_flower.png";
+    elseif ($rand == 14) $profile_pic = "assets/img/profile_pics/defaults/head_turqoise.png";
+    elseif ($rand == 15) $profile_pic = "assets/img/profile_pics/defaults/head_wet_asphalt.png";
+    elseif ($rand == 16) $profile_pic = "assets/img/profile_pics/defaults/head_wisteria.png";
+
+    $query = mysqli_query($Connection, "INSERT INTO users VALUES ('', '$fname', '$lname', '$username', '$email', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
+    array_push($error_array, "<br /><div class='alert alert-success text-center'><strong>Success! Goahead and login !</strong></div>");
+
+    $_SESSION['reg_fname'] = "";
+    $_SESSION['reg_lname'] = "";
+    $_SESSION['reg_email'] = "";
+    $_SESSION['reg_email2'] = "";
   };
 };
 
@@ -248,6 +255,11 @@ if(isset($_POST['reg_btn'])) {
                 <div class="text-center">
                   <button type="submit" name="reg_btn" class="btn btn-primary mt-4">Create my account</button>
                 </div>
+
+                <?php
+                  if(in_array("<br /><div class='alert alert-success text-center'><strong>Success! Goahead and login !</strong></div>", $error_array))
+                  echo "<br /><div class='alert alert-success text-center'><strong>Success! Goahead and login !</strong></div>";
+                ?>
               </form>
             </div>
           </div>
