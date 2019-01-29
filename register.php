@@ -13,15 +13,71 @@ require_once("includes/form_handlers/register_handler.php");
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
 
+  <link rel="stylesheet" type="text/css" href="assets/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/argon.min.css" />
 
-  <title>Material Social Network - Register</title>
+  <title>Social Network - Register</title>
 </head>
 
 <body class="bg-default">
   <div class="main-content">
+    <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
+      <div class="container px-4">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-main">
+          <div class="navbar-collapse-header d-md-none">
+            <div class="row">
+              <div class="col-6 collapse-close">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                  <span></span>
+                  <span></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="index.php">
+                <i class="ni ni-planet"></i>
+                <span class="nav-link-inner--text">Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="register.php">
+                <i class="fas fa-user-plus"></i>
+                <span class="nav-link-inner--text">Sign Up</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="login.php">
+                <i class="fas fa-sign-in-alt"></i>
+                <span class="nav-link-inner--text">Sign In</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <div class="header bg-gradient-primary py-7 py-lg-8">
+      <div class="container">
+        <div class="header-body text-center mb-7">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6">
+              <h1 class="text-white">Welcome to my Social Network!</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="separator separator-bottom separator-skew zindex-100">
         <svg x="0" y="0" viewBox="0 0 2560 100">
           <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
@@ -31,9 +87,27 @@ require_once("includes/form_handlers/register_handler.php");
 
     <div class="container mt--8 pb-5">
       <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
+        <div class="col-lg-5 col-md-7">
           <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-transparent pb-5">
+
+              <div class="text-muted text-center mt-2 mb-3">
+                You've got an account, don't wait any longer !
+              </div>
+
+              <div class="btn-wrapper text-center">
+                <a href="login.php" class="btn btn-primary btn-icon">
+                  <span class="btn-inner--icon"><i class="fas fa-sign-in-alt"></i></span>
+                  <span class="btn-inner--text">Sign in</span>
+                </a>
+              </div>
+            </div>
+
             <div class="card-body px-lg-5 py-lg-5">
+              <div class="text-center text-muted mb-4">
+                Or create an account now !
+              </div>
+
               <form role="form" action="register.php" method="POST">
 
                 <div class="form-group">
