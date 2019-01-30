@@ -109,7 +109,7 @@ if(isset($_POST['reg_btn'])) {
     elseif ($rand == 16) $profile_pic = "assets/img/profile_pics/defaults/head_wisteria.png";
 
     $query = mysqli_query($con, "INSERT INTO users VALUES ('', '$fname', '$lname', '$username', '$email', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')");
-    array_push($error_array, "<br /><div class='alert alert-success text-center'><strong>Success! Goahead and login !</strong></div>");
+    array_push($error_array, "<div class='alert alert-success text-center' style='margin-bottom: 35px;><strong>Success! Goahead and login !</strong></div>");
 
     $_SESSION['reg_fname'] = "";
     $_SESSION['reg_lname'] = "";
