@@ -1,6 +1,7 @@
 <?php
 
 require_once("includes/database.php");
+require_once("includes/form_handlers/register_handler.php");
 require_once("includes/form_handlers/login_handler.php");
 
 ?>
@@ -51,15 +52,15 @@ require_once("includes/form_handlers/login_handler.php");
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="register.php">
-                <i class="fas fa-user-plus"></i>
-                <span class="nav-link-inner--text">Sign Up</span>
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link nav-link-icon" href="login.php">
                 <i class="fas fa-sign-in-alt"></i>
                 <span class="nav-link-inner--text">Sign In</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="register.php">
+                <i class="fas fa-user-plus"></i>
+                <span class="nav-link-inner--text">Sign Up</span>
               </a>
             </li>
           </ul>
@@ -108,13 +109,19 @@ require_once("includes/form_handlers/login_handler.php");
                 Or sign in now !
               </div>
 
-              <form role="form">
-                <div class="form-group mb-3">
+              <form role="form" action="login.php" method="POST">
+                <?php
+                  if(in_array("<div class='alert alert-danger text-center' style='margin-bottom: 35px;'><strong>Error! Email or password was incorrect.</strong></div>", $error_array))
+                  echo "<div class='alert alert-danger text-center' style='margin-bottom: 35px;'><strong>Error! Email or password was incorrect.</strong></div>";
+                ?>
+
+                <div class="form-group">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" name="log_email">
+                    <input class="form-control" placeholder="Email" type="email" name="log_email"
+                           value="<?php if(isset($_SESSION['log_email'])) echo $_SESSION['log_email']; ?>" />
                   </div>
                 </div>
 
@@ -123,7 +130,8 @@ require_once("includes/form_handlers/login_handler.php");
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="log_password">
+                    <input class="form-control" placeholder="Password" type="password" name="log_password"
+                           value="<?php if(isset($_SESSION['log_password'])) echo $_SESSION['log_password']; ?>" />
                   </div>
                 </div>
 

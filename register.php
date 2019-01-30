@@ -51,15 +51,15 @@ require_once("includes/form_handlers/register_handler.php");
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-link-icon" href="register.php">
-                <i class="fas fa-user-plus"></i>
-                <span class="nav-link-inner--text">Sign Up</span>
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link nav-link-icon" href="login.php">
                 <i class="fas fa-sign-in-alt"></i>
                 <span class="nav-link-inner--text">Sign In</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-link-icon" href="register.php">
+                <i class="fas fa-user-plus"></i>
+                <span class="nav-link-inner--text">Sign Up</span>
               </a>
             </li>
           </ul>
@@ -109,6 +109,10 @@ require_once("includes/form_handlers/register_handler.php");
               </div>
 
               <form role="form" action="register.php" method="POST">
+                <?php
+                  if(in_array("<div class='alert alert-success text-center' style='margin-bottom: 35px;><strong>Success! Goahead and login !</strong></div>", $error_array))
+                  echo "<div class='alert alert-success text-center' style='margin-bottom: 35px;><strong>Success! Goahead and login !</strong></div>";
+                ?>
 
                 <div class="form-group">
                   <div class="input-group input-group-alternative mb-3">
@@ -212,10 +216,6 @@ require_once("includes/form_handlers/register_handler.php");
                   <button type="submit" name="reg_btn" class="btn btn-primary mt-4">Create my account</button>
                 </div>
 
-                <?php
-                  if(in_array("<br /><div class='alert alert-success text-center'><strong>Success! Goahead and login !</strong></div>", $error_array))
-                  echo "<br /><div class='alert alert-success text-center'><strong>Success! Goahead and login !</strong></div>";
-                ?>
               </form>
             </div>
           </div>
