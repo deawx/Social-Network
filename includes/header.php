@@ -57,7 +57,7 @@ if(isset($_SESSION['username'])) {
 
           <li class="nav-item">
             <a class="nav-link nav-link-icon" href="">
-              <i style="font-size: 1.25rem;" class="ni ni-bell-55"></i>
+              <i style="font-size: 1.25rem;" class="ni ni-notification-70"></i>
               <span class="nav-link-inner--text d-lg-none">Notifications</span>
             </a>
           </li>
@@ -67,7 +67,7 @@ if(isset($_SESSION['username'])) {
                aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="assets/img/profile_pics/defauts/head_alizarin.png">
+                  <img alt="Image placeholder" src="<?php echo $user['profile_pic']; ?>">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm font-weight-bold">
