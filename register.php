@@ -110,8 +110,8 @@ require_once("includes/form_handlers/register_handler.php");
 
               <form role="form" action="register.php" method="POST">
                 <?php
-                  if(in_array("<div class='alert alert-success text-center' style='margin-bottom: 35px;><strong>Success! Goahead and login !</strong></div>", $error_array))
-                  echo "<div class='alert alert-success text-center' style='margin-bottom: 35px;><strong>Success! Goahead and login !</strong></div>";
+                  if(in_array("<div class='alert alert-success text-center' style='margin-bottom: 35px;'><strong>Success! Goahead and login !</strong></div>", $error_array))
+                  echo "<div class='alert alert-success text-center' style='margin-bottom: 35px;'><strong>Success! Goahead and login !</strong></div>";
                 ?>
 
                 <div class="form-group">
