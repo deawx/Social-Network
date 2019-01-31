@@ -27,9 +27,9 @@ if(isset($_SESSION['username'])) {
   <title>Social Network - Dashboard</title>
 </head>
 
-<body class="bg-default">
+<body>
   <div class="main-content">
-    <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-primary" id="navbar-main">
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
 
         <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="index.html">My Social Network</a>
@@ -51,14 +51,12 @@ if(isset($_SESSION['username'])) {
         <li class="nav-item">
             <a class="nav-link nav-link-icon" href="">
               <i style="font-size: 1.25rem;" class="ni ni-email-83"></i>
-              <span class="nav-link-inner--text d-lg-none">Message</span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link nav-link-icon" href="">
               <i style="font-size: 1.25rem;" class="ni ni-notification-70"></i>
-              <span class="nav-link-inner--text d-lg-none">Notifications</span>
             </a>
           </li>
 
@@ -71,7 +69,7 @@ if(isset($_SESSION['username'])) {
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm font-weight-bold">
-                    <?php echo $user['first_name']; ?>
+                    <?php echo $user['first_name'] . ' ' . $user['last_name']; ?>
                   </span>
                 </div>
               </div>
