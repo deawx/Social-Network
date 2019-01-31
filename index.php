@@ -100,9 +100,11 @@ require_once("includes/header.php");
               </div>
 
               <div class="col-4 text-right">
-                <button type="submit" class="btn btn-icon btn-3 btn-outline-info">
-                  <span class="btn-inner--icon"><i class="fas fa-paper-plane"></i></span>
-                  <span class="btn-inner--text">Post</span>
+                <button type="submit" class="btn btn-primary btn-icon mb-3 mb-sm-0">
+                  <span class="btn-inner--icon">
+                    <i class="fas fa-paper-plane"></i>
+                  </span>
+                  <span class="btn-inner--text">Send ...</span>
                 </button>
               </div>
             </div>
@@ -111,7 +113,7 @@ require_once("includes/header.php");
           <div class="card-body">
             <div class="pl-lg-4">
               <div class="form-group">
-                <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                <textarea rows="4" class="form-control form-control-alternative">Post a message ...</textarea>
               </div>
             </div>
           </div>
@@ -120,88 +122,112 @@ require_once("includes/header.php");
     </div>
   </div>  
 
-            <div class="pl-lg-4">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-username">Username</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
-                  </div>
-                </div>
+  <div class="container mt-5">
+    <div class="col">
+      <div class="card bg-secondary shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <h6 class="heading-small mb-0">Latest Posts</h6>
+            </div>
+          </div>
+        </div>
 
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-email">Email address</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
-                  </div>
-                </div>
+        <div class="card-body border-0">
+          <div class="p-3">
+            <div class="row align-items-center">
+              <div class="col-lg-2 ml-1 mr-1">
+                <img class="img-fluid rounded-circle shadow-lg" src="assets/img/profile_pics/defaults/head_alizarin.png" />
               </div>
 
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-first-name">First name</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Lucky">
-                  </div>
-                </div>
-
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-last-name">Last name</label>
-                    <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
-                  </div>
-                </div>
+              <div class="col-lg-8">
+                <h3 class="heading mb-0">Echeverria Laurent</h3>
+                <p class="mb-0 mt-3">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel scelerisque metus. Fusce porta 
+                  interdum est sit amet ultricies. Vivamus rutrum quam a ante aliquet venenatis. Aenean eros turpis, tincidunt 
+                  et leo eu, egestas efficitur nunc. Suspendisse a posuere tellus, et volutpat ante.
+                </p>
               </div>
             </div>
+          </div>
+        </div>
 
-            <hr class="my-4" />
-
-            <h6 class="heading-small text-muted mb-4">Contact information</h6>
-            <div class="pl-lg-4">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-address">Address</label>
-                    <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-city">City</label>
-                    <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
-                  </div>
-                </div>
-
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">Country</label>
-                    <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
-                  </div>
-                </div>
-
-                <div class="col-lg-4">
-                  <div class="form-group">
-                    <label class="form-control-label" for="input-country">Postal code</label>
-                    <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
-                  </div>
-                </div>
-              </div>
+        <div class="card-footer bg-secondary border-0">
+          <div class="row">
+            <div class="col-lg-3 text-left">
+              <button type="submit" class="btn btn-primary btn-icon">
+                <span class="btn-inner--icon">
+                  <i class="fas fa-calendar-day" style="font-size: 20px;"></i>
+                </span>
+                <span class="btn-inner--text">31 Janv 2019</span>
+              </button>
             </div>
 
-            <hr class="my-4" />
+            <div class="col-lg-9 text-right">
+              <button type="submit" class="btn btn-outline-danger btn-icon">
+                <span class="btn-inner--icon">
+                  <i class="fas fa-heart" style="font-size: 16px;"></i>
+                </span>
+                <span class="btn-inner--text">18</span>
+              </button>
 
-            <h6 class="heading-small text-muted mb-4">About me</h6>
+              <button type="submit" class="btn btn-outline-info btn-icon">
+                <span class="btn-inner--icon">
+                  <i class="fas fa-comments" style="font-size: 16px;"></i>
+                </span>
+                <span class="btn-inner--text">10</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
 
-            <div class="pl-lg-4">
-              <div class="form-group">
-                <label>About Me</label>
-                <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+        <div class="card-body border-0">
+          <div class="p-3">
+            <div class="row align-items-center">
+              <div class="col-lg-2 ml-1 mr-1">
+                <img class="img-fluid rounded-circle shadow-lg" src="assets/img/profile_pics/defaults/head_pete_river.png" />
+              </div>
+
+              <div class="col-lg-8">
+                <h3 class="heading mb-0">Marie Poppins</h3>
+                <p class="mb-0 mt-3">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel scelerisque metus. Fusce porta 
+                  interdum est sit amet ultricies. Vivamus rutrum quam a ante aliquet venenatis. Aenean eros turpis, tincidunt 
+                  et leo eu, egestas efficitur nunc. Suspendisse a posuere tellus, et volutpat ante.
+                </p>
               </div>
             </div>
-          </form>
+          </div>
+        </div>
+
+        <div class="card-footer bg-secondary border-0">
+          <div class="row">
+            <div class="col-lg-3 text-left">
+              <button type="submit" class="btn btn-primary btn-icon">
+                <span class="btn-inner--icon">
+                  <i class="fas fa-calendar-day" style="font-size: 20px;"></i>
+                </span>
+                <span class="btn-inner--text">30 Janv 2019</span>
+              </button>
+            </div>
+
+            <div class="col-lg-9 text-right">
+              <button type="submit" class="btn btn-outline-danger btn-icon">
+                <span class="btn-inner--icon">
+                  <i class="fas fa-heart" style="font-size: 16px;"></i>
+                </span>
+                <span class="btn-inner--text">3</span>
+              </button>
+
+              <button type="submit" class="btn btn-outline-info btn-icon">
+                <span class="btn-inner--icon">
+                  <i class="fas fa-comments" style="font-size: 16px;"></i>
+                </span>
+                <span class="btn-inner--text">9</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
