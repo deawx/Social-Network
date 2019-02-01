@@ -1,7 +1,6 @@
 <?php
 
 require_once("includes/header.php");
-//session_destroy();
 
 ?>
 
@@ -16,7 +15,7 @@ require_once("includes/header.php");
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Friends</h5>
-                    <span class="h2 font-weight-bold mb-0"><?php echo ($user['friend_array']); ?></span>
+                    <span class="h2 font-weight-bold mb-0">0<?php echo ($user['friend_array']); ?></span>
                   </div>
                   
                   <div class="col-auto">
@@ -92,7 +91,7 @@ require_once("includes/header.php");
   <div class="container mt--6">
     <div class="col">
       <div class="card bg-secondary shadow">
-        <form>
+        <form method="POST" action="index.php">
           <div class="card-header border-0">
             <div class="row align-items-center">
               <div class="col-8">
@@ -100,7 +99,7 @@ require_once("includes/header.php");
               </div>
 
               <div class="col-4 text-right">
-                <button type="submit" class="btn btn-primary btn-icon mb-3 mb-sm-0">
+                <button type="submit" name="post" id="post_btn" class="btn btn-primary btn-icon mb-3 mb-sm-0">
                   <span class="btn-inner--icon">
                     <i class="fas fa-paper-plane"></i>
                   </span>
