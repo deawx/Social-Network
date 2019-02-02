@@ -50,7 +50,10 @@ require_once("includes/header.php");
 
             <div class="text-center">
               <h3>
-                <?php echo $user['first_name'] . ' ' . $user['last_name']; ?>
+                <?php
+                  $user_obj = new User($con, $userLoggedIn);
+                  echo $user_obj->getFirstAndLastName();
+                ?>
                 <span class="font-weight-light">, 26</span>
               </h3>
               
