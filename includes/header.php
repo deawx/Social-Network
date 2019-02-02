@@ -1,6 +1,7 @@
 <?php
 
 require_once("includes/database.php");
+require_once("includes/classes/User.php");
 
 if(isset($_SESSION['username'])) {
    $userLoggedIn = $_SESSION['username'];
@@ -8,7 +9,7 @@ if(isset($_SESSION['username'])) {
    $user = mysqli_fetch_array($user_infos);
 } else {
    header("Location: login.php");
-};
+}
 
 ?>
 
@@ -71,7 +72,10 @@ if(isset($_SESSION['username'])) {
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm font-weight-bold">
-                    <?php echo $user['first_name'] . ' ' . $user['last_name']; ?>
+                    <?php
+                      $user_obj = new User($con, $userLoggedIn);
+                      echo $user_obj->getFirstAndLastName();
+                    ?>
                   </span>
                 </div>
               </div>
