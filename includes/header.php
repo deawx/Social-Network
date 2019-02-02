@@ -32,7 +32,7 @@ if(isset($_SESSION['username'])) {
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
 
-        <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="index.html">My Social Network</a>
+        <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="index.php">My Social Network</a>
 
         <form class="navbar-search navbar-search-dark form-inline d-none d-md-flex mr-lg-auto ml-lg-auto">
           <div class="form-group mb-0">
@@ -49,13 +49,15 @@ if(isset($_SESSION['username'])) {
 
         <ul class="navbar-nav align-items-center d-none d-md-flex">
         <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="">
+            <a class="nav-link nav-link-icon" href="" data-toggle="tooltip"
+               data-placement="bottom" title="Messages">
               <i style="font-size: 1.25rem;" class="ni ni-email-83"></i>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="">
+            <a class="nav-link nav-link-icon" href="" data-toggle="tooltip" 
+               data-placement="bottom" title="Notifications">
               <i style="font-size: 1.25rem;" class="ni ni-notification-70"></i>
             </a>
           </li>
@@ -80,7 +82,7 @@ if(isset($_SESSION['username'])) {
                 <h6 class="text-overflow m-0">Welcome <?php echo $user['first_name']; ?> !</h6>
               </div>
 
-              <a href="" class="dropdown-item">
+              <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item">
                 <i class="ni ni-single-02"></i>
                 <span>My profile</span>
               </a>
