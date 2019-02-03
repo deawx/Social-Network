@@ -15,15 +15,26 @@ class Post {
       $check_empty = preg_replace('/\s+/', '', $body);
 
       if($check_empty != "") {
-         $date_added = date("d-m-Y H:i:s");
-         $added_by = $this->user_obj->getUsername;
 
+         // CURRENT DATE & TIME
+         $date_added = date("d-m-Y H:i:s");
+
+         // GET USERNAME
+         $added_by = $this->user_obj->getUsername();
+
+         // IF USER IS ON OWN PROFILE, $user_to = 'none';
          if($user_to == $added_by) {
             $user_to = "none";
          }
 
+         // INSERT POST
          $query = mysqli_query($this->con, "INSERT INTO posts VALUES ('', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0')");
          $returned_id = mysqli_insert_id($this->con);
+
+         // UPDATE POST COUNT FOR USER
+         $num_posts = $this->user_obj->getNumPosts();
+         $num_posts++;
+         $update_query = mysqli_query($this->con, "UPDATE users SET num_posts='$num_posts' WHERE (username='$added_by')");
       }
    }
 }
