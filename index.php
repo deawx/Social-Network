@@ -1,6 +1,13 @@
 <?php
 
 require_once("includes/header.php");
+require_once("includes/classes/Post.php");
+
+if(isset($_POST['post_btn'])) {
+  $post = new POST($con, $userLoggedIn);
+  $post->submitPost($_POST['post_text'], 'none');
+
+}
 
 ?>
 
@@ -15,7 +22,7 @@ require_once("includes/header.php");
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Friends</h5>
-                    <span class="h2 font-weight-bold mb-0">0<?php echo ($user['friend_array']); ?></span>
+                    <span class="h2 font-weight-bold mb-0">0<?php echo $user['friend_array']; ?></span>
                   </div>
                   
                   <div class="col-auto">
@@ -99,7 +106,7 @@ require_once("includes/header.php");
               </div>
 
               <div class="col-4 text-right">
-                <button type="submit" name="post" id="post_btn" class="btn btn-primary btn-icon mb-3 mb-sm-0">
+                <button type="submit" name="post_btn" id="post_btn" class="btn btn-primary btn-icon mb-3 mb-sm-0">
                   <span class="btn-inner--icon">
                     <i class="fas fa-paper-plane"></i>
                   </span>
@@ -112,7 +119,7 @@ require_once("includes/header.php");
           <div class="card-body">
             <div class="pl-lg-4">
               <div class="form-group">
-                <textarea rows="4" class="form-control form-control-alternative">Post a message ...</textarea>
+                <textarea rows="4" name="post_text" class="form-control form-control-alternative">Post a message ...</textarea>
               </div>
             </div>
           </div>
