@@ -18,6 +18,12 @@ class Post {
          $date_added = date("d-m-Y H:i:s");
          $added_by = $this->user_obj->getUsername;
 
+         if($user_to == $added_by) {
+            $user_to = "none";
+         }
+
+         $query = mysqli_query($this->con, "INSERT INTO posts VALUES ('', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0')");
+         $returned_id = mysqli_insert_id($this->con);
       }
    }
 }
