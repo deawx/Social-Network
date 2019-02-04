@@ -144,9 +144,26 @@ if(isset($_POST['post_btn'])) {
           $post->loadPostsFriends();
         ?>
 
+        <img id="loading" src="assets/img/icons/loading.gif" alt="loader" style="max-width: 100px;" />
       </div>
     </div>
   </div>
+
+  <script>
+    var userLoggedIn = '<?php echo $userLoggedIn; ?>';
+
+    $(document).ready(function() {
+      $('#loading').show();
+
+      // AJAX REQUEST FOR LOADING FIRST POSTS
+      $.ajax({
+        url: "includes/handlers/ajax_load_posts.php",
+        type: "POST",
+        data: "page=1&userLoggedIn=" + userLoggedIn,
+        cache: false
+      })
+    });
+  </script>
 
   <script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
   <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
