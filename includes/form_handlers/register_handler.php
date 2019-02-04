@@ -75,7 +75,7 @@ if(isset($_POST['reg_btn'])) {
     array_push($error_array, "Your password must be between 5 & 30 characters.");
   };
 
-  $date = date("d-m-Y");
+  $date = date("d m Y");
 //--------------------------------------------------------------------------------- USERNAME & PROFILE_PIC
   if(empty($error_array)) {
     $password = md5($password);
