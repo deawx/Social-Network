@@ -128,10 +128,6 @@ if(isset($_POST['post_btn'])) {
     </div>
   </div>
 
-<?php 
-  $post = new Post($con, $userLoggedIn);
-  $post->loadPostsFriends();
-?>
   <div class="container mt-5">
     <div class="col">
       <div class="card bg-secondary shadow">
@@ -143,102 +139,11 @@ if(isset($_POST['post_btn'])) {
           </div>
         </div>
 
-        <div class="card-body border-0">
-          <div class="p-3">
-            <div class="row align-items-center">
-              <div class="col-lg-2 ml-1 mr-1">
-                <img class="img-fluid rounded-circle shadow-lg" src="assets/img/profile_pics/defaults/head_alizarin.png" />
-              </div>
+        <?php 
+          $post = new Post($con, $userLoggedIn);
+          $post->loadPostsFriends();
+        ?>
 
-              <div class="col-lg-8">
-                <h3 class="heading mb-0">Echeverria Laurent</h3>
-                <p class="mb-0 mt-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel scelerisque metus. Fusce porta 
-                  interdum est sit amet ultricies. Vivamus rutrum quam a ante aliquet venenatis. Aenean eros turpis, tincidunt 
-                  et leo eu, egestas efficitur nunc. Suspendisse a posuere tellus, et volutpat ante.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-footer bg-secondary border-0">
-          <div class="row">
-            <div class="col-lg-3 text-left">
-              <button type="submit" class="btn btn-primary btn-icon">
-                <span class="btn-inner--icon">
-                  <i class="fas fa-calendar-day" style="font-size: 20px;"></i>
-                </span>
-                <span class="btn-inner--text">31 Janv 2019</span>
-              </button>
-            </div>
-
-            <div class="col-lg-9 text-right">
-              <button type="submit" class="btn btn-outline-danger btn-icon">
-                <span class="btn-inner--icon">
-                  <i class="fas fa-heart" style="font-size: 16px;"></i>
-                </span>
-                <span class="btn-inner--text">18</span>
-              </button>
-
-              <button type="submit" class="btn btn-outline-info btn-icon">
-                <span class="btn-inner--icon">
-                  <i class="fas fa-comments" style="font-size: 16px;"></i>
-                </span>
-                <span class="btn-inner--text">10</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <hr class="my-4" />
-
-        <div class="card-body border-0">
-          <div class="p-3">
-            <div class="row align-items-center">
-              <div class="col-lg-2 ml-1 mr-1">
-                <img class="img-fluid rounded-circle shadow-lg" src="assets/img/profile_pics/defaults/head_pete_river.png" />
-              </div>
-
-              <div class="col-lg-8">
-                <h3 class="heading mb-0">Marie Poppins</h3>
-                <p class="mb-0 mt-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel scelerisque metus. Fusce porta 
-                  interdum est sit amet ultricies. Vivamus rutrum quam a ante aliquet venenatis. Aenean eros turpis, tincidunt 
-                  et leo eu, egestas efficitur nunc. Suspendisse a posuere tellus, et volutpat ante.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-footer bg-secondary border-0">
-          <div class="row">
-            <div class="col-lg-3 text-left">
-              <button type="submit" class="btn btn-primary btn-icon">
-                <span class="btn-inner--icon">
-                  <i class="fas fa-calendar-day" style="font-size: 20px;"></i>
-                </span>
-                <span class="btn-inner--text">30 Janv 2019</span>
-              </button>
-            </div>
-
-            <div class="col-lg-9 text-right">
-              <button type="submit" class="btn btn-outline-danger btn-icon">
-                <span class="btn-inner--icon">
-                  <i class="fas fa-heart" style="font-size: 16px;"></i>
-                </span>
-                <span class="btn-inner--text">3</span>
-              </button>
-
-              <button type="submit" class="btn btn-outline-info btn-icon">
-                <span class="btn-inner--icon">
-                  <i class="fas fa-comments" style="font-size: 16px;"></i>
-                </span>
-                <span class="btn-inner--text">9</span>
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
