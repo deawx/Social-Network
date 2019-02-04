@@ -1,6 +1,6 @@
 <?php
 
-require_once("includes/database.php");
+require_once("config/config.php");
 require_once("includes/classes/User.php");
 
 if(isset($_SESSION['username'])) {
