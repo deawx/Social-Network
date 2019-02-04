@@ -48,6 +48,7 @@ class Post {
          $added_by = $row['added_by'];
          $date_time = $row['date_added'];
 
+         // PREPARE user_to STRING SO IT CAN BE INCLUDED EVEN IF NOT POSTED TO A USER
          if($row['user_to'] == "none") {
             $user_to = "";
          } else {
@@ -56,6 +57,7 @@ class Post {
             $user_to = "<a href='" . $row['user_to'] . "'>" . $user_to_name . "</a>";
          }
 
+         // CHECK IF USER WHO POSTED, HAS THEIR ACCOUNT CLOSED
          $added_by_obj = new User($con, $added_by);
          if($added_by_obj->isClosed()) {
             continue;
@@ -63,6 +65,58 @@ class Post {
 
          $user_infos = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE (username='$added_by')");
          $user_row = mysqli_fetch_array($user_infos);
+
+         //TIMEFRAME
+         $date_time_now = date("d-m-Y  H:i:s");
+         $start_date = new DateTime($date_time);
+         $end_date = new DateTime($date_time_now);
+         $interval = $start_date->diff($end_date);
+
+         if($interval->y >= 1) {
+            if($interval == 1) {
+               $time_message = $interval->y . " year ago"; // 1 year
+            } else {
+               $time_message = $interval->y . " years ago"; // 1+ years
+            }
+         } elseif($interval->m >= 1) {
+            if($interval->d == 0) {
+               $days = " ago";
+            } elseif($interval->d == 1) {
+               $days = $interval->d . " day ago";
+            } else {
+               $days = $interval->d . " days ago";
+            }
+
+            if($interval->m == 1) {
+               $time_message = $interval->m . " month" . $days;
+            } else {
+               $time_message = $interval->m . " months" . $days;
+            }
+         } elseif($interval->d >= 1) {
+            if($interval->d == 1) {
+               $time_message = "Yesterday";
+            } else {
+               $time_message = $interval->d . " days ago";
+            }
+         } elseif($interval->h >= 1) {
+            if($interval->h == 1) {
+               $time_message = $interval->h . " hour ago";
+            } else {
+               $time_message = $interval->h . " hours ago";
+            }
+         } elseif($interval->i >= 1) {
+            if($interval->i == 1) {
+               $time_message = $interval->i . " minute ago";
+            } else {
+               $time_message = $interval->i . " minutes ago";
+            }
+         } else {
+            if($interval->s < 30) {
+               $time_message = "Just now";
+            } else {
+               $time_message = $interval->s . " seconds ago";
+            }
+         }
       }
    }
 }
