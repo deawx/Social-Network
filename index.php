@@ -126,8 +126,12 @@ if(isset($_POST['post_btn'])) {
         </form>
       </div>
     </div>
-  </div>  
+  </div>
 
+<?php 
+  $post = new Post($con, $userLoggedIn);
+  $post->loadPostsFriends();
+?>
   <div class="container mt-5">
     <div class="col">
       <div class="card bg-secondary shadow">

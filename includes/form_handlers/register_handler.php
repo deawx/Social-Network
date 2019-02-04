@@ -19,7 +19,7 @@ if(isset($_POST['reg_btn'])) {
 
   if(strlen($fname) < 3 || strlen($fname) > 25) {
     array_push($error_array, "Your first name must be between 3 & 25 characters.");
-  };
+  }
 
 //--------------------------------------------------------------------------------- LAST NAME
   $lname = strip_tags($_POST['reg_lname']);
@@ -29,7 +29,7 @@ if(isset($_POST['reg_btn'])) {
 
   if(strlen($lname) < 3 || strlen($lname) > 25) {
     array_push($error_array, "Your last name must be between 3 & 25 characters.");
-  };
+  }
 
 //--------------------------------------------------------------------------------- EMAIL
   $email = strip_tags($_POST['reg_email']);
@@ -51,13 +51,13 @@ if(isset($_POST['reg_btn'])) {
 
       if($num_rows > 0) {
         array_push($error_array, "Email already in use.");
-      };
+      }
     } else {
       array_push($error_array, "Invalid email format.");
-    };
+    }
   } else {
     array_push($error_array, "Email don't match.");
-  };
+  }
 
 //--------------------------------------------------------------------------------- PASSWORD & DATE
   $password = strip_tags($_POST['reg_password']);
@@ -68,14 +68,14 @@ if(isset($_POST['reg_btn'])) {
   } else {
     if(preg_match('/[^a-zA-Z0-9]/', $password)) {
       array_push($error_array, "Your password can only contain english characters or numbers.");
-    };
-  };
+    }
+  }
 
   if(strlen($password) < 5 || strlen($password) > 30) {
     array_push($error_array, "Your password must be between 5 & 30 characters.");
-  };
+  }
 
-  $date = date("d m Y");
+  $date = date("Y-m-d");
 //--------------------------------------------------------------------------------- USERNAME & PROFILE_PIC
   if(empty($error_array)) {
     $password = md5($password);
@@ -87,7 +87,7 @@ if(isset($_POST['reg_btn'])) {
       $i++;
       $username = $username . "_" . $i;
       $username_check = mysqli_query($con, "SELECT username FROM users WHERE (username='$username')");
-    };
+    }
 
     $rand = rand(1, 16);
 
@@ -115,7 +115,7 @@ if(isset($_POST['reg_btn'])) {
     $_SESSION['reg_lname'] = "";
     $_SESSION['reg_email'] = "";
     $_SESSION['reg_email2'] = "";
-  };
-};
+  }
+}
 
 ?>

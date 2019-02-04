@@ -23,7 +23,7 @@ if(isset($_POST['log_btn'])) {
       exit();
    } else {
       array_push($error_array, "<div class='alert alert-danger text-center' style='margin-bottom: 35px;'><strong>Error! Email or password was incorrect.</strong></div>");
-   };
-};
+   }
+}
 
 ?>

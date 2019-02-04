@@ -1,6 +1,6 @@
 <?php
 
-require_once("includes/database.php");
+require_once("config/config.php");
 require_once("includes/form_handlers/register_handler.php");
 require_once("includes/form_handlers/login_handler.php");
 
@@ -36,7 +36,9 @@ require_once("includes/form_handlers/login_handler.php");
           <div class="navbar-collapse-header d-md-none">
             <div class="row">
               <div class="col-6 collapse-close">
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" 
+                        data-target="#navbar-collapse-main" aria-controls="sidenav-main" 
+                        aria-expanded="false" aria-label="Toggle sidenav">
                   <span></span>
                   <span></span>
                 </button>
