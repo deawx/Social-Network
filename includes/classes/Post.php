@@ -122,18 +122,60 @@ class Post {
             }
          }
 
-         $str .= "<div class='status_post'>
-                     <div class='post_profile_pic'>
-                        <img src='$profile_pic' width='50'>
+         $str .= "
+            <div class='card-body border-0'>
+               <div class='p-3'>
+                  <div class='row align-items-center'>
+                     <div class='col-lg-2 ml-1 mr-1'>
+                        <img class='img-fluid rounded-circle shadow-lg' src='$profile_pic' />
                      </div>
-                     <div class='posted_by'>
-                        <a href='$added_by'>$first_name $last_name</a> $user_to $time_message
+
+                     <div class='col-lg-8'>
+                        <h3 class='heading mb-0'>
+                           <a href='$added_by'>$first_name $last_name</a> $user_to
+                        </h3>
+                        <p class='mb-0 mt-3'>
+                           $body
+                        </p>
                      </div>
-                     <div id='post_body'>
-                        $body
-                        <br>
-                     </div>
-                  </div>";
+                  </div>
+               </div>
+            </div>
+
+            <div class='card-footer bg-secondary border-0'>
+               <div class='row'>
+                  <div class='col-lg-3 text-left'>
+                     <button type='submit' class='btn btn-primary btn-icon'>
+                        <span class='btn-inner--icon'>
+                           <i class='fas fa-calendar-day' style='font-size: 20px;'></i>
+                        </span>
+
+                        <span class='btn-inner--text'>$time_message</span>
+                     </button>
+                  </div>
+  
+                  <div class='col-lg-9 text-right'>
+                     <button type='submit' class='btn btn-outline-danger btn-icon'>
+                        <span class='btn-inner--icon'>
+                           <i class='fas fa-heart' style='font-size: 16px;'></i>
+                        </span>
+
+                        <span class='btn-inner--text'>18</span>
+                     </button>
+  
+                     <button type='submit' class='btn btn-outline-info btn-icon'>
+                        <span class='btn-inner--icon'>
+                           <i class='fas fa-comments' style='font-size: 16px;'></i>
+                        </span>
+
+                        <span class='btn-inner--text'>10</span>
+                     </button>
+                  </div>
+               </div>
+            </div>
+
+            <hr class='my-4' />
+         "; // END $str
       }
 
       echo $str;
