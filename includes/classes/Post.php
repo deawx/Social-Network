@@ -203,11 +203,19 @@ class Post {
          }
 
          if($count > $limit) {
-            $str .= "<input type='hidden' class='nextPage' value='" . ($page + 1) . "'>
-                     <input type='hidden' class='noMorePosts' value='false'>";
+            $str .= "
+               <input type='hidden' class='nextPage' value='" . ($page + 1) . "' />
+               <input type='hidden' class='noMorePosts' value='false' />
+            ";
          } else {
-            $str .= "<input type='hidden' class='noMorePosts' value='true'>
-                     <p>No more posts to show</p>";
+            $str .= "
+               <input type='hidden' class='noMorePosts' value='true' />
+               <div class='alert alert-primary alert-dismissible fade show text-center'>
+                  <span class='alert-inner--text' style='text-transform: uppercase; font-weight: 600;'>
+                     No more posts to show ...
+                  </span>
+               </div>         
+            ";
          }
       }
 
