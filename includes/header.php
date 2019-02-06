@@ -1,7 +1,7 @@
 <?php
 
 require_once("config/config.php");
-require_once("includes/classes/User.php");
+include_once("includes/classes/User.php");
 
 if(isset($_SESSION['username'])) {
    $userLoggedIn = $_SESSION['username'];
@@ -20,6 +20,11 @@ if(isset($_SESSION['username'])) {
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
+
+  <script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="assets/js/argon.min.js"></script>
+  <script type="text/javascript" src="assets/js/infinite-scroll.js"></script>
 
   <link rel="stylesheet" type="text/css" href="assets/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
