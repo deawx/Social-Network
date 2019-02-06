@@ -24,7 +24,6 @@ if(isset($_SESSION['username'])) {
   <script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
   <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="assets/js/argon.min.js"></script>
-  <script type="text/javascript" src="assets/js/infinite-scroll.js"></script>
 
   <link rel="stylesheet" type="text/css" href="assets/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
