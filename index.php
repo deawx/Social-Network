@@ -1,13 +1,12 @@
 <?php
 
-require_once("includes/header.php");
-require_once("includes/classes/Post.php");
-require_once("includes/classes/User.php");
+include_once("includes/header.php");
+include_once("includes/classes/Post.php");
 
 if(isset($_POST['post_btn'])) {
   $post = new POST($con, $userLoggedIn);
   $post->submitPost($_POST['post_text'], 'none');
-
+  header("Location: index.php");
 }
 
 ?>
@@ -146,11 +145,6 @@ if(isset($_POST['post_btn'])) {
       </div>
     </div>
   </div>
-
-  <script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
-  <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="assets/js/argon.min.js"></script>
-  <script type="text/javascript" src="assets/js/infinite-scroll.js"></script>
-
+  
 </body>
 </html>
