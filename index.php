@@ -140,8 +140,8 @@ if(isset($_POST['post_btn'])) {
         </div>
 
         <div class="posts_area"></div>
-        <img id="loading" src="assets/img/icons/loading.gif" alt="loader" style="max-width: 100px;" />
-
+        <img id="loading" src="assets/img/icons/loading.gif" alt="loader" style="max-width: 100px; margin: 0 auto;" />
+        
       </div>
     </div>
   </div>
