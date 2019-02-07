@@ -76,132 +76,155 @@ class Post {
                continue;
             }
 
-            if($num_iterations++ < $start) {
-               continue;
-            }
-
-            // ONCE $limit POSTS HAVE BEEN LOADED, BREAK
-            if($count > $limit) {
-               break;
-            } else {
-               $count++;
-            }
-
-            $user_infos = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE (username='$added_by')");
-            $user_row = mysqli_fetch_array($user_infos);
-
-            $first_name = $user_row['first_name'];
-            $last_name = $user_row['last_name'];
-            $profile_pic = $user_row['profile_pic'];
-
-            //TIMEFRAME
-            $date_time_now = date("Y-m-d  H:i:s");
-            $start_date = new DateTime($date_time);
-            $end_date = new DateTime($date_time_now);
-            $interval = $start_date->diff($end_date);
-
-            if($interval->y >= 1) {
-               if($interval == 1) {
-                  $time_message = $interval->y . " year ago"; // 1 year
-               } else {
-                  $time_message = $interval->y . " years ago"; // 1+ years
-               }
-            } elseif($interval->m >= 1) {
-               if($interval->d == 0) {
-                  $days = " ago";
-               } elseif($interval->d == 1) {
-                  $days = $interval->d . " day ago";
-               } else {
-                  $days = $interval->d . " days ago";
+            $user_logged_obj = new User($this->con, $userLoggedIn);
+            if($user_logged_obj->isFriend($added_by)) {
+               if($num_iterations++ < $start) {
+                  continue;
                }
 
-               if($interval->m == 1) {
-                  $time_message = $interval->m . " month" . $days;
+               // ONCE $limit POSTS HAVE BEEN LOADED, BREAK
+               if($count > $limit) {
+                  break;
                } else {
-                  $time_message = $interval->m . " months" . $days;
+                  $count++;
                }
-            } elseif($interval->d >= 1) {
-               if($interval->d == 1) {
-                  $time_message = "Yesterday";
-               } else {
-                  $time_message = $interval->d . " days ago";
-               }
-            } elseif($interval->h >= 1) {
-               if($interval->h == 1) {
-                  $time_message = $interval->h . " hour ago";
-               } else {
-                  $time_message = $interval->h . " hours ago";
-               }
-            } elseif($interval->i >= 1) {
-               if($interval->i == 1) {
-                  $time_message = $interval->i . " minute ago";
-               } else {
-                  $time_message = $interval->i . " minutes ago";
-               }
-            } else {
-               if($interval->s < 30) {
-                  $time_message = "Just now";
-               } else {
-                  $time_message = $interval->s . " seconds ago";
-               }
-            }
 
-            $str .= "
-               <div class='status_post'>
-                  <div class='card-body border-0'>
-                     <div class='p-3'>
-                        <div class='row align-items-center'>
-                           <div class='col-lg-2 ml-1 mr-1'>
-                              <img class='img-fluid rounded-circle shadow-lg' src='$profile_pic' />
+               $user_infos = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE (username='$added_by')");
+               $user_row = mysqli_fetch_array($user_infos);
+
+               $first_name = $user_row['first_name'];
+               $last_name = $user_row['last_name'];
+               $profile_pic = $user_row['profile_pic'];
+
+               ?>
+
+               <script>
+                  function toggle<?php echo $id; ?>() {
+                     var element = document.getElementById('toggleComment<?php echo $id; ?>');
+
+                     if(element.style.display == 'block') {
+                        element.style.display = 'none';
+                     } else {
+                        element.style.display= 'block';
+                     }
+                  }
+               </script>
+
+               <?php
+
+               //TIMEFRAME
+               $date_time_now = date("Y-m-d  H:i:s");
+               $start_date = new DateTime($date_time);
+               $end_date = new DateTime($date_time_now);
+               $interval = $start_date->diff($end_date);
+
+               if($interval->y >= 1) {
+                  if($interval == 1) {
+                     $time_message = $interval->y . " year ago"; // 1 year
+                  } else {
+                     $time_message = $interval->y . " years ago"; // 1+ years
+                  }
+               } elseif($interval->m >= 1) {
+                  if($interval->d == 0) {
+                     $days = " ago";
+                  } elseif($interval->d == 1) {
+                     $days = $interval->d . " day ago";
+                  } else {
+                     $days = $interval->d . " days ago";
+                  }
+
+                  if($interval->m == 1) {
+                     $time_message = $interval->m . " month" . $days;
+                  } else {
+                     $time_message = $interval->m . " months" . $days;
+                  }
+               } elseif($interval->d >= 1) {
+                  if($interval->d == 1) {
+                     $time_message = "Yesterday";
+                  } else {
+                     $time_message = $interval->d . " days ago";
+                  }
+               } elseif($interval->h >= 1) {
+                  if($interval->h == 1) {
+                     $time_message = $interval->h . " hour ago";
+                  } else {
+                     $time_message = $interval->h . " hours ago";
+                  }
+               } elseif($interval->i >= 1) {
+                  if($interval->i == 1) {
+                     $time_message = $interval->i . " minute ago";
+                  } else {
+                     $time_message = $interval->i . " minutes ago";
+                  }
+               } else {
+                  if($interval->s < 30) {
+                     $time_message = "Just now";
+                  } else {
+                     $time_message = $interval->s . " seconds ago";
+                  }
+               }
+
+               $str .= "
+                  <div class='status_post'>
+                     <div class='card-body border-0'>
+                        <div class='p-3'>
+                           <div class='row align-items-center'>
+                              <div class='col-lg-2 ml-1 mr-1'>
+                                 <img class='img-fluid rounded-circle shadow-lg' src='$profile_pic' />
+                              </div>
+
+                              <div class='col-lg-8'>
+                                 <h3 class='heading mb-0'>
+                                    <a href='$added_by'>$first_name $last_name</a> $user_to
+                                 </h3>
+                                 <p class='mb-0 mt-3'>
+                                    $body
+                                 </p>
+                              </div>
                            </div>
+                        </div>
+                     </div>
 
-                           <div class='col-lg-8'>
-                              <h3 class='heading mb-0'>
-                                 <a href='$added_by'>$first_name $last_name</a> $user_to
-                              </h3>
-                              <p class='mb-0 mt-3'>
-                                 $body
-                              </p>
+                     <div class='card-footer bg-secondary border-0'>
+                        <div class='row'>
+                           <div class='col-lg-3 text-left'>
+                              <button type='submit' class='btn btn-primary btn-icon'>
+                                 <span class='btn-inner--icon'>
+                                    <i class='fas fa-calendar-day' style='font-size: 20px;'></i>
+                                 </span>
+
+                                 <span class='btn-inner--text'>$time_message</span>
+                              </button>
+                           </div>
+         
+                           <div class='col-lg-9 text-right'>
+                              <button type='submit' class='btn btn-outline-danger btn-icon'>
+                                 <span class='btn-inner--icon'>
+                                    <i class='fas fa-heart' style='font-size: 16px;'></i>
+                                 </span>
+
+                                 <span class='btn-inner--text'>18</span>
+                              </button>
+         
+                              <button onClick='javascript:toggle$id()' class='btn btn-outline-info btn-icon'>
+                                 <span class='btn-inner--icon'>
+                                    <i class='fas fa-comments' style='font-size: 16px;'></i>
+                                 </span>
+
+                                 <span class='btn-inner--text'>10</span>
+                              </button>
+
+                              <div class='post_comment' id='toggleComment$id' style='display:none;'>
+                                 <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+                              </div>
                            </div>
                         </div>
                      </div>
                   </div>
 
-                  <div class='card-footer bg-secondary border-0'>
-                     <div class='row'>
-                        <div class='col-lg-3 text-left'>
-                           <button type='submit' class='btn btn-primary btn-icon'>
-                              <span class='btn-inner--icon'>
-                                 <i class='fas fa-calendar-day' style='font-size: 20px;'></i>
-                              </span>
-
-                              <span class='btn-inner--text'>$time_message</span>
-                           </button>
-                        </div>
-      
-                        <div class='col-lg-9 text-right'>
-                           <button type='submit' class='btn btn-outline-danger btn-icon'>
-                              <span class='btn-inner--icon'>
-                                 <i class='fas fa-heart' style='font-size: 16px;'></i>
-                              </span>
-
-                              <span class='btn-inner--text'>18</span>
-                           </button>
-      
-                           <button type='submit' class='btn btn-outline-info btn-icon'>
-                              <span class='btn-inner--icon'>
-                                 <i class='fas fa-comments' style='font-size: 16px;'></i>
-                              </span>
-
-                              <span class='btn-inner--text'>10</span>
-                           </button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-               <hr class='my-4' />
-            "; // END $str
+                  <hr class='my-4' />
+               "; // END $str
+            }
          }
 
          if($count > $limit) {
