@@ -68,9 +68,18 @@
 
    <form action="comment_frame.php?post_id=<?php echo $post_id; ?>" method="POST" 
          id="comment_form" name="postComment<?php echo $post_id; ?>">
-   
-      <textarea name="post_body"></textarea>
-      <input type="submit" name="postComment<?php echo $post_id; ?>" value="Post" />
+
+         <div class="form-group">
+            <textarea rows="4" name="post_body" class="form-control form-control-alternative">Post a comment ...</textarea>
+         </div>
+
+         <button type="submit" name="postComment<?php echo $post_id; ?>" class="btn btn-primary btn-icon mb-3 mb-sm-0">
+            <span class="btn-inner--icon">
+               <i class="fas fa-paper-plane"></i>
+            </span>
+
+            <span class="btn-inner--text">Post ...</span>
+         </button>
 
       <!-- LOAD COMMENTS -->
 
