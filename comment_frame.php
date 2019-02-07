@@ -34,7 +34,7 @@
 
    <script>
       function toggle() {
-         var element = document.getElementByID('comment_section');
+         var element = document.getElementById('comment_section');
 
          if(element.style.display == 'block') {
             element.style.display = 'none';
@@ -56,7 +56,7 @@
 
    $posted_to = $row['added_by'];
 
-   $if(isset($_POST['postComment' . $post_id])) {
+   if(isset($_POST['postComment' . $post_id])) {
       $post_body = $_POST['post_body'];
       $post_body = mysqli_escape_string($con, $post_body);
       $date_time_now = date("Y-m-d H:i:s");
