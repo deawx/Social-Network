@@ -1,3 +1,19 @@
+<?php
+
+require_once("config/config.php");
+include_once("includes/classes/User.php");
+include_once("includes/classes/Post.php");
+
+if(isset($_SESSION['username'])) {
+   $userLoggedIn = $_SESSION['username'];
+   $user_infos = mysqli_query($con, "SELECT * FROM users WHERE (username='$userLoggedIn')");
+   $user = mysqli_fetch_array($user_infos);
+} else {
+   header("Location: login.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,21 +32,6 @@
 </head>
 
 <body>
-   <?php
-
-   require_once("config/config.php");
-   include_once("includes/classes/User.php");
-   include_once("includes/classes/Post.php");
-
-   if(isset($_SESSION['username'])) {
-      $userLoggedIn = $_SESSION['username'];
-      $user_infos = mysqli_query($con, "SELECT * FROM users WHERE (username='$userLoggedIn')");
-      $user = mysqli_fetch_array($user_infos);
-   } else {
-      header("Location: login.php");
-   }
-
-   ?>
 
    <script>
       function toggle() {
