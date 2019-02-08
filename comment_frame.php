@@ -68,7 +68,7 @@ if(isset($_SESSION['username'])) {
    ?>
 
    <form action="comment_frame.php?post_id=<?php echo $post_id; ?>" method="POST" 
-         id="comment_form" name="postComment<?php echo $post_id; ?>" class="mb-7">
+         id="comment_form" name="postComment<?php echo $post_id; ?>" class="mb-7 mt-1">
 
       <div class="form-group mr-3 ml-4">
          <textarea rows="4" name="post_body" class="form-control form-control-alternative">Post a comment ...</textarea>
@@ -185,7 +185,7 @@ if(isset($_SESSION['username'])) {
       }
    } else {
       echo "
-         <div class='alert alert-primary alert-dismissible fade show text-center'>
+         <div class='alert alert-primary alert-dismissible fade show text-center ml-4 mr-3'>
             <span class='alert-inner--text' style='text-transform: uppercase; font-weight: 600;'>
                Be the first to write a comment
             </span>
