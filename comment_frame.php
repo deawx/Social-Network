@@ -67,25 +67,25 @@
    ?>
 
    <form action="comment_frame.php?post_id=<?php echo $post_id; ?>" method="POST" 
-         id="comment_form" name="postComment<?php echo $post_id; ?>">
+         id="comment_form" name="postComment<?php echo $post_id; ?>" class="mb-7">
 
-      <div class="form-group">
+      <div class="form-group mr-3 ml-4">
          <textarea rows="4" name="post_body" class="form-control form-control-alternative">Post a comment ...</textarea>
       </div>
 
-      <button type="submit" name="postComment<?php echo $post_id; ?>" class="btn btn-primary btn-icon mb-3 mb-sm-0">
+      <button type="submit" name="postComment<?php echo $post_id; ?>" class="btn btn-primary btn-icon mr-3"  style="float: right;">
          <span class="btn-inner--icon">
             <i class="fas fa-paper-plane"></i>
          </span>
 
-         <span class="btn-inner--text">Post ...</span>
+         <span class="btn-inner--text">Post a comment</span>
       </button>
    </form>
 
    <?php
 
    // LOAD COMMENTS
-   $get_comments = mysqli_query($con, "SELECT * FROM comments WHERE (post_id='$post_id') ORDER BY id ASC");
+   $get_comments = mysqli_query($con, "SELECT * FROM comments WHERE (post_id='$post_id') ORDER BY id DESC");
    $count = mysqli_num_rows($get_comments);
 
    if($count != 0) {
@@ -153,19 +153,29 @@
           ?>
 
          <div class="comment_section">
-            <a href="<?php echo $posted_by; ?>" target="_parent">
-               <img src="<?php echo $user_obj->getProfilePic(); ?>"
-                    title="<?php echo $posted_by; ?>"
-                    style="foat: left;"/>
-            </a>
+            <div class="card-body border-0">
+               <div class="p-1">
+                  <div class="row align-items-center">
+                     <div class="col-lg-2 ml-1 mr-1">
+                        <img class="img-fluid rounded-circle shadow-lg" style="height:100px;" src="<?php echo $user_obj->getProfilePic(); ?>" />
+                     </div>
 
-            <a href="<?php echo $posted_by; ?>" target="_parent">
-               <?php echo $user_obj->getFirstAndLastName(); ?>
-            </a>
+                     <div class="col-lg-8">
+                        <h3 class="heading mb-0">
+                           <a href="<?php echo $posted_by; ?>" target="_parent">
+                              <?php echo $user_obj->getFirstAndLastName(); ?>
+                           </a>
+                           <small class="text-muted">- <?php echo $time_message; ?></small>
+                        </h3>
 
-            <?php echo $time_message . "<br>" . $comment_body; ?>
-
-            <hr>
+                        <p class='mb-0 mt-3'>
+                           <?php echo $comment_body; ?>
+                        </p>
+                     </div>
+                     <br/>
+                  </div>
+               </div>
+            </div>
          </div>
 
          <?php
