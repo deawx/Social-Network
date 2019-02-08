@@ -222,7 +222,7 @@ class Post {
                   <div class='row mt-5'>
                      <div class='col-lg-12 text-center'>
                         <div class='post_comment' id='toggleComment$id' style='display:none;'>
-                           <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
+                           <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0' class='' style='width: 100%; height: 300px;'></iframe>
                         </div>
                      </div>
                   </div>
