@@ -44,17 +44,29 @@ if(isset($_SESSION['username'])) {
    $row = mysqli_fetch_array($get_likes);
    $total_likes = $row['likes'];
    $user_liked = $row['added_by'];
+   $total_users_likes = $row['num_likes'];
 
    $user_infos = mysqli_query($con, "SELECT * FROM users WHERE (username='$user_liked')");
    $row = mysqli_fetch_array($user_infos);
 
    // LIKE BTN
+   if(isset($_POST['like_btn'])) {
+      $total_likes++;
+      $likes_query = mysqli_query($con, "UPDATE posts SET likes='$total_likes' WHERE (post_id='$post_id')");
+
+      $total_users_likes++;
+      $users_likes_query = mysqli_query($con, "UPDATE users SET num_likes='$total_users_likes' WHERE (username='$user_liked')");
+
+      $insert_user = mysqli_query($con, "INSERT INTO likes VALUES('', '$userLoggedIn', '$post_id')");
+
+      // INSERT NOTIFICATION
+   }
 
    // UNLIKE BTN
 
    // CHECK FOR PREVIOUS LIKE
    $check_query = mysqli_query($con, "SELECT * FROM likes WHERE (username='$userLoggedIn' AND post_id='$post_id')");
-   $num_rows = mysqli_num_rows($check_query):
+   $num_rows = mysqli_num_rows($check_query);
 
    if($num_rows > 0) {
       echo "
