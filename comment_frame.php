@@ -173,7 +173,9 @@ if(isset($_SESSION['username'])) {
                            <?php echo $comment_body; ?>
                         </p>
                      </div>
+
                      <br/>
+
                   </div>
                </div>
             </div>
@@ -181,6 +183,14 @@ if(isset($_SESSION['username'])) {
 
          <?php
       }
+   } else {
+      echo "
+         <div class='alert alert-primary alert-dismissible fade show text-center'>
+            <span class='alert-inner--text' style='text-transform: uppercase; font-weight: 600;'>
+               Be the first to write a comment
+            </span>
+         </div>
+      ";
    }
 
    ?>
