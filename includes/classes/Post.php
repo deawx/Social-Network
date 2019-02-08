@@ -112,6 +112,9 @@ class Post {
 
                <?php
 
+               $comments_check = mysqli_query($this->con, "SELECT * FROM comments WHERE (post_id='$id')");
+               $comments_check_num = mysqli_num_rows($comments_check);
+
                //TIMEFRAME
                $date_time_now = date("Y-m-d  H:i:s");
                $start_date = new DateTime($date_time);
@@ -211,7 +214,7 @@ class Post {
                                     <i class='fas fa-comments' style='font-size: 16px;'></i>
                                  </span>
 
-                                 <span class='btn-inner--text'>10</span>
+                                 <span class='btn-inner--text'>$comments_check_num</span>
                               </button>
 
                            </div>
@@ -222,7 +225,7 @@ class Post {
                   <div class='row mt-5'>
                      <div class='col-lg-12 text-center'>
                         <div class='post_comment' id='toggleComment$id' style='display:none;'>
-                           <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0' class='' style='width: 100%; height: 300px;'></iframe>
+                           <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0' style='width: 100%; height: 275px;'></iframe>
                         </div>
                      </div>
                   </div>
