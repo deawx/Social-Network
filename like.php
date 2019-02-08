@@ -57,9 +57,23 @@ if(isset($_SESSION['username'])) {
    $num_rows = mysqli_num_rows($check_query):
 
    if($num_rows > 0) {
-      echo 'like_btn';
+      echo "
+         <form action='like.php?post_id=" . $post_id . "' method='POST'>
+            <input type='submit'class='comment_like' name='unlike_btn' value='Unlike' />
+            <div class='like_value'>
+               " . $total_likes . " Likes
+            </div>
+         </form>
+      ";
    } else {
-      echo 'unlike_btn';
+      echo "
+         <form action='like.php?post_id=" . $post_id . "' method='POST'>
+            <input type='submit'class='comment_like' name='like_btn' value='Like' />
+            <div class='like_value'>
+               " . $total_likes . " Likes
+            </div>
+         </form>
+      ";
    }
 
    ?>
