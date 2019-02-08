@@ -69,19 +69,109 @@
    <form action="comment_frame.php?post_id=<?php echo $post_id; ?>" method="POST" 
          id="comment_form" name="postComment<?php echo $post_id; ?>">
 
-         <div class="form-group">
-            <textarea rows="4" name="post_body" class="form-control form-control-alternative">Post a comment ...</textarea>
+      <div class="form-group">
+         <textarea rows="4" name="post_body" class="form-control form-control-alternative">Post a comment ...</textarea>
+      </div>
+
+      <button type="submit" name="postComment<?php echo $post_id; ?>" class="btn btn-primary btn-icon mb-3 mb-sm-0">
+         <span class="btn-inner--icon">
+            <i class="fas fa-paper-plane"></i>
+         </span>
+
+         <span class="btn-inner--text">Post ...</span>
+      </button>
+   </form>
+
+   <?php
+
+   // LOAD COMMENTS
+   $get_comments = mysqli_query($con, "SELECT * FROM comments WHERE (post_id='$post_id') ORDER BY id ASC");
+   $count = mysqli_num_rows($get_comments);
+
+   if($count != 0) {
+      while($comment = mysqli_fetch_array($get_comments)) {
+         $comment_body = $comment['post_body'];
+         $posted_to = $comment['posted_to'];
+         $posted_by = $comment['posted_by'];
+         $date_added = $comment['date_added'];
+         $removed = $comment['removed'];
+
+         //TIMEFRAME
+         $date_time_now = date("Y-m-d  H:i:s");
+         $start_date = new DateTime($date_added);
+         $end_date = new DateTime($date_time_now);
+         $interval = $start_date->diff($end_date);
+
+         if($interval->y >= 1) {
+            if($interval == 1) {
+               $time_message = $interval->y . " year ago"; // 1 year
+            } else {
+               $time_message = $interval->y . " years ago"; // 1+ years
+            }
+         } elseif($interval->m >= 1) {
+            if($interval->d == 0) {
+               $days = " ago";
+            } elseif($interval->d == 1) {
+               $days = $interval->d . " day ago";
+            } else {
+               $days = $interval->d . " days ago";
+            }
+
+            if($interval->m == 1) {
+               $time_message = $interval->m . " month" . $days;
+            } else {
+               $time_message = $interval->m . " months" . $days;
+            }
+         } elseif($interval->d >= 1) {
+            if($interval->d == 1) {
+               $time_message = "Yesterday";
+            } else {
+               $time_message = $interval->d . " days ago";
+            }
+         } elseif($interval->h >= 1) {
+            if($interval->h == 1) {
+               $time_message = $interval->h . " hour ago";
+            } else {
+               $time_message = $interval->h . " hours ago";
+            }
+         } elseif($interval->i >= 1) {
+            if($interval->i == 1) {
+               $time_message = $interval->i . " minute ago";
+            } else {
+               $time_message = $interval->i . " minutes ago";
+            }
+         } else {
+            if($interval->s < 30) {
+               $time_message = "Just now";
+            } else {
+               $time_message = $interval->s . " seconds ago";
+            }
+         }
+
+          $user_obj = new User($con, $posted_by);
+
+          ?>
+
+         <div class="comment_section">
+            <a href="<?php echo $posted_by; ?>" target="_parent">
+               <img src="<?php echo $user_obj->getProfilePic(); ?>"
+                    title="<?php echo $posted_by; ?>"
+                    style="foat: left;"/>
+            </a>
+
+            <a href="<?php echo $posted_by; ?>" target="_parent">
+               <?php echo $user_obj->getFirstAndLastName(); ?>
+            </a>
+
+            <?php echo $time_message . "<br>" . $comment_body; ?>
+
+            <hr>
          </div>
 
-         <button type="submit" name="postComment<?php echo $post_id; ?>" class="btn btn-primary btn-icon mb-3 mb-sm-0">
-            <span class="btn-inner--icon">
-               <i class="fas fa-paper-plane"></i>
-            </span>
+         <?php
+      }
+   }
 
-            <span class="btn-inner--text">Post ...</span>
-         </button>
+   ?>
 
-      <!-- LOAD COMMENTS -->
-
-   </form>
 </body>
