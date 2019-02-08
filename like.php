@@ -81,19 +81,25 @@ if(isset($_SESSION['username'])) {
    if($num_rows > 0) {
       echo "
          <form action='like.php?post_id=" . $post_id . "' method='POST'>
-            <input type='submit'class='comment_like' name='unlike_btn' value='Unlike' />
-            <div class='like_value'>
-               " . $total_likes . " Likes
-            </div>
+            <button type='submit' name='unlike_btn' class='btn btn-danger btn-icon'>
+               <span class='btn-inner--icon'>
+                  <i class='fas fa-heart' style='font-size: 18px;'></i>
+               </span>
+
+               <span class='btn-inner--text'>$total_likes Likes</span>
+            </button>
          </form>
       ";
    } else {
       echo "
          <form action='like.php?post_id=" . $post_id . "' method='POST'>
-            <input type='submit'class='comment_like' name='like_btn' value='Like' />
-            <div class='like_value'>
-               " . $total_likes . " Likes
-            </div>
+            <button type='submit' name='like_btn' class='btn btn-outline-danger btn-icon'>
+               <span class='btn-inner--icon'>
+                  <i class='fas fa-heart' style='font-size: 18px;'></i>
+               </span>
+
+               <span class='btn-inner--text'>$total_likes Likes</span>
+            </button>
          </form>
       ";
    }
