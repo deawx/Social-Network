@@ -7,6 +7,7 @@ if(isset($_SESSION['username'])) {
    $userLoggedIn = $_SESSION['username'];
    $user_infos = mysqli_query($con, "SELECT * FROM users WHERE (username='$userLoggedIn')");
    $user = mysqli_fetch_array($user_infos);
+   $num_friends = (substr_count($user['friend_array'], ",")) - 1;
 } else {
    header("Location: login.php");
 }
