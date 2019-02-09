@@ -22,7 +22,9 @@ if(isset($_POST['post_btn'])) {
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Friends</h5>
-                    <span class="h2 font-weight-bold mb-0">0<?php echo $user['friend_array']; ?></span>
+                    <span class="h2 font-weight-bold mb-0">
+                      <?php echo $num_friends; ?>
+                    </span>
                   </div>
                   
                   <div class="col-auto">
