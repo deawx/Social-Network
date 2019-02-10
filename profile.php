@@ -74,28 +74,6 @@ if(isset($_GET['profile_username'])) {
       <div class="col-xl-8 order-xl-1">
         <div class="card bg-secondary shadow">
           <form action="<?php echo $username; ?>">
-            <?php
-              $profile_user_obj = new User($con, $username);
-
-              if($profile_user_obj->isClosed()) {
-                heeader("Location: user_closed.php");
-              }
-
-              $logged_in_user_obj = new User($con, $userLoggedIn);
-
-              if($userLoggedIn != $username) {
-                if($logged_in_user_obj->isFriend($username)) {
-                  echo "<input type='submit' name='remove_friend' class='danger' value='remove friend'>"; 
-                } elseif($logged_in_user_obj->didReceiveRequest($username)) {
-                  echo "<input type='submit' name='respond_request' class='warning' value='Respond to request'>";
-                } elseif($logged_in_user_obj->didSendRequest($username)) {
-                  echo "<input type='submit' name='' class='default' value='Request Sent'>";
-                } else {
-                  echo "<input type='submit' name='add_friend' class='success' value='Add Friend'>";
-                }
-              }
-            ?>
-
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
@@ -103,13 +81,54 @@ if(isset($_GET['profile_username'])) {
                 </div>
 
                 <div class="col-4 text-right">
-                  <button type='submit' class='btn btn-primary btn-icon'>
-                    <span class='btn-inner--icon'>
-                      <i class='fas fa-user-plus' style='font-size: 20px;'></i>
-                    </span>
+                  <?php
+                    $profile_user_obj = new User($con, $username);
+                    if($profile_user_obj->isClosed()) {
+                      heeader("Location: user_closed.php");
+                    }
 
-                    <span class='btn-inner--text'> Add Firends</span>
-                  </button>
+                    $logged_in_user_obj = new User($con, $userLoggedIn);
+                    if($userLoggedIn != $username) {
+                      if($logged_in_user_obj->isFriend($username)) {
+                        echo "
+                          <button type='submit' name='remove_friend' class='btn btn-danger btn-icon'>
+                            <span class='btn-inner--icon'>
+                              <i class='fas fa-user-minus' style='font-size: 20px;'></i>
+                            </span>
+                            <span class='btn-inner--text'> Remove Friend</span>
+                          </button>
+                        "; 
+                      } elseif($logged_in_user_obj->didReceiveRequest($username)) {
+                        echo "
+                          <button type='submit' name='respond_request' class='btn btn-warning btn-icon'>
+                            <span class='btn-inner--icon'>
+                              <i class='fas fa-user-clock' style='font-size: 20px;'></i>
+                            </span>
+                            <span class='btn-inner--text'> Respond to Request</span>
+                          </button>
+                        ";
+                      } elseif($logged_in_user_obj->didSendRequest($username)) {
+                        echo "
+                          <button type='submit' name='' class='btn btn-neutral btn-icon'>
+                            <span class='btn-inner--icon'>
+                              <i class='fas fa-handshake' style='font-size: 20px;'></i>
+                            </span>
+                            <span class='btn-inner--text'> Request Sent</span>
+                          </button>
+                        ";
+                      } else {
+                        echo "
+                          <button type='submit' name='add_friend' class='btn btn-primary btn-icon'>
+                            <span class='btn-inner--icon'>
+                              <i class='fas fa-user-plus' style='font-size: 20px;'></i>
+                            </span>
+                            <span class='btn-inner--text'> Add Friend</span>
+                          </button>
+                        ";
+                      }
+                    }
+                  ?>
+
                 </div>
               </div>
             </div>
