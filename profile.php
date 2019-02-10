@@ -1,5 +1,6 @@
 <?php
 include_once("includes/header.php");
+include_once("includes/classes/Post.php");
 
 if(isset($_GET['profile_username'])) {
    $username = $_GET['profile_username'];
@@ -72,23 +73,41 @@ if(isset($_GET['profile_username'])) {
 
       <div class="col-xl-8 order-xl-1">
         <div class="card bg-secondary shadow">
-          <div class="card-header bg-white border-0">
-            <div class="row align-items-center">
-              <div class="col-8">
-                <h3 class="mb-0">Profile of <?php echo $username; ?></h3>
-              </div>
+          <form action="<?php echo $username; ?>">
+            <?php
+              $profile_user_obj = new User($con, $username);
 
-               <div class="col-4 text-right">
+              if($profile_user_obj->isClosed()) {
+                heeader("Location: user_closed.php");
+              }
+
+              $logged_in_user_obj = new User($con, $userLoggedIn);
+
+              if($userLoggedIn != $username) {
+                if($logged_in_user_obj->isFriend($username)) {
+                  echo "<input type='submit' name='remove_friend' class='danger' value='remove friend'>"; 
+                }
+              }
+            ?>
+
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Profile of <?php echo $username; ?></h3>
+                </div>
+
+                <div class="col-4 text-right">
                   <button type='submit' class='btn btn-primary btn-icon'>
-                     <span class='btn-inner--icon'>
-                        <i class='fas fa-user-plus' style='font-size: 20px;'></i>
-                     </span>
+                    <span class='btn-inner--icon'>
+                      <i class='fas fa-user-plus' style='font-size: 20px;'></i>
+                    </span>
 
-                     <span class='btn-inner--text'> Add Firends</span>
+                    <span class='btn-inner--text'> Add Firends</span>
                   </button>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
 
           <div class="card-body">
             <form>
