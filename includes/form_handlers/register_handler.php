@@ -76,6 +76,7 @@ if(isset($_POST['reg_btn'])) {
   }
 
   $date = date("Y-m-d");
+
 //--------------------------------------------------------------------------------- USERNAME & PROFILE_PIC
   if(empty($error_array)) {
     $password = md5($password);
