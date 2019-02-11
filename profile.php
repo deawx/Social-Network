@@ -9,6 +9,23 @@ if(isset($_GET['profile_username'])) {
    $num_friends = (substr_count($user['friend_array'], ",")) - 1;
 }
 
+if(isset($_POST['remove_friend'])) {
+  $user = new User($con, $userLoggedIn);
+  $user->removeFriend($username);
+  header("Location: $username");
+}
+
+if(isset($_POST['add_friend'])) {
+  $user = new User($con, $userLoggedIn);
+  $user->sendRequest($username);
+  header("Location: $username");
+}
+
+if(isset($_POST['respond_request'])) {
+  header("Location: requests.php");
+}
+
+
 ?>
 
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-9">
@@ -73,7 +90,7 @@ if(isset($_GET['profile_username'])) {
 
       <div class="col-xl-8 order-xl-1">
         <div class="card bg-secondary shadow">
-          <form action="<?php echo $username; ?>">
+          <form action="<?php echo $username; ?>" method="POST">
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
@@ -223,10 +240,6 @@ if(isset($_GET['profile_username'])) {
       </div>
     </div>
   </div>
-
-  <script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
-  <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="assets/js/argon.min.js"></script>
 
 </body>
 </html>
