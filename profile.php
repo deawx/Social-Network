@@ -73,8 +73,13 @@ if(isset($_POST['respond_request'])) {
             </div>
 
             <div class="text-center">
-              <h3><?php echo $username; ?></h3>
-              
+              <h3>
+                <?php
+                  $user_obj = new User($con, $username);
+                  echo $user_obj->getFirstAndLastName();
+                ?>
+              </h3>
+
               <div class="h5 font-weight-300">
                 <i class="ni location_pin mr-2"></i>Sare, France
               </div>
@@ -94,7 +99,9 @@ if(isset($_POST['respond_request'])) {
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">Profile of <?php echo $username; ?></h3>
+                  <h3 class="mb-0">
+                    Profile of <?php echo $user_obj->getFirstAndLastName(); ?>
+                  </h3>
                 </div>
 
                 <div class="col-4 text-right">
