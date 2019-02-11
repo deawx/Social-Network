@@ -93,19 +93,19 @@ if(isset($_SESSION['username'])) {
               </div>
 
               <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
+                <i class="ni ni-settings-gear-65"></i>
                 <span>My profile</span>
               </a>
 
-              <a href="" class="dropdown-item">
-                <i class="ni ni-settings-gear-65"></i>
-                <span>Settings</span>
+              <a href="requests.php" class="dropdown-item">
+                <i class="fas fa-user-friends"></i>
+                <span>Friend Requests</span>
               </a>
 
               <div class="dropdown-divider"></div>
 
               <a href="includes/handlers/logout.php" class="dropdown-item">
-                <i class="fas fa-sign-out-alt"></i>
+                <i class="ni ni-button-power"></i>
                 <span>Logout</span>
               </a>
             </div>
