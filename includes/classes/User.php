@@ -58,8 +58,8 @@ class User {
     }
   }
 
-  public function didReceiveRequest($user_to) {
-    $user_from = $this->user['username'];
+  public function didReceiveRequest($user_from) {
+    $user_to = $this->user['username'];
     $check_request_query = mysqli_query($this->con, "SELECT * FROM friend_requests WHERE (user_to='$user_to' AND user_from='$user_from')");
 
     if(mysqli_num_rows($check_request_query) > 0) {
@@ -69,8 +69,8 @@ class User {
     }
   }
 
-  public function didSendRequest($user_from) {
-    $user_to = $this->user['username'];
+  public function didSendRequest($user_to) {
+    $user_from = $this->user['username'];
     $check_request_query = mysqli_query($this->con, "SELECT * FROM friend_requests WHERE (user_to='$user_to' AND user_from='$user_from')");
 
     if(mysqli_num_rows($check_request_query) > 0) {
@@ -91,6 +91,11 @@ class User {
 
     $new_friend_array = str_replace($this->user['username'] . ",", "", $friend_array_username);
     $remove_friend = mysqli_query($this->con, "UPDATE users SET friend_array='$new_friend_array' WHERE (username='$user_to_remove')");
+  }
+
+  public function sendRequest($user_to) {
+    $user_from = $this->user['username'];
+    $query = mysqli_query($this->con, "INSERT INTO friend_requests VALUES('', '$user_to', '$user_from')");
   }
 }
 
