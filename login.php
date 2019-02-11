@@ -14,6 +14,10 @@ require_once("includes/form_handlers/login_handler.php");
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" />
 
+  <script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="assets/js/argon.min.js"></script>
+
   <link rel="stylesheet" type="text/css" href="assets/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/argon.min.css" />
@@ -163,10 +167,5 @@ require_once("includes/form_handlers/login_handler.php");
       </div>
     </div>
   </div>
-
-  <script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
-  <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
-  <script type="text/javascript" src="assets/js/argon.min.js"></script>
-
 </body>
 </html>
