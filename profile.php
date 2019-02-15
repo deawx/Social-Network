@@ -162,7 +162,7 @@ if(isset($_POST['post_btn'])) {
           </form>
 
           <div class="card bg-secondary shadow">
-            <form method="POST" action="profile.php">
+            <form method="POST" action="<?php echo $username; ?>">
               <div class="card-body border-0">
                 <div class="row align-items-center">
                   <div class="col-8">
