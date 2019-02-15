@@ -1,6 +1,5 @@
 <?php
 include_once("includes/header.php");
-include_once("includes/classes/Post.php");
 
 if(isset($_GET['profile_username'])) {
    $username = $_GET['profile_username'];
@@ -25,6 +24,10 @@ if(isset($_POST['respond_request'])) {
   header("Location: requests.php");
 }
 
+if(isset($_POST['post_btn'])) {
+  $post = new Post($con, $_POST['user_from']);
+  $post->submitPost($_POST['post_body'], $_POST['user_to']);
+}
 
 ?>
 
@@ -81,7 +84,7 @@ if(isset($_POST['respond_request'])) {
               </h3>
 
               <div class="h5 font-weight-300">
-                <i class="ni location_pin mr-2"></i>Sare, France
+                <?php echo $username; ?>
               </div>
 
               <div class="h5 mt-4">
@@ -108,7 +111,7 @@ if(isset($_POST['respond_request'])) {
                   <?php
                     $profile_user_obj = new User($con, $username);
                     if($profile_user_obj->isClosed()) {
-                      heeader("Location: user_closed.php");
+                      header("Location: user_closed.php");
                     }
 
                     $logged_in_user_obj = new User($con, $userLoggedIn);
@@ -158,87 +161,33 @@ if(isset($_POST['respond_request'])) {
             </div>
           </form>
 
-          <div class="card-body">
-            <form>
-              <h6 class="heading-small text-muted mb-4">User information</h6>
-              <div class="pl-lg-4">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-username">Username</label>
-                      <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
-                    </div>
-                  </div>
-
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-email">Email address</label>
-                      <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-first-name">First name</label>
-                      <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Lucky">
-                    </div>
-                  </div>
-
-                  <div class="col-lg-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-last-name">Last name</label>
-                      <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
-                    </div>
+          <div class="card bg-secondary shadow">
+            <form method="POST" action="profile.php">
+              <div class="card-body border-0">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h6 class="heading-small ml-4 mb--4">Post a message to your friend</h6>
                   </div>
                 </div>
               </div>
 
-              <hr class="my-4" />
-
-              <h6 class="heading-small text-muted mb-4">Contact information</h6>
-              <div class="pl-lg-4">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-address">Address</label>
-                      <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
-                    </div>
+              <div class="card-body">
+                <div class="pl-lg-4">
+                  <div class="form-group">
+                    <textarea rows="4" name="post_body" class="form-control form-control-alternative">What do you want to tell him?</textarea>
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-city">City</label>
-                      <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
-                    </div>
-                  </div>
+                <input type="hidden" name="user_from" value="<?php echo $userLoggedIn; ?>" />
+                <input type="hidden" name="user_to" value="<?php echo $username; ?>" />
 
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-country">Country</label>
-                      <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4">
-                    <div class="form-group">
-                      <label class="form-control-label" for="input-country">Postal code</label>
-                      <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <hr class="my-4" />
-
-              <h6 class="heading-small text-muted mb-4">About me</h6>
-              <div class="pl-lg-4">
-                <div class="form-group">
-                  <label>About Me</label>
-                  <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                <div class="text-right">
+                  <button type="submit" name="post_btn" id="post_btn" class="btn btn-primary btn-icon mb-3 mb-sm-0">
+                    <span class="btn-inner--icon">
+                      <i class="fas fa-paper-plane"></i>
+                    </span>
+                    <span class="btn-inner--text">Send ...</span>
+                  </button>
                 </div>
               </div>
             </form>
@@ -247,6 +196,5 @@ if(isset($_POST['respond_request'])) {
       </div>
     </div>
   </div>
-
 </body>
 </html>
