@@ -67,7 +67,8 @@ class Post {
             } else {
                $user_to_obj = new User($this->con, $row['user_to']);
                $user_to_name = $user_to_obj->getFirstAndLastName();
-               $user_to = "to <a href='" . $row['user_to'] . "'>" . $user_to_name . "</a>";
+               $user_to = "<span class='text-primary' style='font-size: 20px;'>&#8594;</span> 
+                           <a href='" . $row['user_to'] . "'>" . $user_to_name . "</a>";
             }
 
             // CHECK IF USER WHO POSTED, HAS THEIR ACCOUNT CLOSED
@@ -188,9 +189,9 @@ class Post {
                         </div>
                      </div>
 
-                     <div class='card-footer bg-secondary border-0'>
+                     <div class='card-footer bg-secondary border-0 mb--6'>
                         <div class='row'>
-                           <div class='col-lg-3 text-left'>
+                           <div class='col-lg-9 text-left'>
                               <button type='submit' class='btn btn-primary btn-icon'>
                                  <span class='btn-inner--icon'>
                                     <i class='fas fa-calendar-day' style='font-size: 20px;'></i>
@@ -198,34 +199,30 @@ class Post {
 
                                  <span class='btn-inner--text'>$time_message</span>
                               </button>
-                           </div>
-         
-                           <div class='col-lg-9 text-right'>
-                              <button type='submit' class='btn btn-outline-danger btn-icon'>
-                                 <span class='btn-inner--icon'>
-                                    <i class='fas fa-heart' style='font-size: 16px;'></i>
-                                 </span>
 
-                                 <span class='btn-inner--text'>18</span>
-                              </button>
-         
+                           </div>
+
+                           <div class='col-lg-1 text-right'>
                               <button onClick='javascript:toggle$id()' class='btn btn-outline-info btn-icon'>
                                  <span class='btn-inner--icon'>
-                                    <i class='fas fa-comments' style='font-size: 16px;'></i>
+                                    <i class='fas fa-comments' style='font-size: 18px;'></i>
                                  </span>
 
                                  <span class='btn-inner--text'>$comments_check_num</span>
                               </button>
+                           </div>
 
+                           <div class='col-lg-1 text-right'>
+                              <iframe style='width: 124.5px; height=43px; margin-left: 10px;' src='like.php?post_id=$id'></iframe>
                            </div>
                         </div>
                      </div>
-                  </div>
 
-                  <div class='row mt-5'>
+
+                  <div class='row mt-4'>
                      <div class='col-lg-12 text-center'>
                         <div class='post_comment' id='toggleComment$id' style='display:none;'>
-                           <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0' style='width: 100%; height: 275px;'></iframe>
+                           <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0' style='width: 100%; height: 285px;'></iframe>
                         </div>
                      </div>
                   </div>
