@@ -83,7 +83,7 @@ if(isset($_SESSION['username'])) {
           <span class='btn-inner--icon'>
             <i class='fas fa-heart' style='font-size: 18px;'></i>
           </span>
-          <span class='btn-inner--text'>$total_likes Likes</span>
+          <span class='btn-inner--text'>$total_likes</span>
         </button>
       </form>
     ";
@@ -94,7 +94,7 @@ if(isset($_SESSION['username'])) {
           <span class='btn-inner--icon'>
             <i class='fas fa-heart' style='font-size: 18px;'></i>
           </span>
-          <span class='btn-inner--text'>$total_likes Likes</span>
+          <span class='btn-inner--text'>$total_likes</span>
         </button>
       </form>
     ";
