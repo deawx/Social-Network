@@ -90,6 +90,15 @@ class Post {
                   $count++;
                }
 
+               if($userLoggedIn == $added_by) {
+                 $delete_btn = "
+                  <button class='btn btn-danger' id='post$id'>
+                    <i class='fas fa-trash'></i>
+                  </button>";
+               } else {
+                 $delete_btn = "";
+               }
+
                $user_infos = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE (username='$added_by')");
                $user_row = mysqli_fetch_array($user_infos);
 
@@ -189,15 +198,16 @@ class Post {
                       </div>
                     </div>
 
-                    <div class='card-footer bg-secondary border-0 mb--6'>
+                    <div class='card-footer bg-secondary border-0 mb--6 ml-2'>
                       <div class='row'>
                         <div class='col-lg-9 text-left'>
-                          <button type='submit' class='btn btn-primary btn-icon'>
+                          <button type='submit' class='btn btn-primary btn-icon' disabled>
                             <span class='btn-inner--icon'>
                               <i class='fas fa-calendar-day' style='font-size: 20px;'></i>
                             </span>
                             <span class='btn-inner--text'>$time_message</span>
                           </button>
+                          $delete_btn
 
                           <br />
                         </div>
@@ -229,6 +239,23 @@ class Post {
                   <hr class='my-4' />
                 "; // END $str
               }
+              ?>
+
+              <script>
+                $(document).ready(function(){
+                  $('#post<?php echo $id; ?>').on('click', function(){
+                    bootbox.confirm("Are you sure you want to delete this post ?", function(result) {
+                      $.post("includes/form_handlers/delete_post.php?post_id=<?php echo $id; ?>", {result:result});
+                      if(result) {
+                        location.reload();
+                      }
+                    });
+                  });
+                });
+              </script>
+
+              <?php
+
             }
 
          if($count > $limit) {
