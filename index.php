@@ -111,17 +111,15 @@ if(isset($_POST['post_btn'])) {
                   <span class="btn-inner--icon">
                     <i class="fas fa-paper-plane"></i>
                   </span>
-                  <span class="btn-inner--text">Send ...</span>
+                  <span class="btn-inner--text">Send</span>
                 </button>
               </div>
             </div>
           </div>
 
           <div class="card-body">
-            <div class="pl-lg-4">
-              <div class="form-group">
-                <textarea rows="4" name="post_text" class="form-control form-control-alternative">Post a message ...</textarea>
-              </div>
+            <div class="form-group mt-4">
+              <textarea rows="4" name="post_text" class="form-control form-control-alternative">Post a message ...</textarea>
             </div>
           </div>
         </form>
