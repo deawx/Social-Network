@@ -201,7 +201,7 @@ class Post {
                     <div class='card-footer bg-secondary border-0 mb--6 ml-2'>
                       <div class='row'>
                         <div class='col-lg-9 text-left'>
-                          <button type='submit' class='btn btn-primary btn-icon' disabled>
+                          <button class='btn btn-primary btn-icon' disabled>
                             <span class='btn-inner--icon'>
                               <i class='fas fa-calendar-day' style='font-size: 20px;'></i>
                             </span>
@@ -243,11 +243,11 @@ class Post {
 
               <script>
                 $(document).ready(function(){
-                  $('#post<?php echo $id; ?>').on('click', function(){
+                  $('#post<?php echo $id; ?>').on('click', function() {
                     bootbox.confirm("Are you sure you want to delete this post ?", function(result) {
                       $.post("includes/form_handlers/delete_post.php?post_id=<?php echo $id; ?>", {result:result});
                       if(result) {
-                        location.reload();
+                        setTimeout(function(){ location.reload(); }, 300);
                       }
                     });
                   });
