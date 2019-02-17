@@ -56,18 +56,28 @@ if(isset($_SESSION['username'])) {
         </form>
 
         <ul class="navbar-nav align-items-center d-none d-md-flex">
-        <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="" data-toggle="tooltip"
-               data-placement="bottom" title="Messages">
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-link-icon" href="#" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
               <i style="font-size: 1.25rem;" class="ni ni-email-83"></i>
             </a>
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-center">
+              <div class="dropdown-header noti-title">
+                <h6 class="text-overflow m-0">0 Messages</h6>
+              </div>
+            </div>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="" data-toggle="tooltip" 
-               data-placement="bottom" title="Notifications">
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#" role="button" data-toggle="dropdown" 
+               aria-haspopup="true" aria-expanded="false">
               <i style="font-size: 1.25rem;" class="ni ni-notification-70"></i>
             </a>
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-center">
+              <div class="dropdown-header noti-title">
+                <h6 class="text-overflow m-0">0 Notifications</h6>
+              </div>
+            </div>
           </li>
 
           <li class="nav-item dropdown">
@@ -89,7 +99,7 @@ if(isset($_SESSION['username'])) {
             </a>
 
             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-              <div class=" dropdown-header noti-title">
+              <div class="dropdown-header noti-title">
                 <h6 class="text-overflow m-0">Welcome <?php echo $user['first_name']; ?> !</h6>
               </div>
 
