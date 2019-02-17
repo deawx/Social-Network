@@ -1,5 +1,7 @@
 <?php
+
 include_once("includes/header.php");
+
 if(isset($_GET['profile_username'])) {
    $username = $_GET['profile_username'];
    $user_infos = mysqli_query($con, "SELECT * FROM users WHERE (username='$username')");
@@ -151,7 +153,7 @@ if(isset($_POST['post_btn'])) {
             <div class="card-header bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0 heading">
+                  <h3 class="heading-small mb-0">
                     Post a message to your friend
                   </h3>
                 </div>
@@ -180,5 +182,84 @@ if(isset($_POST['post_btn'])) {
       </div>
     </div>
   </div>
+
+  <div class="container-fluid mt-5">
+    <div class="col">
+      <div class="card bg-secondary shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <h6 class="heading-small mb-0">Latest Posts</h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="posts_area"></div>
+        <img id="loading" src="assets/img/icons/loading.gif" alt="loader" style="max-width: 100px; margin: 0 auto;" />
+        
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      var userLoggedIn = '<?php echo $userLoggedIn; ?>';
+      var profileUsername = '<?php echo $username; ?>';
+      var inProgress = false;
+      loadPosts();
+
+      $(window).scroll(function() {
+        var bottomElement = $(".status_post").last();
+        var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+
+        if(isElementInView(bottomElement[0]) && noMorePosts == 'false') {
+          loadPosts();
+        }
+      });
+
+      function loadPosts() {
+        if(inProgress) {
+          return;
+        }
+ 
+        inProgress = true;
+        $('#loading').show();
+        var page = $('.posts_area').find('.nextPage').val() || 1;
+
+        $.ajax({
+          url: "includes/handlers/ajax_load_profile_posts.php",
+          type: "POST",
+          data: "page=" + page + "&userLoggedIn=" + userLoggedIn + "&profileUsername=" + profileUsername,
+          cache: false,
+
+          success: function(response) {
+            $('.posts_area').find('.nextPage').remove();
+            $('.posts_area').find('.noMorePosts').remove();
+            $('.posts_area').find('.noMorePostsText').remove();
+
+            $('#loading').hide();
+            $(".posts_area").append(response);
+
+            inProgress = false;
+          }
+        });
+      }
+
+      //CHECK IF THE ELEMENT IS IN VIEW
+      function isElementInView(element) {
+        if(element == null) {
+          return;
+        }
+
+        var rect = element.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+    });
+  </script>
 </body>
 </html>
