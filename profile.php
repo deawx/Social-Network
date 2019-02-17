@@ -108,10 +108,24 @@ if(isset($_POST['post_btn'])) {
             <div class="row">
               <div class="col">
                 <div class="card-profile-stats d-flex justify-content-center md-5">
+
                   <div>
                     <span class="heading"><?php echo $num_friends; ?></span>
                     <span class="description">Friends</span>
                   </div>
+
+                  <?php
+                    if($userLoggedIn != $username) {
+                      echo "
+                        <div>
+                          <span class='heading'> " .
+                            $logged_in_user_obj->getMutualFriends($username) .
+                          "</span>
+                          <span class='description'>Mutual Friends</span>
+                        </div>
+                      ";
+                    }
+                  ?>
 
                   <div>
                     <span class="heading"><?php echo $user['num_likes']; ?></span>
