@@ -26,6 +26,7 @@ if(isset($_SESSION['username'])) {
   <script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
   <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="assets/js/argon.min.js"></script>
+  <script type="text/javascript" src="assets/js/bootbox.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="assets/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
@@ -94,7 +95,7 @@ if(isset($_SESSION['username'])) {
 
               <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item">
                 <i class="ni ni-settings-gear-65"></i>
-                <span>My profile</span>
+                <span>My Account</span>
               </a>
 
               <a href="requests.php" class="dropdown-item">
