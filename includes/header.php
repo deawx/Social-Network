@@ -27,10 +27,13 @@ if(isset($_SESSION['username'])) {
   <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="assets/js/argon.min.js"></script>
   <script type="text/javascript" src="assets/js/bootbox.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.Jcrop.js"></script>
+  <script type="text/javascript" src="assets/js/jcrop_bits.js"></script>
 
   <link rel="stylesheet" type="text/css" href="assets/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/argon.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/jquery.Jcrop" />
 
   <title>Social Network - Dashboard</title>
 </head>
@@ -104,13 +107,18 @@ if(isset($_SESSION['username'])) {
               </div>
 
               <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item">
-                <i class="ni ni-settings-gear-65"></i>
-                <span>My Account</span>
+                <i class="ni ni-badge"></i>
+                <span>My Profile</span>
               </a>
 
               <a href="requests.php" class="dropdown-item">
                 <i class="fas fa-user-friends"></i>
                 <span>Friend Requests</span>
+              </a>
+
+              <a href="setting.php" class="dropdown-item">
+                <i class="ni ni-settings-gear-65"></i>
+                <span>My Account</span>
               </a>
 
               <div class="dropdown-divider"></div>
