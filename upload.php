@@ -29,7 +29,7 @@ if(isset($_FILES['image']['name'])) {
   $type = $ImageType[1];
 
 	// SET UPLOAD DIRECTORY
-	$uploaddir = $_SERVER['DOCUMENT_ROOT'].'assets/img/profile_pics';
+	$uploaddir = $_SERVER['DOCUMENT_ROOT'] . 'assets/img/profile_pics';
   
   // SET FILE NAME
 	$file_temp_name = $profile_id . '_original.' . md5(time()) . 'n' . $type;
@@ -38,7 +38,7 @@ if(isset($_FILES['image']['name'])) {
 	$fullpath_2 = $uploaddir . "/" . $file_name;
   
   // MOVE THE FILE TO CORRECT LOCATION
-	$move = move_uploaded_file($ImageTempName ,$fullpath);
+	$move = move_uploaded_file($ImageTempName, $fullpath);
 	chmod($fullpath, 0777);
 
   // CHECK FOR VALID UPLOAD
@@ -68,12 +68,27 @@ if(isset($_FILES['image']['name'])) {
 	} elseif($_FILES["image"]["type"] == "image/png") {
 		$src2 = imagecreatefrompng($fullpath);
 	} else {
-		$msg .= "There was an error uploading the file. Please upload a .jpg, .gif or .png file. <br />";
+    $msg .= "
+      <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+        <span class='alert-inner--icon'>
+          <i class='fas fa-exclamation-triangle'></i>
+        </span>
+
+        <span class='alert-inner--text'>
+          <strong>Error ! </strong>
+          There was an error uploading the file. Please upload a .jpg, .gif or .png file.
+        </span>
+
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+        </button>
+      </div>
+    ";
 	}
 
   // CREATE THE NEW RESIZED IMAGE
-	$main = imagecreatetruecolor($main_width,$main_height);
-	imagecopyresampled($main,$src2,0, 0, 0, 0,$main_width,$main_height,$original_width,$original_height);
+	$main = imagecreatetruecolor($main_width, $main_height);
+	imagecopyresampled($main, $src2, 0, 0, 0, 0, $main_width, $main_height, $original_width, $original_height);
 
   // UPLOAD NEW VERSION
 	$main_temp = $fullpath_2;
@@ -146,19 +161,37 @@ if(isset($_POST['x'])) {
 ?>
 
 <div id="Overlay" style=" width:100%; height:100%; border:0px #990000 solid; position:absolute; top:0px; left:0px; z-index:2000; display:none;"></div>
-  <div class="main_column column">
-	  <div id="formExample">
-	    <p><b> <?=$msg?> </b></p>
+  <div class="header bg-gradient-primary pb-8 pt-5 pt-md-9">
+    <div class="container-fluid mt--3">
+      <div class="col">
+        <div class="card bg-secondary shadow">
+          <div class="card-header border-0">
+            <div class="row align-items-center">
+              <div class="col-12">
 
-	    <form action="upload.php" method="post" enctype="multipart/form-data">
-	      Upload something
-        <br /><br />
-	      <input type="file" id="image" name="image" style="width:200px; height:30px;" />
-        <br /><br />
-	      <input type="submit" value="Submit" style="width:85px; height:25px;" />
-	    </form>
-    <br /><br />
-	</div>
+	              <?php echo $msg; ?>
+
+	              <form action="upload.php" method="post" enctype="multipart/form-data">
+                  <h3 class="heading mb--4 mt-2">
+	                  Upload something
+                  </h3>
+                  <br />
+                  <input class="btn btn-neutral mt-4 mb-4" type="file" id="image" name="image" />
+                  <br />
+                  <button class="btn btn-icon btn-3 btn-primary mt-1 mb-1" type="submit">
+	                  <span class="btn-inner--icon">
+                      <i class="ni ni-cloud-upload-96"></i>
+                    </span>
+                    <span class="btn-inner--text">Submit</span>
+                  </button>
+	              </form>
+	            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <?php
     // IF AN IMAGE HAD BEEN UPLOADED DISPLAY CROPPING AREA
