@@ -17,6 +17,13 @@ if($user_to != "new") {
   $user_to_obj = new User($con, $user_to);
 }
 
+if(isset($_POST['post_msg'])) {
+  if(isset($_POST['msg_body'])) {
+    $body = mysqli_real_escape_string($con, $_POST['msg_body']);
+    $date = date("Y-m-d H:i:s");
+    $message_obj->sendMessage($user_to, $body, $date);
+  }
+}
 ?>
 
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-9">
@@ -112,8 +119,8 @@ if($user_to != "new") {
                 echo "TO : <input type='text' />";
                 echo "<div class='results'></div>";
               } else {
-                echo "<textarea name='msg_body' id='msg_textarea' placeholder='Write your message ...'></textarea>";
-                echo "<button type='submit' class='btn btn-primary' name='post_msg' id='msg_submit'>Send</button>";
+                echo "<textarea name='msg_body' placeholder='Write your message ...'></textarea><br />";
+                echo "<button type='submit' class='btn btn-primary' name='post_msg'>Send</button>";
               }
             ?>
           </form>
