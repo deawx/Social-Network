@@ -26,7 +26,7 @@ if(isset($_POST['post_msg'])) {
 }
 ?>
 
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-9">
+  <div class="header bg-gradient-primary pb-8 pt-5 pt-md-9">
     <div class="container">
       <div class="header-body">
         <div class="row">
@@ -94,39 +94,88 @@ if(isset($_POST['post_msg'])) {
     </div>
   </div>
 
-  <div class="container mt-5">
-    <div class="col">
-      <div class="card bg-secondary shadow">
-        <div class="card-header border-0">
-          <div class="row align-items-center">
-            <div class="col-12">
-              <h6 class="heading-small mb-0">Latest Posts</h6>
+  <?php
+    if($user_to != "new") {
+      echo " 
+        <div class='container mt-5 mb-5'>
+          <div class='row justify-content-md-center'>
+            <div class='col-10'>
+              <div class='card bg-secondary shadow'>
+                <div class='card-header border-0'>
+                  <div class='row align-items-center'>
+                    <div class='col-12'>
+                      <h6 class='heading-small mb-0'>
+                        You and <a href='$user_to'>" . $user_to_obj->getFirstAndLastName() . "</a>
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+
+                <div class='card-body border-0'>
+                  <div class='p-3'>
+                    <div class='row align-items-center'>
+                      <div class='loaded_messages'>" .
+                        $message_obj->getMessages($user_to) . "
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ";
+            } else {
+              echo "
+                <div class='container mt-5'>
+                  <div class='col'>
+                    <div class='card bg-secondary shadow'>
+                      <div class='card-header border-0'>
+                        <div class='row align-items-center'>
+                          <div class='col-12'>
+                            <h6 class='heading-small mb-0'>
+                              New Message
+                            </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ";
+            }
+          ?>
+
+          <div class="message_post">
+            <form action="" method="POST" >
+              <?php
+                if($user_to == "new") {
+                  echo "Select the friend you would like to message.<br /><br />";
+                  echo "TO : <input type='text' />";
+                  echo "<div class='results'></div>";
+                } else {
+                  echo 
+                    "<div class='row justify-content-md-center'>
+                      <div class='pl-lg-5 ml--2 col-10'>
+                        <div class='form-group mr-4'>
+                          <textarea rows='3' class='form-control form-control-alternative' name='msg_body' placeholder='Write your message ...'></textarea>
+                        </div>
+                      </div>
+
+                      <div class='col-2 mt-4'>
+                        <button type='submit' name='post_msg' class='btn btn-lg btn-primary btn-icon mb-4'>
+                          <span class='btn-inner--icon'>
+                            <i class='fas fa-paper-plane'></i>
+                          </span>
+                          <span class='btn-inner--text'>Send</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          ";
+        }
+      ?>
+    </form>
+  </div>
 
-        <?php
-          if($user_to != "new") {
-            echo "<h4>You and <a href='$user_to'>" . $user_to_obj->getFirstAndLastName() . "</a></h4>";
-            echo "<div class='loaded_messages'>";
-              echo $message_obj->getMessages($user_to);
-            echo "</div>";
-          } else {
-            echo "<h4>New Message</h4>";
-          }
-        ?>
-
-        <div class="message_post">
-          <form action="" method="POST" >
-            <?php
-              if($user_to == "new") {
-                echo "Select the friend you would like to message.<br /><br />";
-                echo "TO : <input type='text' />";
-                echo "<div class='results'></div>";
-              } else {
-                echo "<textarea name='msg_body' placeholder='Write your message ...'></textarea><br />";
-                echo "<button type='submit' class='btn btn-primary' name='post_msg'>Send</button>";
-              }
-            ?>
-          </form>
-        </div>
+</body>
+</html>  
