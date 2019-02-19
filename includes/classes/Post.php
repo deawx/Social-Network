@@ -463,7 +463,7 @@ class Post {
           ?>
 
           <script>
-            $(document).ready(function(){
+            $(document).ready(function() {
               $('#post<?php echo $id; ?>').on('click', function() {
                 bootbox.confirm("Are you sure you want to delete this post ?", function(result) {
                   $.post("includes/form_handlers/delete_post.php?post_id=<?php echo $id; ?>", {result:result});
@@ -482,18 +482,18 @@ class Post {
             <input type='hidden' class='nextPage' value='" . ($page + 1) . "' />
             <input type='hidden' class='noMorePosts' value='false' />
           ";
-       } else {
+        } else {
           $str .= "
             <input type='hidden' class='noMorePosts' value='true' />
-            <div class='alert alert-primary alert-dismissible fade show text-center'>
+            <div class='alert alert-primary alert-dismissible fade show text-center mb-4'>
               <span class='alert-inner--text' style='text-transform: uppercase; font-weight: 600;'>
                 No more posts to show ...
               </span>
             </div>         
           ";
-       }
+        }
       }
-      echo $str;
-    }
+    echo $str;
   }
+}
 ?>
