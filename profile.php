@@ -73,7 +73,7 @@ if(isset($_POST['post_btn'])) {
                       ";
                     } elseif($logged_in_user_obj->didSendRequest($username)) {
                       echo "
-                        <button type='submit' name='' class='btn btn-neutral btn-icon'>
+                        <button type='submit' name='' class='btn btn-sm btn-neutral btn-icon'>
                           <span class='btn-inner--icon'>
                             <i class='fas fa-handshake' style='font-size: 15px;'></i>
                           </span>
