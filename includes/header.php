@@ -3,6 +3,7 @@
 require_once("config/config.php");
 include_once("includes/classes/User.php");
 include_once("includes/classes/Post.php");
+include_once("includes/classes/Message.php");
 
 if(isset($_SESSION['username'])) {
    $userLoggedIn = $_SESSION['username'];
@@ -33,7 +34,8 @@ if(isset($_SESSION['username'])) {
   <link rel="stylesheet" type="text/css" href="assets/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/argon.min.css" />
-  <link rel="stylesheet" type="text/css" href="assets/css/jquery.Jcrop" />
+  <link rel="stylesheet" type="text/css" href="assets/css/jquery.Jcrop.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
   <title>Social Network - Dashboard</title>
 </head>
