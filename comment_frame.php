@@ -35,7 +35,7 @@ if(isset($_SESSION['username'])) {
 
   <script>
     function toggle() {
-      var element = document.getElementById('comment_section');
+      let element = document.getElementById('comment_section');
 
       if(element.style.display == 'block') {
         element.style.display = 'none';

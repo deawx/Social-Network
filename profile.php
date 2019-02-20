@@ -217,14 +217,14 @@ if(isset($_POST['post_btn'])) {
 
   <script>
     $(document).ready(function() {
-      var userLoggedIn = '<?php echo $userLoggedIn; ?>';
-      var profileUsername = '<?php echo $username; ?>';
-      var inProgress = false;
+      let userLoggedIn = '<?php echo $userLoggedIn; ?>';
+      let profileUsername = '<?php echo $username; ?>';
+      let inProgress = false;
       loadPosts();
 
       $(window).scroll(function() {
-        var bottomElement = $(".status_post").last();
-        var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+        let bottomElement = $(".status_post").last();
+        let noMorePosts = $('.posts_area').find('.noMorePosts').val();
 
         if(isElementInView(bottomElement[0]) && noMorePosts == 'false') {
           loadPosts();
@@ -265,7 +265,7 @@ if(isset($_POST['post_btn'])) {
           return;
         }
 
-        var rect = element.getBoundingClientRect();
+        let rect = element.getBoundingClientRect();
         return (
           rect.top >= 0 &&
           rect.left >= 0 &&

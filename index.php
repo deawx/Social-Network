@@ -32,12 +32,6 @@ if(isset($_POST['post_btn'])) {
                     </div>
                   </div>
                 </div>
-                
-                <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-nowrap">
-                    Your last friend added is ...
-                  </span>
-                </p>
               </div>
             </div>
           </div>
@@ -57,12 +51,6 @@ if(isset($_POST['post_btn'])) {
                     </div>
                   </div>
                 </div>
-
-                <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-nowrap">
-                    Your latest like is ...
-                  </span>
-                </p>
               </div>
             </div>
           </div>
@@ -82,12 +70,6 @@ if(isset($_POST['post_btn'])) {
                     </div>
                   </div>
                 </div>
-
-                <p class="mt-3 mb-0 text-muted text-sm">
-                  <span class="text-nowrap">
-                    Your latest post is ...
-                  </span>
-                </p>
               </div>
             </div>
           </div>
@@ -147,13 +129,13 @@ if(isset($_POST['post_btn'])) {
 
   <script>
     $(document).ready(function() {
-      var userLoggedIn = '<?php echo $userLoggedIn; ?>';
-      var inProgress = false;
+      let userLoggedIn = '<?php echo $userLoggedIn; ?>';
+      let inProgress = false;
       loadPosts();
 
       $(window).scroll(function() {
-        var bottomElement = $(".status_post").last();
-        var noMorePosts = $('.posts_area').find('.noMorePosts').val();
+        let bottomElement = $(".status_post").last();
+        let noMorePosts = $('.posts_area').find('.noMorePosts').val();
 
         if(isElementInView(bottomElement[0]) && noMorePosts == 'false') {
           loadPosts();
@@ -167,7 +149,7 @@ if(isset($_POST['post_btn'])) {
  
         inProgress = true;
         $('#loading').show();
-        var page = $('.posts_area').find('.nextPage').val() || 1;
+        let page = $('.posts_area').find('.nextPage').val() || 1;
 
         $.ajax({
           url: "includes/handlers/ajax_load_posts.php",
@@ -194,7 +176,7 @@ if(isset($_POST['post_btn'])) {
           return;
         }
 
-        var rect = element.getBoundingClientRect();
+        let rect = element.getBoundingClientRect();
         return (
           rect.top >= 0 &&
           rect.left >= 0 &&
