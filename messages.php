@@ -52,12 +52,12 @@ if(isset($_POST['post_msg'])) {
                   <span class="btn-inner--text" style="color: #fff;">
                     New Message
                   </span>
-                </a></div>
-
+                </a>
               </div>
             </div>
           </div>
         </div>
+      </div>
 
         <?php
           if($user_to != "new") {
@@ -92,8 +92,54 @@ if(isset($_POST['post_msg'])) {
                       <div class='row align-items-center'>
                         <div class='col-8'>
                           <h6 class='heading-small mb-0'>
-                            New Message
+                            Select the friend you would like to message.
                           </h6>
+                        </div>
+                      </div>
+                    </div>
+                  ";
+                }
+              ?>
+
+              <div class="message_post">
+                <form action="" method="POST" >
+                  <?php
+                    if($user_to == "new") {
+                      echo "
+                        <div class='card-body border-0'>
+                          <div class='form-group'>
+                            <label for=''>TO :</label>
+                            
+                            <div class='input-group input-group-alternative mb-4'>
+                              <div class='input-group-prepend'>
+                                <span class='input-group-text'>
+                                  <i class='ni ni-single-02'></i>
+                                </span>
+                              </div>
+                              
+                              <input class='form-control form-control-alternative' placeholder='Enter the name' type='text' />
+                            </div>
+                          </div>
+                          <div class='results'></div>
+                        </div>
+                      ";
+                    } else {
+                      echo 
+                        "<div class='row justify-content-md-center'>
+                          <div class='pl-lg-5 ml--2 col-10'>
+                            <div class='form-group mr-4 mt--3'>
+                              <textarea rows='3' class='form-control form-control-alternative' name='msg_body' placeholder='Write your message ...'></textarea>
+                            </div>
+                          </div>
+
+                          <div class='col-2 mt-2'>
+                            <button type='submit' name='post_msg' class='btn btn-lg btn-primary btn-icon mb-4'>
+                              <span class='btn-inner--icon'>
+                                <i class='fas fa-paper-plane'></i>
+                              </span>
+                              <span class='btn-inner--text'>Send</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -102,41 +148,8 @@ if(isset($_POST['post_msg'])) {
               ";
             }
           ?>
-
-          <div class="message_post">
-            <form action="" method="POST" >
-              <?php
-                if($user_to == "new") {
-                  echo "Select the friend you would like to message.<br /><br />";
-                  echo "TO : <input type='text' />";
-                  echo "<div class='results'></div>";
-                } else {
-                  echo 
-                    "<div class='row justify-content-md-center'>
-                      <div class='pl-lg-5 ml--2 col-10'>
-                        <div class='form-group mr-4 mt--3'>
-                          <textarea rows='3' class='form-control form-control-alternative' name='msg_body' placeholder='Write your message ...'></textarea>
-                        </div>
-                      </div>
-
-                      <div class='col-2 mt-2'>
-                        <button type='submit' name='post_msg' class='btn btn-lg btn-primary btn-icon mb-4'>
-                          <span class='btn-inner--icon'>
-                            <i class='fas fa-paper-plane'></i>
-                          </span>
-                          <span class='btn-inner--text'>Send</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ";
-        }
-      ?>
-    </form>
-  </div>
+        </form>
+      </div>
 
   <script>
     let div = document.getElementById("scroll_messages");
