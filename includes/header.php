@@ -45,7 +45,10 @@ if(isset($_SESSION['username'])) {
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
 
-        <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="index.php">My Social Network</a>
+        <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" 
+           href="index.php" style="outline: none;"
+          >My Social Network
+        </a>
 
         <form class="navbar-search navbar-search-dark form-inline d-none d-md-flex mr-lg-auto ml-lg-auto">
           <div class="form-group mb-0">
@@ -61,33 +64,21 @@ if(isset($_SESSION['username'])) {
         </form>
 
         <ul class="navbar-nav align-items-center d-none d-md-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-link-icon" href="#" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false">
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="messages.php?u=new" style="outline: none;">
               <i style="font-size: 1.25rem;" class="ni ni-email-83"></i>
             </a>
-            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-center">
-              <div class="dropdown-header noti-title">
-                <h6 class="text-overflow m-0">0 Messages</h6>
-              </div>
-            </div>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#" role="button" data-toggle="dropdown" 
-               aria-haspopup="true" aria-expanded="false">
+          <li class="nav-item">
+            <a class="nav-link nav-link-icon" href="#" style="outline: none;">
               <i style="font-size: 1.25rem;" class="ni ni-notification-70"></i>
             </a>
-            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-center">
-              <div class="dropdown-header noti-title">
-                <h6 class="text-overflow m-0">0 Notifications</h6>
-              </div>
-            </div>
           </li>
 
           <li class="nav-item dropdown">
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" 
-               aria-haspopup="true" aria-expanded="false">
+               aria-haspopup="true" aria-expanded="false" style="outline: none;">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
                   <img alt="Image placeholder" src="<?php echo $user['profile_pic']; ?>">
@@ -105,27 +96,29 @@ if(isset($_SESSION['username'])) {
 
             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
               <div class="dropdown-header noti-title">
-                <h6 class="text-overflow m-0">Welcome <?php echo $user['first_name']; ?> !</h6>
+                <h6 class="text-overflow tect-center m-0">
+                  Welcome <?php echo $user_obj->getFirstAndLastName(); ?> !
+                </h6>
               </div>
 
-              <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item">
+              <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item" style="outline: none;">
                 <i class="ni ni-badge"></i>
                 <span>My Profile</span>
               </a>
 
-              <a href="requests.php" class="dropdown-item">
+              <a href="requests.php" class="dropdown-item" style="outline: none;">
                 <i class="fas fa-user-friends"></i>
                 <span>Friend Requests</span>
               </a>
 
-              <a href="setting.php" class="dropdown-item">
+              <a href="setting.php" class="dropdown-item" style="outline: none;">
                 <i class="ni ni-settings-gear-65"></i>
                 <span>My Account</span>
               </a>
 
               <div class="dropdown-divider"></div>
 
-              <a href="includes/handlers/logout.php" class="dropdown-item">
+              <a href="includes/handlers/logout.php" class="dropdown-item" style="outline: none;">
                 <i class="ni ni-button-power"></i>
                 <span>Logout</span>
               </a>
