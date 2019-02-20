@@ -160,7 +160,7 @@ if(isset($_SESSION['username'])) {
 
                 <div class="col-lg-8">
                   <h3 class="heading mb-0">
-                    <a href="<?php echo $posted_by; ?>" target="_parent">
+                    <a href="<?php echo $posted_by; ?>" target="_parent" style="outline: none;">
                       <?php echo $user_obj->getFirstAndLastName(); ?>
                     </a>
                     <small class="text-muted">- <?php echo $time_message; ?></small>

@@ -11,9 +11,9 @@
                 <span class="alert-inner--icon">
                   <i class="fas fa-user-lock"></i>
                 </span>
-                <span class="alert-inner--text" >
+                <span class="alert-inner--text">
                   <strong>User Closed !</strong>
-                  This account is closed. <a href="index.php" class="btn-link" style="color: white;">Click here to go back.</a>
+                  This account is closed. <a href="index.php" class="btn-link" style="color: white; outline: none;">Click here to go back.</a>
                 </span>
                 <button class="close" type="button" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">x</span>

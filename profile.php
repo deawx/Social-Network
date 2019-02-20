@@ -35,7 +35,7 @@ if(isset($_POST['post_btn'])) {
           <div class="row justify-content-center">
             <div class="col-lg-3 order-lg-2">
               <div class="card-profile-image">
-                <a href="#">
+                <a href="#" style='outline: none;'>
                   <img src="<?php echo $user['profile_pic']; ?>" class="rounded-circle">
                 </a>
               </div>
@@ -97,7 +97,7 @@ if(isset($_POST['post_btn'])) {
               <?php
                if($userLoggedIn != $username) {
                 echo"
-                  <a href='messages.php?u=$username' class='btn btn-sm btn-primary btn-icon'>
+                  <a href='messages.php?u=$username' class='btn btn-sm btn-primary btn-icon' style='outline:none;'>
                     <span class='btn-inner--icon'>
                       <i class='fas fa-paper-plane' style='font-size: 15px;'></i>
                     </span>
@@ -106,7 +106,7 @@ if(isset($_POST['post_btn'])) {
                 ";
                } else {
                 echo"
-                  <a href='messages.php?u=new' class='btn btn-sm btn-primary btn-icon'>
+                  <a href='messages.php?u=new' class='btn btn-sm btn-primary btn-icon' style='outline:none;'>
                     <span class='btn-inner--icon'>
                       <i class='fas fa-pen' style='font-size: 15px;'></i>
                     </span>

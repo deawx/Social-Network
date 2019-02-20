@@ -68,7 +68,7 @@ if(isset($_POST['post_msg'])) {
                     <div class='row align-items-center'>
                       <div class='col-8'>
                         <h6 class='heading-small mb-0'>
-                          You and <a href='$user_to'>" . $user_to_obj->getFirstAndLastName() . "</a>
+                          You and <a href='$user_to' style='outline: none;'>" . $user_to_obj->getFirstAndLastName() . "</a>
                         </h6>
                       </div>
                     </div>

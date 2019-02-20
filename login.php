@@ -103,7 +103,7 @@ require_once("includes/form_handlers/login_handler.php");
               </div>
 
               <div class="btn-wrapper text-center">
-                <a href="register.php" class="btn btn-primary btn-icon">
+                <a href="register.php" class="btn btn-primary btn-icon" style="outline: none;">
                   <span class="btn-inner--icon"><i class="fas fa-user-plus"></i></span>
                   <span class="btn-inner--text">Create my account</span>
                 </a>
@@ -157,10 +157,10 @@ require_once("includes/form_handlers/login_handler.php");
           </div>
           <div class="row mt-3">
             <div class="col-6">
-              <a href="#" class="text-light"><small>Forgot password?</small></a>
+              <a href="#" class="text-light" style="outline: none;"><small>Forgot password?</small></a>
             </div>
             <div class="col-6 text-right">
-              <a href="register.php" class="text-light"><small>Create new account</small></a>
+              <a href="register.php" class="text-light" style="outline: none;"><small>Create new account</small></a>
             </div>
           </div>
         </div>

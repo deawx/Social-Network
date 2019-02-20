@@ -28,7 +28,7 @@
                         <strong>You are up to date !<br /><br /></strong>
                         You have no friend requests at this time !
                         <br /><br />
-                        <a href='index.php' class='btn-link'>Click here to go back.</a>
+                        <a href='index.php' class='btn-link' style='outline: none;'>Click here to go back.</a>
                       </span>
                     </div>
                   ";

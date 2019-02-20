@@ -102,7 +102,7 @@ require_once("includes/form_handlers/register_handler.php");
               </div>
 
               <div class="btn-wrapper text-center">
-                <a href="login.php" class="btn btn-primary btn-icon">
+                <a href="login.php" class="btn btn-primary btn-icon" style="outline: none;">
                   <span class="btn-inner--icon"><i class="fas fa-sign-in-alt"></i></span>
                   <span class="btn-inner--text">Sign in</span>
                 </a>
