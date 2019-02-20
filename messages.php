@@ -114,7 +114,7 @@ if(isset($_POST['post_msg'])) {
                 <div class='card-body border-0'>
                   <div class='p-3'>
                     <div class='row align-items-center'>
-                      <div class='loaded_messages'>" .
+                      <div class='loaded_messages' id='scroll_messages'>" .
                         $message_obj->getMessages($user_to) . "
                       </div>
                     </div>
@@ -177,5 +177,9 @@ if(isset($_POST['post_msg'])) {
     </form>
   </div>
 
+  <script>
+    let div = document.getElementById("scroll_messages");
+    div.scrollTop = div.scrollHeight;
+  </script>
 </body>
 </html>  
