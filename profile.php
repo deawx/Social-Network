@@ -94,13 +94,27 @@ if(isset($_POST['post_btn'])) {
                 ?>
               </form>
 
-              <button type='' name='' class='btn btn-sm btn-primary btn-icon'>
-                <span class='btn-inner--icon'>
-                  <i class='fas fa-paper-plane' style='font-size: 15px;'></i>
-                </span>
-                <span class='btn-inner--text'>PRIVATE MESSAGE</span>
-              </button>
-
+              <?php
+               if($userLoggedIn != $username) {
+                echo"
+                  <a href='messages.php?u=$username' class='btn btn-sm btn-primary btn-icon'>
+                    <span class='btn-inner--icon'>
+                      <i class='fas fa-paper-plane' style='font-size: 15px;'></i>
+                    </span>
+                    <span class='btn-inner--text'>SEND MESSAGE</span>
+                  </a>
+                ";
+               } else {
+                echo"
+                  <a href='messages.php?u=new' class='btn btn-sm btn-primary btn-icon'>
+                    <span class='btn-inner--icon'>
+                      <i class='fas fa-pen' style='font-size: 15px;'></i>
+                    </span>
+                    <span class='btn-inner--text'>WRITE MESSAGE</span>
+                  </a>
+                ";
+               }
+            ?>
             </div>
           </div>
 
