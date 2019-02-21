@@ -28,13 +28,14 @@ if(isset($_SESSION['username'])) {
   <script type="text/javascript" src="assets/js/lib/bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="assets/js/argon.min.js"></script>
   <script type="text/javascript" src="assets/js/bootbox.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery.Jcrop.js"></script>
+  <script type="text/javascript" src="assets/js/demo.js"></script>
   <script type="text/javascript" src="assets/js/jcrop_bits.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.Jcrop.js"></script>
 
   <link rel="stylesheet" type="text/css" href="assets/css/all.min.css" />
-  <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/argon.min.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/jquery.Jcrop.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/nucleo.css" />
   <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
 
   <title>Social Network - Dashboard</title>
