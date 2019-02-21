@@ -117,7 +117,9 @@ if(isset($_POST['post_msg'])) {
                                 </span>
                               </div>
                               
-                              <input class='form-control form-control-alternative' placeholder='Enter the name' type='text' />
+                              <input class='form-control form-control-alternative' placeholder='Enter the name' 
+                                     type='text' name='q' onkeyup='getUser(this.value, <?php echo $userLoggedIn; ?>)'
+                                     id='search_text_input' autocomplete='off' />
                             </div>
                           </div>
                           <div class='results'></div>
