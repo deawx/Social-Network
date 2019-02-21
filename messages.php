@@ -115,11 +115,15 @@ if(isset($_POST['post_msg'])) {
                                 <span class='input-group-text'>
                                   <i class='ni ni-single-02'></i>
                                 </span>
-                              </div>
-                              
+                              </div>";
+                            ?>
+
                               <input class='form-control form-control-alternative' placeholder='Enter the name' 
-                                     type='text' name='q' onkeyup='getUser(this.value, <?php echo $userLoggedIn; ?>)'
+                                     type='text' name='q' onkeyup='getUser(this.value, "<?php echo $userLoggedIn; ?>")'
                                      id='search_text_input' autocomplete='off' />
+
+                            <?php 
+                              echo "
                             </div>
                           </div>
                           <div class='results'></div>
