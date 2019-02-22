@@ -65,9 +65,24 @@ if(isset($_SESSION['username'])) {
         </form>
 
         <ul class="navbar-nav align-items-center d-none d-md-flex">
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="messages.php?u=new" style="outline: none;">
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-link-icon" href="javascript:void(0);" onclick="getDropdownData(<?php $userLoggedIn; ?>, 'message')"
+               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+               style="outline: none;">
               <i style="font-size: 1.25rem;" class="ni ni-email-83"></i>
+              <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                <div class="dropdown-header noti-title">
+                  <h6 class="text-overflow tect-center m-0">
+                    Messages : 0
+                  </h6>
+                </div>
+                <div class="dropdown-body">
+                  <a href="requests.php" class="dropdown-item" style="outline: none;">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Friend Requests</span>
+                  </a>
+                </div>
+              </div>
             </a>
           </li>
 
@@ -96,11 +111,7 @@ if(isset($_SESSION['username'])) {
             </a>
 
             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-              <div class="dropdown-header noti-title">
-                <h6 class="text-overflow tect-center m-0">
-                  Welcome <?php echo $user_obj->getFirstAndLastName(); ?> !
-                </h6>
-              </div>
+              <div class="dropdown-body noti-title">
 
               <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item" style="outline: none;">
                 <i class="ni ni-badge"></i>
