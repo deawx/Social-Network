@@ -190,7 +190,7 @@ if(isset($_POST['post_btn'])) {
 
             <div class="card-body">
               <div class="form-group">
-                <textarea rows="6" name="post_body" class="form-control form-control-alternative mt-1">What do you want to tell him?</textarea>
+                <textarea rows="6" name="post_body" class="form-control form-control-alternative mt-1" placeholder="What do you want to tell him ?"></textarea>
               </div>
 
               <input type="hidden" name="user_from" value="<?php echo $userLoggedIn; ?>" />
