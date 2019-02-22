@@ -34,22 +34,20 @@ if($query != "") {
       $mutual_friends = "";
     }
 
-    if($user->isFriend($row['username'])) {
+    if($user->isFriend($row['username']) && ($row['username'] != $userLoggedIn)) {
       echo "
-        <div class='resultDisplay'>
-          <a href='messages.php?u='" . $row['username'] . "' style='color: red;'>
-            <div class='LiveSearchProfilePic'>
-              <img src='" . $row['profile_pic'] . "' />
+        <a href='messages.php?u=" . $row['username'] . "' style='outline: none;'>
+          <h3 class='heading'>
+            <img src='" . $row['profile_pic'] . "' class='avatar' />
+            <span class='ml-3 text-primary'>" . $row['first_name'] . " " . $row['last_name'] . "</span>
+            <small class='text-muted'> - " . $row['username'] . "</small>
+
+            <div class='text-left mt--2' style='margin-left: 4.5vw;'>
+              <small>" . $mutual_friends . "</small>
             </div>
-
-            <div class='LiveSearchText'>"
-              . $row['first_name'] . " " . $row['last_name'] .
-            "</div>
-
-            <p>" . $row['username'] . "</p>
-            <p id='grey'>" . $mutual_friends . "</p>
-          </a>
-        </div>
+          </h3>
+          <hr class='my-4' />
+        </a>
       ";
     }
   }
