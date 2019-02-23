@@ -15,7 +15,7 @@ if(isset($_POST['post_btn'])) {
       <div class="header-body">
         <div class="row">
     
-          <div class="col-xl-4 col-lg-6">
+          <div class="col-xl-4 col-lg-6 ml-2">
             <div class="card card-stats mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
@@ -36,7 +36,7 @@ if(isset($_POST['post_btn'])) {
             </div>
           </div>
 
-          <div class="col-xl-4 col-lg-6">
+          <div class="col-xl-4 col-lg-6 ml--2 mr--2">
             <div class="card card-stats mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
