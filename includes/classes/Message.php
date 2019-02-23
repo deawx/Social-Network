@@ -206,28 +206,28 @@ class Message {
                                                    ORDER BY id DESC");
 
       $row = mysqli_fetch_array($is_unread_query);
-      $style = ($row['opened'] == 'no') ? "background-color: #000;" : "";
-
 
       $user_found_obj = new User($this->con, $username);
       $latest_msg_details = $this->getLatestMessage($userLoggedIn, $username);
-      $dots = (strlen($latest_msg_details[0]) >= 50) ? " ..." : "";
-      $split = str_split($latest_msg_details[0], 50);
+      $dots = (strlen($latest_msg_details[0]) >= 29) ? " ..." : "";
+      $split = str_split($latest_msg_details[0], 29);
       $split = $split[0] . $dots;
 
       $return_string .= "
         <a href='messages.php?u=$username' style='outline: none;'>
-        <div class='user_found_messages' style='" . $style . "'>
-          <h3 class='heading'>
-            <img src='" . $user_found_obj->getProfilePic() . "' class='avatar' />
-            <span class='ml-3 text-primary'>" . $user_found_obj->getFirstAndLastName() . "</span>
-            <small class='text-muted'> - " . $latest_msg_details[1] . "</small>
-            <div class='text-left ml-2 mt-4'>
+          <h3 class='heading-small'>
+            <img src='" . $user_found_obj->getProfilePic() . "' class='avatar ml-1 mr-1' />
+            <span class='text-primary'>" . $user_found_obj->getFirstAndLastName() . "</span>
+
+            <div class='text-right mr-1 mt--3'>
+              <small class='text-muted'>" . $latest_msg_details[1] . "</small>
+            </div>
+            
+            <div class='text-left ml-1 mt-2 mb--3'>
               <small>" . $split . "</small>
             </div>
           </h3>
-          </div>
-          <hr class='my-4' />
+          <hr class='mt-4 mb-2' />
         </a>
       ";
     }
@@ -241,10 +241,8 @@ class Message {
     } else {
       $return_string .= "
         <input type='hidden' class='noMoreDropdownData' value='true' />
-        <div class='alert alert-primary' role='alert'>
-          <small>
-            No more messages to load !
-          </small>
+        <div class='alert alert-primary mt--2 mb--2' style='border-radius: 0;'>
+          <span class='heading-small' style='font-weight:600;'>No more messages !</span>
         </div>
       ";
     }
