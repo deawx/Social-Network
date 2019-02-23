@@ -5,8 +5,9 @@ function getUser(value, user) {
 }
 
 function getDropdownData(user, type) {
-  if($(".dropdown-body").css("height") == "0px") {
+  if($(".dropdown-message").css("height") == "0px") {
     var pageName;
+
     if(type == 'notification') {
 
     } else if(type == 'message') {
@@ -21,13 +22,13 @@ function getDropdownData(user, type) {
       cache: false,
 
       success: function(response) {
-        $(".dropdown-body").html(response);
-        $(".dropdown-body").css({"padding":"0px", "height":"280px"});
+        $(".dropdown-message").html(response);
+        $(".dropdown-message").css({"padding":"0px", "height":"280px"});
         $("#dropdown_data_type").val(type);
       }
     });
   } else {
-    $(".dropdown-body").html("");
-    $(".dropdown-body").css({"padding":"0px", "height":"0px"}); 
+    $(".dropdown-message").html("");
+    $(".dropdown-message").css({"padding":"0px", "height":"0px"}); 
   }
 }
