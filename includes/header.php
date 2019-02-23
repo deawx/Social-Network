@@ -66,24 +66,17 @@ if(isset($_SESSION['username'])) {
 
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">
-            <a class="nav-link nav-link-icon" href="javascript:void(0);" onclick="getDropdownData(<?php $userLoggedIn; ?>, 'message')"
-               role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
-               style="outline: none;">
+            <a class="nav-link nav-link-icon" data-toggle="dropdown" style="outline: none;" 
+               href="javascript:void(0);" onclick="getDropdownData('<?php $userLoggedIn; ?>', 'message')">
               <i style="font-size: 1.25rem;" class="ni ni-email-83"></i>
-              <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-                <div class="dropdown-header noti-title">
-                  <h6 class="text-overflow tect-center m-0">
-                    Messages : 0
-                  </h6>
-                </div>
-                <div class="dropdown-body">
-                  <a href="requests.php" class="dropdown-item" style="outline: none;">
-                    <i class="fas fa-user-friends"></i>
-                    <span>Friend Requests</span>
-                  </a>
-                </div>
-              </div>
             </a>
+
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+              <div class="dropdown-body">
+                <div class="dropdown-message"></div>
+                <input type="hidden" id="dropdown_data_type" value="" />
+              </div>
+            </div>
           </li>
 
           <li class="nav-item">
@@ -93,8 +86,7 @@ if(isset($_SESSION['username'])) {
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" 
-               aria-haspopup="true" aria-expanded="false" style="outline: none;">
+            <a class="nav-link pr-0" href="#" data-toggle="dropdown" tyle="outline: none;">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
                   <img alt="Image placeholder" src="<?php echo $user['profile_pic']; ?>">
@@ -111,29 +103,30 @@ if(isset($_SESSION['username'])) {
             </a>
 
             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-              <div class="dropdown-body noti-title">
+              <div class="dropdown-body">
 
-              <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item" style="outline: none;">
-                <i class="ni ni-badge"></i>
-                <span>My Profile</span>
-              </a>
+                <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item" style="outline: none;">
+                  <i class="ni ni-badge"></i>
+                  <span>My Profile</span>
+                </a>
 
-              <a href="requests.php" class="dropdown-item" style="outline: none;">
-                <i class="fas fa-user-friends"></i>
-                <span>Friend Requests</span>
-              </a>
+                <a href="requests.php" class="dropdown-item" style="outline: none;">
+                  <i class="fas fa-user-friends"></i>
+                  <span>Friend Requests</span>
+                </a>
 
-              <a href="setting.php" class="dropdown-item" style="outline: none;">
-                <i class="ni ni-settings-gear-65"></i>
-                <span>My Account</span>
-              </a>
+                <a href="setting.php" class="dropdown-item" style="outline: none;">
+                  <i class="ni ni-settings-gear-65"></i>
+                  <span>My Account</span>
+                </a>
 
-              <div class="dropdown-divider"></div>
+                <div class="dropdown-divider"></div>
 
-              <a href="includes/handlers/logout.php" class="dropdown-item" style="outline: none;">
-                <i class="ni ni-button-power"></i>
-                <span>Logout</span>
-              </a>
+                <a href="includes/handlers/logout.php" class="dropdown-item" style="outline: none;">
+                  <i class="ni ni-button-power"></i>
+                  <span>Logout</span>
+                </a>
+              </div>
             </div>
           </li>
         </ul>
