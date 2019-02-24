@@ -18,7 +18,7 @@ class Notification {
   public function insertNotification($post_id, $user_to, $type) {
     $userLoggedIn = $this->user_obj->getUsername();
     $userLoggedInName = $this->user_obj->getFirstAndLastName();
-    $date_time = ("Y-m-d H:m:s");
+    $date_time = date("Y-m-d H:m:s");
 
     switch($type) {
       case 'comment':
