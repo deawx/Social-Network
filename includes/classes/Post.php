@@ -28,8 +28,16 @@ class Post {
          }
 
          // INSERT POST
-         $query = mysqli_query($this->con, "INSERT INTO posts VALUES ('', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0')");
+         $query = mysqli_query($this->con, "INSERT INTO posts 
+                                            VALUES ('', '$body', '$added_by', '$user_to', '$date_added', 'no', 'no', '0')");
+
          $returned_id = mysqli_insert_id($this->con);
+
+         // INSERT NOTIFICATION
+         if($user_to != 'none') {
+           $notification = new Notification($this->con, $userLoggedIn);
+           $notification->insertNotification($returned_id, $user_to, 'profile_post');
+         }
 
          // UPDATE POST COUNT FOR USER
          $num_posts = $this->user_obj->getNumPosts();
@@ -187,7 +195,7 @@ class Post {
 
                       <div class='col-lg-9'>
                         <h3 class='heading mb-0'>
-                          <a href='$added_by'>$first_name $last_name</a> $user_to
+                          <a href='$added_by' style='outline: none;'>$first_name $last_name</a> $user_to
                         </h3>
                         <p class='mb-0 mt-3'>
                           $body
@@ -410,7 +418,7 @@ class Post {
 
                       <div class='col-lg-9'>
                         <h3 class='heading mb-0'>
-                          <a href='$added_by'>$first_name $last_name</a>
+                          <a href='$added_by' style='outline: none;'>$first_name $last_name</a>
                         </h3>
                         <p class='mb-0 mt-3'>
                           $body
