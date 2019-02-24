@@ -1,250 +1,259 @@
 <?php
+
 class Message {
-	private $user_obj;
-	private $con;
+  private $user_obj;
+  private $con;
 
-	public function __construct($con, $user){
-		$this->con = $con;
-		$this->user_obj = new User($con, $user);
-	}
+  public function __construct($con, $user) {
+    $this->con = $con;
+    $this->user_obj = new User($con, $user);
+  }
 
-	public function getMostRecentUser() {
-		$userLoggedIn = $this->user_obj->getUsername();
+  public function getMostRecentUser() {
+    $userLoggedIn = $this->user_obj->getUsername();
+    $query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages 
+                                       WHERE (user_to='$userLoggedIn' OR user_from='$userLoggedIn') 
+                                       ORDER BY id DESC LIMIT 1");
+    if(mysqli_num_rows($query) == 0) {
+      return false;
+    }
 
-		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE user_to='$userLoggedIn' OR user_from='$userLoggedIn' ORDER BY id DESC LIMIT 1");
+    $row = mysqli_fetch_array($query);
+    $user_to = $row['user_to'];
+    $user_from = $row['user_from'];
 
-		if(mysqli_num_rows($query) == 0)
-			return false;
+    if($user_to != $userLoggedIn) {
+      return $user_to;
+    } else {
+      return $user_from;
+    }
+  }
 
-		$row = mysqli_fetch_array($query);
-		$user_to = $row['user_to'];
-		$user_from = $row['user_from'];
+  public function sendMessage($user_to, $body, $date) {
+    if($body != "") {
+      $userLoggedIn = $this->user_obj->getUsername();
+      $query = mysqli_query($this->con, "INSERT INTO messages VALUES('', '$user_to', '$userLoggedIn', '$body', '$date', 'no', 'no', 'no')");    
+    }
+  }
 
-		if($user_to != $userLoggedIn)
-			return $user_to;
-		else 
-			return $user_from;
+  public function getMessages($otherUser) {
+    $userLoggedIn = $this->user_obj->getUsername();
+    $data = "";
 
-	}
+    $query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE (user_to='$userLoggedIn' AND user_from='$otherUser')");
+    $get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE ((user_to='$userLoggedIn' AND user_from='$otherUser') OR (user_from='$userLoggedIn' AND user_to='$otherUser'))");
 
-	public function sendMessage($user_to, $body, $date) {
+    while($row = mysqli_fetch_array($get_messages_query)) {
+      $user_to = $row['user_to'];
+      $user_from = $row['user_from'];
+      $body = $row['body'];
+      $div_top = ($user_to == $userLoggedIn) ? "<div class='bubble' id='primary'>" : "<div class='bubble' id='green'>";
+      $data = $data . $div_top . $body . "</div>";
+    }
 
-		if($body != "") {
-			$userLoggedIn = $this->user_obj->getUsername();
-			$query = mysqli_query($this->con, "INSERT INTO messages VALUES('', '$user_to', '$userLoggedIn', '$body', '$date', 'no', 'no', 'no')");
-		}
-	}
+    return $data;
+  }
 
-	public function getMessages($otherUser) {
-		$userLoggedIn = $this->user_obj->getUsername();
-		$data = "";
+  public function getLatestMessage($userLoggedIn, $user2) {
+    $details_array = array();
+    $query = mysqli_query($this->con, "SELECT body, user_to, date FROM messages 
+                                       WHERE ((user_to='$userLoggedIn' AND user_from='$user2') 
+                                       OR (user_to='$user2' AND user_from='$userLoggedIn')) 
+                                       ORDER BY id DESC LIMIT 1");
+    $row = mysqli_fetch_array($query);
 
-		$query = mysqli_query($this->con, "UPDATE messages SET opened='yes' WHERE user_to='$userLoggedIn' AND user_from='$otherUser'");
+    $date_time_now = date("Y-m-d  H:i:s");
+    $start_date = new DateTime($row['date']);
+    $end_date = new DateTime($date_time_now);
+    $interval = $start_date->diff($end_date);
 
-		$get_messages_query = mysqli_query($this->con, "SELECT * FROM messages WHERE (user_to='$userLoggedIn' AND user_from='$otherUser') OR (user_from='$userLoggedIn' AND user_to='$otherUser')");
+    if($interval->y >= 1) {
+      if($interval == 1) {
+        $time_message = $interval->y . " year ago"; // 1 year
+      } else {
+        $time_message = $interval->y . " years ago"; // 1+ years
+      }
+    } elseif($interval->m >= 1) {
+      if($interval->d == 0) {
+        $days = " ago";
+      } elseif($interval->d == 1) {
+        $days = $interval->d . " day ago";
+      } else {
+        $days = $interval->d . " days ago";
+      }
 
-		while($row = mysqli_fetch_array($get_messages_query)) {
-			$user_to = $row['user_to'];
-			$user_from = $row['user_from'];
-			$body = $row['body'];
+      if($interval->m == 1) {
+        $time_message = $interval->m . " month" . $days;
+      } else {
+        $time_message = $interval->m . " months" . $days;
+      }
+    } elseif($interval->d >= 1) {
+      if($interval->d == 1) {
+        $time_message = "Yesterday";
+      } else {
+        $time_message = $interval->d . " days ago";
+      }
+    } elseif($interval->h >= 1) {
+      if($interval->h == 1) {
+        $time_message = $interval->h . " hour ago";
+      } else {
+        $time_message = $interval->h . " hours ago";
+      }
+    } elseif($interval->i >= 1) {
+      if($interval->i == 1) {
+        $time_message = $interval->i . " minute ago";
+      } else {
+        $time_message = $interval->i . " minutes ago";
+      }
+    } else {
+      if($interval->s < 30) {
+        $time_message = "Just now";
+      } else {
+        $time_message = $interval->s . " seconds ago";
+      }
+    }
 
-			$div_top = ($user_to == $userLoggedIn) ? "<div class='message' id='green'>" : "<div class='message' id='blue'>";
-			$data = $data . $div_top . $body . "</div><br><br>";
-		}
-		return $data;
-	}
+    array_push($details_array, $row['body']);
+    array_push($details_array, $time_message);
 
-	public function getLatestMessage($userLoggedIn, $user2) {
-		$details_array = array();
+    return $details_array;
+  }
 
-		$query = mysqli_query($this->con, "SELECT body, user_to, date FROM messages WHERE (user_to='$userLoggedIn' AND user_from='$user2') OR (user_to='$user2' AND user_from='$userLoggedIn') ORDER BY id DESC LIMIT 1");
+  public function getConvers() {
+    $userLoggedIn = $this->user_obj->getUsername();
+    $return_string = "";
+    $convers = array();
 
-		$row = mysqli_fetch_array($query);
-		$sent_by = ($row['user_to'] == $userLoggedIn) ? "They said: " : "You said: ";
+    $query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages 
+                                       WHERE (user_to='$userLoggedIn' OR user_from='$userLoggedIn')
+                                       ORDER BY id DESC");
 
-		//Timeframe
-		$date_time_now = date("Y-m-d H:i:s");
-		$start_date = new DateTime($row['date']); //Time of post
-		$end_date = new DateTime($date_time_now); //Current time
-		$interval = $start_date->diff($end_date); //Difference between dates 
-		if($interval->y >= 1) {
-			if($interval == 1)
-				$time_message = $interval->y . " year ago"; //1 year ago
-			else 
-				$time_message = $interval->y . " years ago"; //1+ year ago
-		}
-		else if ($interval->m >= 1) {
-			if($interval->d == 0) {
-				$days = " ago";
-			}
-			else if($interval->d == 1) {
-				$days = $interval->d . " day ago";
-			}
-			else {
-				$days = $interval->d . " days ago";
-			}
+    while($row = mysqli_fetch_array($query)) {
+      $user_to_push = ($row['user_to'] != $userLoggedIn) ? $row['user_to'] : $row['user_from'];
 
+      if(!in_array($user_to_push, $convers)) {
+        array_push($convers, $user_to_push);
+      }
+    }
 
-			if($interval->m == 1) {
-				$time_message = $interval->m . " month". $days;
-			}
-			else {
-				$time_message = $interval->m . " months". $days;
-			}
+    foreach($convers as $username) {
+      $user_found_obj = new User($this->con, $username);
+      $latest_msg_details = $this->getLatestMessage($userLoggedIn, $username);
+      $dots = (strlen($latest_msg_details[0]) >= 50) ? " ..." : "";
+      $split = str_split($latest_msg_details[0], 50);
+      $split = $split[0] . $dots;
 
-		}
-		else if($interval->d >= 1) {
-			if($interval->d == 1) {
-				$time_message = "Yesterday";
-			}
-			else {
-				$time_message = $interval->d . " days ago";
-			}
-		}
-		else if($interval->h >= 1) {
-			if($interval->h == 1) {
-				$time_message = $interval->h . " hour ago";
-			}
-			else {
-				$time_message = $interval->h . " hours ago";
-			}
-		}
-		else if($interval->i >= 1) {
-			if($interval->i == 1) {
-				$time_message = $interval->i . " minute ago";
-			}
-			else {
-				$time_message = $interval->i . " minutes ago";
-			}
-		}
-		else {
-			if($interval->s < 30) {
-				$time_message = "Just now";
-			}
-			else {
-				$time_message = $interval->s . " seconds ago";
-			}
-		}
+      $return_string .= "
+        <a href='messages.php?u=$username' style='outline: none;'>
+          <h3 class='heading'>
+            <img src='" . $user_found_obj->getProfilePic() . "' class='avatar' />
+            <span class='ml-3 text-primary'>" . $user_found_obj->getFirstAndLastName() . "</span>
+            <small class='text-muted'> - " . $latest_msg_details[1] . "</small>
+            <div class='text-left ml-2 mt-4'>
+              <small>" . $split . "</small>
+            </div>
+          </h3>
+          <hr class='my-4' />
+        </a>
+      ";
+    }
 
-		array_push($details_array, $sent_by);
-		array_push($details_array, $row['body']);
-		array_push($details_array, $time_message);
+    return $return_string;
+  }
 
-		return $details_array;
-	}
+  public function getConversDropdown($data, $limit) {
+    $page = $data['page'];
+    $userLoggedIn = $this->user_obj->getUsername();
+    $return_string = "";
+    $convers = array();
 
-	public function getConvos() {
-		$userLoggedIn = $this->user_obj->getUsername();
-		$return_string = "";
-		$convos = array();
+    if($page == 1) {
+      $start = 0;
+    } else {
+      $start = ($page - 1) * $limit;
+    }
 
-		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE user_to='$userLoggedIn' OR user_from='$userLoggedIn' ORDER BY id DESC");
+		$set_viewed_query = mysqli_query($this->con, "UPDATE messages SET viewed='yes' WHERE (user_to='$userLoggedIn')");
 
-		while($row = mysqli_fetch_array($query)) {
-			$user_to_push = ($row['user_to'] != $userLoggedIn) ? $row['user_to'] : $row['user_from'];
+		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages 
+                                       WHERE (user_to='$userLoggedIn' OR user_from='$userLoggedIn') 
+                                       ORDER BY id DESC");
 
-			if(!in_array($user_to_push, $convos)) {
-				array_push($convos, $user_to_push);
-			}
-		}
+    while($row = mysqli_fetch_array($query)) {
+      $user_to_push = ($row['user_to'] != $userLoggedIn) ? $row['user_to'] : $row['user_from'];
 
-		foreach($convos as $username) {
-			$user_found_obj = new User($this->con, $username);
-			$latest_message_details = $this->getLatestMessage($userLoggedIn, $username);
+      if(!in_array($user_to_push, $convers)) {
+        array_push($convers, $user_to_push);
+      }
+    }
 
-			$dots = (strlen($latest_message_details[1]) >= 12) ? "..." : "";
-			$split = str_split($latest_message_details[1], 12);
-			$split = $split[0] . $dots; 
+    $num_iterations = 0;
+    $count = 1;
 
-			$return_string .= "<a href='messages.php?u=$username'> <div class='user_found_messages'>
-								<img src='" . $user_found_obj->getProfilePic() . "' style='border-radius: 5px; margin-right: 5px;'>
-								" . $user_found_obj->getFirstAndLastName() . "
-								<span class='timestamp_smaller' id='grey'> " . $latest_message_details[2] . "</span>
-								<p id='grey' style='margin: 0;'>" . $latest_message_details[0] . $split . " </p>
-								</div>
-								</a>";
-		}
+    foreach($convers as $username) {
+      if($num_iterations++ < $start) {
+        continue;
+      }
 
-		return $return_string;
+      if($count > $limit) {
+        break;
+      } else {
+        $count++;
+      }
 
-	}
+			$is_unread_query = mysqli_query($this->con, "SELECT opened FROM messages 
+                                                   WHERE (user_to='$userLoggedIn' AND user_from='$username') 
+                                                   ORDER BY id DESC");
 
-	public function getConvosDropdown($data, $limit) {
+      $row = mysqli_fetch_array($is_unread_query);
 
-		$page = $data['page'];
-		$userLoggedIn = $this->user_obj->getUsername();
-		$return_string = "";
-		$convos = array();
+      $user_found_obj = new User($this->con, $username);
+      $latest_msg_details = $this->getLatestMessage($userLoggedIn, $username);
+      $dots = (strlen($latest_msg_details[0]) >= 29) ? " ..." : "";
+      $split = str_split($latest_msg_details[0], 29);
+      $split = $split[0] . $dots;
 
-		if($page == 1)
-			$start = 0;
-		else 
-			$start = ($page - 1) * $limit;
+      $return_string .= "
+        <a href='messages.php?u=$username' style='outline: none;'>
+          <h3 class='heading-small'>
+            <img src='" . $user_found_obj->getProfilePic() . "' class='avatar ml-1 mr-1' />
+            <span class='text-primary'>" . $user_found_obj->getFirstAndLastName() . "</span>
 
-		$set_viewed_query = mysqli_query($this->con, "UPDATE messages SET viewed='yes' WHERE user_to='$userLoggedIn'");
+            <div class='text-right mr-1 mt--3'>
+              <small class='text-muted'>" . $latest_msg_details[1] . "</small>
+            </div>
+            
+            <div class='text-left ml-1 mt-2 mb--3'>
+              <small>" . $split . "</small>
+            </div>
+          </h3>
+          <hr class='mt-4 mb-2' />
+        </a>
+      ";
+    }
 
-		$query = mysqli_query($this->con, "SELECT user_to, user_from FROM messages WHERE user_to='$userLoggedIn' OR user_from='$userLoggedIn' ORDER BY id DESC");
+    // IF POST WERE LOADED
+    if($count > $limit) {
+      $return_string .= "
+        <input type='hidden' class='nextPageDropdownData' value='" . ($page + 1) . "'/>
+        <input type='hidden' class='noMoreDropdownData' value='false' />
+      ";
+    } else {
+      $return_string .= "
+        <input type='hidden' class='noMoreDropdownData' value='true' />
+        <div class='alert alert-primary mt--2 mb--2' style='border-radius: 0;'>
+          <span class='heading-small' style='font-weight:600;'>No more messages !</span>
+        </div>
+      ";
+    }
 
-		while($row = mysqli_fetch_array($query)) {
-			$user_to_push = ($row['user_to'] != $userLoggedIn) ? $row['user_to'] : $row['user_from'];
+    return $return_string;
+  }
 
-			if(!in_array($user_to_push, $convos)) {
-				array_push($convos, $user_to_push);
-			}
-		}
-
-		$num_iterations = 0; //Number of messages checked 
-		$count = 1; //Number of messages posted
-
-		foreach($convos as $username) {
-
-			if($num_iterations++ < $start)
-				continue;
-
-			if($count > $limit)
-				break;
-			else 
-				$count++;
-
-
-			$is_unread_query = mysqli_query($this->con, "SELECT opened FROM messages WHERE user_to='$userLoggedIn' AND user_from='$username' ORDER BY id DESC");
-			$row = mysqli_fetch_array($is_unread_query);
-			$style = ($row['opened'] == 'no') ? "background-color: #DDEDFF;" : "";
-
-
-			$user_found_obj = new User($this->con, $username);
-			$latest_message_details = $this->getLatestMessage($userLoggedIn, $username);
-
-			$dots = (strlen($latest_message_details[1]) >= 12) ? "..." : "";
-			$split = str_split($latest_message_details[1], 12);
-			$split = $split[0] . $dots; 
-
-			$return_string .= "<a href='messages.php?u=$username'> 
-								<div class='user_found_messages' style='" . $style . "'>
-								<img src='" . $user_found_obj->getProfilePic() . "' style='border-radius: 5px; margin-right: 5px;'>
-								" . $user_found_obj->getFirstAndLastName() . "
-								<span class='timestamp_smaller' id='grey'> " . $latest_message_details[2] . "</span>
-								<p id='grey' style='margin: 0;'>" . $latest_message_details[0] . $split . " </p>
-								</div>
-								</a>";
-		}
-
-
-		//If posts were loaded
-		if($count > $limit)
-			$return_string .= "<input type='hidden' class='nextPageDropdownData' value='" . ($page + 1) . "'><input type='hidden' class='noMoreDropdownData' value='false'>";
-		else 
-			$return_string .= "<input type='hidden' class='noMoreDropdownData' value='true'> <p style='text-align: center;'>No more messages to load!</p>";
-
-		return $return_string;
-	}
-
-	public function getUnreadNumber() {
-		$userLoggedIn = $this->user_obj->getUsername();
-		$query = mysqli_query($this->con, "SELECT * FROM messages WHERE viewed='no' AND user_to='$userLoggedIn'");
-		return mysqli_num_rows($query);
-	}
-
+  public function getUnreadNumber() {
+    $userLoggedIn = $this->user_obj->getUsername();
+    $query = mysqli_query($this->con, "SELECT * FROM messages WHERE (viewed='no' AND user_to='$userLoggedIn')");
+    return mysqli_num_rows($query);
+  }
 }
-
 ?>
