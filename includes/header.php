@@ -45,6 +45,11 @@ if(isset($_SESSION['username'])) {
 <body>
   <div class="main-content">
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <?php
+				//UNREAD MESSAGES
+				$messages = new Message($con, $userLoggedIn);
+				$num_messages = $messages->getUnreadNumber();
+			?>
       <div class="container-fluid">
         <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" 
            href="index.php" style="outline: none;"
@@ -69,6 +74,13 @@ if(isset($_SESSION['username'])) {
 			      <a class="nav-link nav-link-icon" data-toggle="dropdown" href="javascript:void(0);" 
                onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'message')" style='outline: none;'>
               <i style='font-size: 1.25rem;' class='ni ni-email-83'></i>
+              <?php
+				        if($num_messages > 0) {
+                  echo "
+                    <span class='badge badge-primary' id='unread_message'>" . $num_messages . "</span>
+                  ";
+                }
+				      ?>
 			      </a>
 
             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
@@ -79,10 +91,25 @@ if(isset($_SESSION['username'])) {
             </div>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="#" style="outline: none;">
-              <i style="font-size: 1.25rem;" class="ni ni-notification-70"></i>
-            </a>
+          <li class="nav-item dropdown">        
+			      <a class="nav-link nav-link-icon" data-toggle="dropdown" href="javascript:void(0);" 
+               onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'notification')" style='outline: none;'>
+              <i style='font-size: 1.25rem;' class='ni ni-notification-70'></i>
+              <?php
+				        if($num_messages > 0) {
+                  echo "
+                    <span class='badge badge-primary' id='unread_notification'>" . $num_messages . "</span>
+                  ";
+                }
+				      ?>
+			      </a>
+
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+              <div class="dropdown-header mb-2">
+                <div class="dropdown_data_window"></div>
+                <input type="hidden" id="dropdown_data_type" value="" />
+              </div>
+            </div>
           </li>
 
           <li class="nav-item dropdown">
