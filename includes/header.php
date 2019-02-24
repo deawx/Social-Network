@@ -4,6 +4,7 @@ require_once("config/config.php");
 include_once("includes/classes/User.php");
 include_once("includes/classes/Post.php");
 include_once("includes/classes/Message.php");
+include_once("includes/classes/Notification.php");
 
 if(isset($_SESSION['username'])) {
    $userLoggedIn = $_SESSION['username'];
@@ -44,11 +45,6 @@ if(isset($_SESSION['username'])) {
 <body>
   <div class="main-content">
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-      <?php
-			  $messages = new Message($con, $userLoggedIn);
-		    $num_messages = $messages->getUnreadNumber();
-			?>
-
       <div class="container-fluid">
         <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" 
            href="index.php" style="outline: none;"
