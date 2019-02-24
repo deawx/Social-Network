@@ -45,11 +45,16 @@ if(isset($_SESSION['username'])) {
 <body>
   <div class="main-content">
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+
       <?php
 				//UNREAD MESSAGES
 				$messages = new Message($con, $userLoggedIn);
+        $num_messages = $messages->getUnreadNumber();
+
+        $messages = new Notification($con, $userLoggedIn);
 				$num_messages = $messages->getUnreadNumber();
 			?>
+
       <div class="container-fluid">
         <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" 
            href="index.php" style="outline: none;"
@@ -77,7 +82,7 @@ if(isset($_SESSION['username'])) {
               <?php
 				        if($num_messages > 0) {
                   echo "
-                    <span class='badge badge-primary' id='unread_message'>" . $num_messages . "</span>
+                    <span class='badge badge-white' id='unread_message'>" . $num_messages . "</span>
                   ";
                 }
 				      ?>
@@ -98,7 +103,7 @@ if(isset($_SESSION['username'])) {
               <?php
 				        if($num_messages > 0) {
                   echo "
-                    <span class='badge badge-primary' id='unread_notification'>" . $num_messages . "</span>
+                    <span class='badge badge-white' id='unread_notification'>" . $num_messages . "</span>
                   ";
                 }
 				      ?>
