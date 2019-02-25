@@ -51,8 +51,8 @@ if(isset($_SESSION['username'])) {
 				$messages = new Message($con, $userLoggedIn);
         $num_messages = $messages->getUnreadNumber();
 
-        $messages = new Notification($con, $userLoggedIn);
-				$num_messages = $messages->getUnreadNumber();
+        $notifications = new Notification($con, $userLoggedIn);
+				$num_notifications = $notifications->getUnreadNumber();
 			?>
 
       <div class="container-fluid">
@@ -101,9 +101,9 @@ if(isset($_SESSION['username'])) {
                onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'notification')" style='outline: none;'>
               <i style='font-size: 1.25rem;' class='ni ni-notification-70'></i>
               <?php
-				        if($num_messages > 0) {
+				        if($num_notifications > 0) {
                   echo "
-                    <span class='badge badge-white' id='unread_notification'>" . $num_messages . "</span>
+                    <span class='badge badge-white' id='unread_notification'>" . $num_notifications . "</span>
                   ";
                 }
 				      ?>
