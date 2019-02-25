@@ -7,6 +7,6 @@ include_once("../classes/Notification.php");
 $limit = 5;
 
 $notification = new Notification($con, $_REQUEST['userLoggedIn']);
-echo $notification->getNotificationDropdown($_REQUEST, $limit);
+echo $notification->getNotifications($_REQUEST, $limit);
 
 ?>
