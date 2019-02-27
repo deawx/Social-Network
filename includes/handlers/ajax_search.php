@@ -38,27 +38,43 @@ if($query != "") {
       $mutual_friends = "";
     }
 
+    if($row['username'] != $userLoggedIn) {
     echo "
-      <div style='position: absolute; top: 0px; left: 0px;'>
-        <a href='" . $row['username'] . "'>
-          <h3 class='heading'>
-            <img src='" . $row['profile_pic'] . "' class='avatar' />
-            <span style='position: relative; top: -1.5vh' class='text-primary ml-2'>"
-              . $row['first_name'] . " " . $row['last_name'] .
-
-              "<small class='text-muted'> - "
-                . $row['username'] .
-              "</small>
-            </span>
-
-            <div class='text-left mt--3' style='margin-left:3.9vw;'>
-              <small>" . $mutual_friends . "</small>
+      <div class='card card-profile shadow'>
+        <div class='card-header bg-white border-0' style='border-radius: 30px;'>
+          <div class='row align-items-center'>
+            <div class='col-12'>
+              <h6 class='heading-small mb-0'>
+                Friends Found :
+              </h6>
             </div>
-          </h3>
-          <hr class='my-4' />
-        </a>
+          </div>
+        </div>
+
+        <div class='card-body bg-secondary border-0'>
+          <a href='" . $row['username'] . "'>
+            <h3 class='heading'>
+              <img src='" . $row['profile_pic'] . "' class='avatar' />
+              <span style='position: relative; top: -1.5vh' class='text-primary ml-2'>"
+                . $row['first_name'] . " " . $row['last_name'] .
+
+                "<small class='text-muted'> - "
+                  . $row['username'] .
+                "</small>
+              </span>
+
+              <div class='text-left mt--3' style='margin-left:3.9vw;'>
+                <small class='text-primary'>" . $mutual_friends . "</small>
+              </div>
+            </h3>
+            <hr class='my-4' />
+          </a>
+        </div>
       </div>
     ";
+    } else {
+      echo "";
+    }
   }
 }
 ?>
