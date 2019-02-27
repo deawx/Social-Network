@@ -51,8 +51,13 @@ if(isset($_SESSION['username'])) {
 				$messages = new Message($con, $userLoggedIn);
         $num_messages = $messages->getUnreadNumber();
 
+        // UNREAD NOTIFICATIONS
         $notifications = new Notification($con, $userLoggedIn);
-				$num_notifications = $notifications->getUnreadNumber();
+        $num_notifications = $notifications->getUnreadNumber();
+
+        // UNREAD FRIEND REQUESTS
+        $user_obj = new User($con, $userLoggedIn);
+        $num_requests = $user_obj->getFriendRequest();
 			?>
 
       <div class="container-fluid">
@@ -117,6 +122,19 @@ if(isset($_SESSION['username'])) {
             </div>
           </li>
 
+          <li class="nav-item">        
+			      <a class="nav-link nav-link-icon" href="requests.php" style='outline: none;'>
+              <i style='font-size: 1.25rem;' class='fas fa-user-friends'></i>
+              <?php
+				        if($num_requests > 0) {
+                  echo "
+                    <span class='badge badge-white' id='unread_request'>" . $num_requests . "</span>
+                  ";
+                }
+				      ?>
+			      </a>
+          </li>
+
           <li class="nav-item dropdown">
             <a class="nav-link pr-0" href="#" data-toggle="dropdown" tyle="outline: none;">
               <div class="media align-items-center">
@@ -140,11 +158,6 @@ if(isset($_SESSION['username'])) {
                 <a href="<?php echo $userLoggedIn; ?>" class="dropdown-item" style="outline: none;">
                   <i class="ni ni-badge"></i>
                   <span>My Profile</span>
-                </a>
-
-                <a href="requests.php" class="dropdown-item" style="outline: none;">
-                  <i class="fas fa-user-friends"></i>
-                  <span>Friend Requests</span>
                 </a>
 
                 <a href="setting.php" class="dropdown-item" style="outline: none;">
