@@ -48,7 +48,7 @@ function getLiveSearchUsers(value, user) {
     }
 
     $(".search_results").html(data);
-    $(".search_results_footer").html("<a href='search.php?q=" + value + "'>See All Results</a>");
+    $(".search_results_footer").html("<a href='search.php?q=" + value + "'><div class='alert alert-primary mt--5 mb--2' style='border-radius: 0 0 calc(.375rem - 1px) calc(.375rem - 1px); text-align: center;'><span class='heading-small' style='font-weight:600;'>See All Results</span></div></a>");
 
     if(data = "") {
       $(".search_results_footer").html("");
