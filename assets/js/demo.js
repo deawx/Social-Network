@@ -1,3 +1,9 @@
+$(document).ready(function() {
+  $('.button_holder').on('click', function(){
+    document.search_form.submit();
+  });
+});
+
 function getUser(value, user) {
   $.post("includes/handlers/ajax_friend_search.php", {query:value, userLoggedIn:user}, function(data) {
     $(".results").html(data);
@@ -14,7 +20,7 @@ function getDropdownData(user, type) {
 		} else if (type == 'message') {
 			pageName = "ajax_load_messages.php";
 			$("span").remove("#unread_message");
-		}
+    }
 
 		let ajaxreq = $.ajax({
 			url: "includes/handlers/" + pageName,
