@@ -39,10 +39,14 @@ if($query != "") {
         <a href='messages.php?u=" . $row['username'] . "' style='outline: none;'>
           <h3 class='heading'>
             <img src='" . $row['profile_pic'] . "' class='avatar' />
-            <span class='ml-3 text-primary'>" . $row['first_name'] . " " . $row['last_name'] . "</span>
-            <small class='text-muted'> - " . $row['username'] . "</small>
+            <span style='position: relative; top: -1.5vh' class='text-primary ml-2'>"
+              . $row['first_name'] . " " . $row['last_name'] .
 
-            <div class='text-left mt--2' style='margin-left: 4.5vw;'>
+            "<small class='text-muted'> - "
+              . $row['username'] .
+            "</small></span>
+
+            <div class='text-left mt--3' style='margin-left:3.9vw;'>
               <small>" . $mutual_friends . "</small>
             </div>
           </h3>
