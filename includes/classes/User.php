@@ -105,6 +105,12 @@ class User {
     $query = mysqli_query($this->con, "INSERT INTO friend_requests VALUES('', '$user_to', '$user_from')");
   }
 
+  public function getFriendRequest() {
+    $username = $this->user['username'];
+    $query = mysqli_query($this->con, "SELECT * FROM friend_requests WHERE (user_to='$username')");
+    return mysqli_num_rows($query);
+  }
+
   public function getMutualFriends($user_to_check) {
     $mutalFriends = 0;
     $user_array = $this->user['friend_array'];
