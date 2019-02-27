@@ -71,14 +71,11 @@ if(isset($_SESSION['username'])) {
           <div class="form-group mb-0">
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend">
-                <button class="btn btn-icon text-white" type="submit" 
-                        style="background-color: transparent; border-radius: 50% 0 0 50%;">
-                  <span class="btn-inner--icon">
-                    <i class="fas fa-search"></i>
-                  </span>
-                </button>
+                <span class="input-group-text button_holder">
+                  <i class="fas fa-search"></i>
+                </span>
               </div>
-              <input class="form-control ml-3" placeholder="Search" type="text" name="q" id="search_text_input" autocomplete="off"
+              <input class="form-control ml-1" placeholder="Search" type="text" name="q" id="search_text_input" autocomplete="off"
                      onkeyup="getLiveSearchUsers(this.value, '<?php echo $userLoggedIn; ?>')" />
             </div>
           </div>
