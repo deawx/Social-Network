@@ -66,18 +66,26 @@ if(isset($_SESSION['username'])) {
           >My Social Network
         </a>
 
-        <form class="navbar-search navbar-search-dark form-inline d-none d-md-flex mr-lg-auto ml-lg-auto">
+        <form class="navbar-search navbar-search-dark form-inline d-none d-md-flex mr-lg-auto ml-lg-auto"
+              action="search.php" method="GET" name="search_form">
           <div class="form-group mb-0">
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend">
-                <span class="input-group-text">
-                  <i class="fas fa-search"></i>
-                </span>
+                <button class="btn btn-icon text-white" type="submit" 
+                        style="background-color: transparent; border-radius: 50% 0 0 50%;">
+                  <span class="btn-inner--icon">
+                    <i class="fas fa-search"></i>
+                  </span>
+                </button>
               </div>
-              <input class="form-control" placeholder="Search" type="text">
+              <input class="form-control ml-3" placeholder="Search" type="text" name="q" id="search_text_input" autocomplete="off"
+                     onkeyup="getLiveSearchUsers(this.value, '<?php echo $userLoggedIn; ?>')" />
             </div>
           </div>
         </form>
+
+        <div class="search_results"></div>
+        <div class="search_results_footer_empty"></div>
 
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">        
