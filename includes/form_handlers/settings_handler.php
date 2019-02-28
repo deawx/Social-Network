@@ -12,14 +12,21 @@ if(isset($_POST['save_details'])) {
 
   $matched_user = $row['username'];
   if($matched_user == "" || $matched_user == $userLoggedIn) {
-    $message = "Details updated !";
     $query = mysqli_query($con, "UPDATE users 
                                  SET first_name='$first_name', last_name='$last_name', email='$email' 
                                  WHERE (username='$userLoggedIn')");
 
     header("Location: settings.php");
   } else {
-    $message = "That email is already in use !";
+    $message_email = "
+      <div class='row mt--3 mb-4 mr-2'>
+        <div class='col-md-12'>
+          <div class='text-danger'>
+            <strong>Error : </strong>That email is already in use !
+          </div>
+        </div>
+      </div>
+    ";
   }
 } else {
   $message = "";
