@@ -110,6 +110,7 @@ include_once("includes/form_handlers/settings_handler.php")
                       <input type="email" id="email" name="email" class="form-control form-control-alternative" 
                              value="<?php echo $user['email']; ?>" />
                     </div>
+                    <?php echo $message_email; ?>
                   </div>
                 </div>
 
