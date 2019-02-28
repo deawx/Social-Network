@@ -62,8 +62,8 @@ if(isset($_SESSION['username'])) {
 
       <div class="container-fluid">
         <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block" 
-           href="index.php" style="outline: none;"
-          >My Social Network
+           href="index.php" style="outline: none;">
+          My Social Network
         </a>
 
         <form class="navbar-search navbar-search-dark form-inline d-none d-md-flex mr-lg-auto ml-lg-auto"
@@ -75,14 +75,17 @@ if(isset($_SESSION['username'])) {
                   <i class="fas fa-search"></i>
                 </span>
               </div>
-              <input class="form-control ml-1" placeholder="Search" type="text" name="q" id="search_text_input" autocomplete="off"
+              <input class="form-control ml-1" placeholder="Find Friends" type="text" name="q" id="search_text_input" autocomplete="off"
                      onkeyup="getLiveSearchUsers(this.value, '<?php echo $userLoggedIn; ?>')" />
             </div>
           </div>
         </form>
 
-        <div class="search_results"></div>
-        <div class="search_results_footer_empty"></div>
+        <div style='position: absolute; top: 11.5vh; left: 32.5vw; border-radius: calc(.375rem - 1px) calc(.375rem - 1px) 0 0;'>
+          <div class="search_results"></div>
+          <div class="search_results_footer_empty"></div>
+        </div>
+
 
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">        
@@ -165,7 +168,7 @@ if(isset($_SESSION['username'])) {
                   <span>My Profile</span>
                 </a>
 
-                <a href="setting.php" class="dropdown-item" style="outline: none;">
+                <a href="settings.php" class="dropdown-item" style="outline: none;">
                   <i class="ni ni-settings-gear-65"></i>
                   <span>My Account</span>
                 </a>
