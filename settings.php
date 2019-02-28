@@ -1,7 +1,7 @@
 <?php
 
 require_once("includes/header.php");
-//include_once("includes/settings_handler.php")
+include_once("includes/form_handlers/settings_handler.php")
 
 ?>
 
@@ -90,7 +90,7 @@ require_once("includes/header.php");
                     <div class="form-group">
                       <label class="form-control-label" for="first_name">First name</label>
                       <input type="text" id="first_name" name="first_name" class="form-control form-control-alternative" 
-                             placeholder="<?php echo $user['first_name']; ?>" />
+                             value="<?php echo $user['first_name']; ?>" />
                     </div>
                   </div>
 
@@ -98,7 +98,7 @@ require_once("includes/header.php");
                     <div class="form-group">
                       <label class="form-control-label" for="last_name">Last name</label>
                       <input type="text" id="last_name" name="last_name" class="form-control form-control-alternative" 
-                             placeholder="<?php echo $user['last_name']; ?>" />
+                             value="<?php echo $user['last_name']; ?>" />
                     </div>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ require_once("includes/header.php");
                     <div class="form-group">
                       <label class="form-control-label" for="email">Email address</label>
                       <input type="email" id="email" name="email" class="form-control form-control-alternative" 
-                             placeholder="<?php echo $user['email']; ?>" />
+                             value="<?php echo $user['email']; ?>" />
                     </div>
                   </div>
                 </div>
@@ -128,6 +128,14 @@ require_once("includes/header.php");
                       <input type="password" id="new_password" name="new_password" class="form-control form-control-alternative" 
                              placeholder="New Password" />
                     </div>
+                  </div>
+                </div>
+
+                <div class="row mt-4 mr-2">
+                  <div class="col-md-12">
+                    <button type="submit" id="save_details" name="save_details" class="btn btn-success btn-lg btn-block">
+                      Update Details
+                    </button>
                   </div>
                 </div>
               </div>
